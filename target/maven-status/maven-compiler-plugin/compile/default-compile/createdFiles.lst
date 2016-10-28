@@ -1,7 +1,9 @@
+app/models/Producto.class
 app/config/AppBootstrap.class
 app/controllers/HomeController.class
+app/controllers/ProductoController.class
 app/config/FreeMarkerConfig.class
 app/config/AppControllerConfig.class
-app/models/Cliente.class
-app/controllers/ClienteController.class
+app/controllers/CategoriaController.class
+app/models/Categoria.class
 app/config/DbConfig.class

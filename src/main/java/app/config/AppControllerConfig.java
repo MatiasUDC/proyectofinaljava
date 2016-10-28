@@ -18,5 +18,6 @@ public class AppControllerConfig extends AbstractControllerConfig {
     public void init(AppContext context) {
         //Para la conexión a la base de datos
         addGlobalFilters(new DBConnectionFilter());
+
     }
 }

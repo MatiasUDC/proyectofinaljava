@@ -7,12 +7,14 @@
     <body>
         <ol class="breadcrumb">
             <li><a href="#">Home</a></li>
-          </ol>
-        <h2>Hola mundo</h2>
+        </ol>
+            <#list productos as item>
+                <p>   ${ item.nombre }   </p>
+            </#list>
 
-        <@link_to controller="cliente">clientes</@link_to></br>
-        <a class="btn btn-default" href="cliente">otro tipo de enlace a cliente</a>
-
+        <@link_to controller="producto">productos</@link_to></br>
+        
+        <a class="btn btn-default" href="producto">otro tipo de enlace a producto</a>
         
         
         </body>

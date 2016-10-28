@@ -5,6 +5,8 @@
  */
 package app.controllers;
 
+import app.models.Producto;
+import java.util.List;
 import org.javalite.activeweb.AppController;
 
 /**
@@ -13,8 +15,8 @@ import org.javalite.activeweb.AppController;
  */
 public class HomeController extends AppController {
     public void index() {
-        
-        
+        List productos = Producto.lista_productos();
+        view("productos", productos);
     }
     
 }

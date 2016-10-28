@@ -16,7 +16,7 @@ public class DbConfig extends AbstractDBConfig {
 
     public void init(AppContext context) {
 
-        String pool = "java:comp/env/jdbc/clientes_db"; //ver context.xml
+        String pool = "java:comp/env/jdbc/tienda_java"; //ver context.xml
         //descomentar para habilitar
         environment("development").jndi(pool);
         //environment("production").jndi(pool);
