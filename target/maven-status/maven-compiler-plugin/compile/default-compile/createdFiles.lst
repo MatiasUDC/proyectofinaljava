@@ -1,7 +1,7 @@
 app/config/AppBootstrap.class
 app/controllers/HomeController.class
+app/config/FreeMarkerConfig.class
+app/config/AppControllerConfig.class
 app/models/Cliente.class
 app/controllers/ClienteController.class
 app/config/DbConfig.class
-app/config/FreeMarkerConfig.class
-app/config/AppControllerConfig.class
