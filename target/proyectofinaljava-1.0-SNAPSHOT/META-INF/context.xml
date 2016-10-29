@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context path="/tienda_online">
-<!--    Pool para la base de datos -->
-   <ResourceLink global="jdbc/tienda_java" name="jdbc/tienda_java" type="javax.sql.DataSource"/>
-</Context>
