@@ -8,6 +8,7 @@ package app.models;
 import java.util.List;
 import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.Table;
+import org.javalite.activeweb.freemarker.SelectOption;
 
 /**
  *
@@ -35,5 +36,10 @@ public class Producto extends Model{
         return producto.delete();
 
     }
+    
+    public static boolean actualizar(Producto producto){
+        return producto.saveIt();
+    }
+    
     
 }
