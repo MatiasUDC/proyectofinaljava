@@ -2,7 +2,7 @@
 <@content for="title">Crear Producto</@content>
 
 
-<@form  action="create" method="post">
+<@form  action="create" method="post" enctype="multipart/form-data">
 <div class="panel panel-success">
     <div class="panel-body">Agregar Producto</div>
     <div class="panel-footer">
@@ -34,7 +34,7 @@
         <br/>
         <div class="form-group">
                 <label class="control-label">Selecione una Imagen</label>
-                <input id="file-21" class="file" type="file" accept="image/*">
+                <input name="imagen" id="file-21" class="file" type="file" accept="image/*">
             </label>
         </div>
         <div class="form-group">

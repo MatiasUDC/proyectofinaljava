@@ -9,8 +9,10 @@ import app.models.Categoria;
 import app.models.Producto;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.*;
 import org.javalite.activeweb.FormItem;
@@ -36,14 +38,31 @@ public class ProductoController extends AppController {
     }
 
     @POST
-    public void create() {
+    public void create() throws IOException {
         Producto producto = new Producto();
-        producto.fromMap(params1st());
+        Map<String, String> params = params1st();//guardo para no perder los datos.
+        producto.fromMap(params);
 
+        
+        Iterator<FormItem> iterator = uploadedFiles();
+        if (iterator.hasNext()){
+            FormItem item = iterator.next();
+
+            if(item.isFile()){
+                InputStream in = item.getInputStream();
+                Date fecha = new Date();
+                String nameFile = fecha.toString()+item.getFileName();
+                item.saveTo("src/main/webapp/imagenes/producto/"+nameFile);
+                producto.set("imagen", nameFile);
+                
+                ///process data
+            }               
+        }
+        
         if (!Producto.crear(producto)) {
             flash("message", "No se ha podido guardar el producto, revise los siguientes items");
             flash("errors", producto.errors());
-            flash("params", params1st());
+            flash("params", params);
             redirect(ProductoController.class, "new_form");
         } else {
             flash("message", "Nuevo producto agregado: " + producto.get("nombre"));
