@@ -36,14 +36,9 @@ public class ProductoController extends AppController {
     }
 
     @POST
-    public void create() throws IOException  {
+    public void create() {
         Producto producto = new Producto();
-        //producto.fromMap(params1st());
-        List<FormItem> items = multipartFormItems();
-        producto.set("nombre", param("nombre", items));
-        producto.set("descripcion", param("descripcion", items));
-        producto.set("precio", param("precio", items));
-        producto.set("stock", param("stock", items));
+        producto.fromMap(params1st());
 
         if (!Producto.crear(producto)) {
             flash("message", "No se ha podido guardar el producto, revise los siguientes items");
@@ -51,9 +46,6 @@ public class ProductoController extends AppController {
             flash("params", params1st());
             redirect(ProductoController.class, "new_form");
         } else {
-            //FileItem files = getFile("imagen", items);
-            //files.saveTo("/home/cesar/Escritorio");
-            //producto.set("imagen", files.getFileName());
             flash("message", "Nuevo producto agregado: " + producto.get("nombre"));
             redirect(ProductoController.class);
         }
@@ -63,7 +55,9 @@ public class ProductoController extends AppController {
     public void edit() {
        
         Producto p = (Producto) Producto.findById(getId());
+        java.util.List<SelectOption> list = Categoria.selectedCategoria();
         render().layout("layouts/form_layout");
+        view("categorias", list);
         view("producto", p);
 
     }
@@ -81,8 +75,14 @@ public class ProductoController extends AppController {
     public void update() {
         Producto p = (Producto) Producto.findById(getId());
         p.fromMap(params1st());
-        Producto.actualizar(p);
-        flash("message", "Producto: '" + p.get("nombre") + "' modificado");
-        redirect(ProductoController.class);
+        if(!Producto.actualizar(p)){
+            flash("message", "No se ha podido guardar el producto, revise los siguientes items");
+            flash("errors", p.errors());
+            flash("params", params1st());
+            redirect(ProductoController.class, "edit");
+        }else {
+            flash("message", "Producto: '" + p.get("nombre") + "' modificado");
+            redirect(ProductoController.class);
+        }
     }
 }

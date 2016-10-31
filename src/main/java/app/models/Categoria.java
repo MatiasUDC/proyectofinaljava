@@ -18,7 +18,11 @@ import org.javalite.activeweb.freemarker.SelectOption;
  */
 @Table("categorias")
 public class Categoria extends Model{
-
+    static{
+        validatePresenceOf("nombre").message("Porfavor, ingrese el nombre del producto");
+        validatePresenceOf("descripcion").message("Porfavor, ingrese una descripcion del producto");
+    }
+    
     public static List lista_categorias() {
         return findAll();
     }
@@ -31,5 +35,17 @@ public class Categoria extends Model{
             list.add(new SelectOption(categoria.get("id"), categoria.getString("nombre")));
         }
         return list;
+    }
+
+    public static boolean crear(Categoria c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static void eliminar(Categoria p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static boolean actualizar(Categoria p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -17,6 +17,11 @@
             <span class="error">${(flasher.errors.descripcion)!}</span>
             </div>
         <div class="form-group">
+            <label class="col-sm-2 control-label" for="categoria">Categoria * : </label><br/><br/>
+             <@select class="selectpicker show-menu-arrow" name="categoria_id" list=categorias> <option value="0">Seleccione una categoria </option> </@> 
+             <span class="error">${(flasher.errors.categoria_id)!}</span>
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label" for="precio">Precio * : </label>
             <input class="form-control"  type="text" name="precio" value=" ${producto.precio}" required>
             <span class="error">${(flasher.errors.precio)!}</span>
@@ -26,9 +31,11 @@
             <input class="form-control" min="0" type="number" name="stock" value="${producto.stock}" required>
             <span class="error">${(flasher.errors.stock)!}</span>
         </div>
-        <br/>
         <div class="form-group">
-            <input type="file">
+                <label class="control-label">Selecione una Imagen</label>
+                <input id="file-21" class="file" type="file" accept="image/*">
+            </label>
+        </div> type="file">
         </div>
         <div class="form-group">
             <button class="btn btn-default" type="submit">Guardar</button>
@@ -39,3 +46,16 @@
 
 </@form>
 
+<script>
+    $(document).on('ready', function() {
+        $("#input-21").fileinput({
+            previewFileType: "image",
+            browseClass: "btn btn-success",
+            browseLabel: "Pick Image",
+            browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+            removeClass: "btn btn-danger",
+            removeLabel: "Delete",
+            removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+        });
+    });
+    </script>
