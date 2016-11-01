@@ -10,13 +10,19 @@ import app.models.Producto;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.*;
 import org.javalite.activeweb.FormItem;
 import org.javalite.activeweb.freemarker.SelectOption;
+import static org.javalite.common.Collections.map;
+import org.javalite.common.Util;
 
 /**
  *
@@ -40,25 +46,31 @@ public class ProductoController extends AppController {
     @POST
     public void create() throws IOException {
         Producto producto = new Producto();
-        Map<String, String> params = params1st();//guardo para no perder los datos.
-        producto.fromMap(params);
-
+        HashMap<String, String> params = new HashMap();
         
-        Iterator<FormItem> iterator = uploadedFiles();
-        if (iterator.hasNext()){
-            FormItem item = iterator.next();
+        List<FormItem> formItems = multipartFormItems();
 
+        for (FormItem item : formItems) {
+            
             if(item.isFile()){
-                InputStream in = item.getInputStream();
+
                 Date fecha = new Date();
-                String nameFile = fecha.toString()+item.getFileName();
-                item.saveTo("src/main/webapp/imagenes/producto/"+nameFile);
+                String nameFile = fecha.getTime()+item.getName();
+                item.saveTo("" + nameFile);
                 producto.set("imagen", nameFile);
                 
-                ///process data
-            }               
+                
+            } else {
+               String valor = new String(item.getBytes());
+               String name = item.getFieldName();
+               producto.set(name, valor);
+               params.put(name, valor);
+            }
+
+            
         }
-        
+        String prod = producto.toString();
+        System.out.println(prod);
         if (!Producto.crear(producto)) {
             flash("message", "No se ha podido guardar el producto, revise los siguientes items");
             flash("errors", producto.errors());
