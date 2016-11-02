@@ -11,7 +11,7 @@
     <div class="panel-footer">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="stock">Cantidad * : </label>
-            <input class="form-control" min="1" type="number" name="cantidad" value="${(flasher.params.cantidad)!}" required>
+            <input class="form-control" min="1" id="cantidad" type="number" name="cantidad" value="${(flasher.params.cantidad)!}" required>
             <span class="error">${(flasher.errors.cantidad)!}</span>
             </div>
         <div class="form-group">
@@ -20,8 +20,8 @@
             <span class="error">${(flasher.errors.metodos)!}</span>
             </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="monto">Precio total * : </label>
-            <d id="monto" class="col-sm-2">  </div>
+            <label class="col-sm-2 control-label" for="monto">Monto * : </label>
+            <label class="col-sm-2 control-label" id="monto"> ${ producto.precio } </label>
             <span class="error">${(flasher.errors.monto)!}</span>
             </div>
         <br/>
@@ -57,7 +57,7 @@
         } else {
         //Si se los numeros son correctos, operamos:
             var resultado = ops.multiplicar(num1, num2);
-            return resultado;
+            return document.getElementById('monto').innerHTML = resultado;
         }
     }
     */

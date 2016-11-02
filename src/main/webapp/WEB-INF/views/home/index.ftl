@@ -26,8 +26,10 @@
 
         <@link_to controller="producto">productos</@link_to></br>
         
+        <@link_to controller="compra">compras</@link_to></br>
+        
         <a class="btn btn-default" href="producto">otro tipo de enlace a producto</a>
         
-
+        
         </body>
     </html>

@@ -20,11 +20,11 @@ public class Producto extends Model{
         validatePresenceOf("descripcion").message("Porfavor, ingrese una descripcion del producto");
         validateNumericalityOf("categoria_id")
                 .allowNull(true)
-                .greaterThan(1).message("Porfavor, Seleccione una categoria para el producto");
+                .greaterThan(1).message("Porfavor, seleccione una categoria para el producto");
         validateNumericalityOf("stock")
                 .allowNull(true).greaterThan(1)
                 .lessThan(1001).onlyInteger()
-                .message("Profavor, Ingrese un numero de stock entre 1 y 10001.");
+                .message("Profavor, ingrese un numero de stock entre 1 y 10001.");
         validateRegexpOf("precio", "^(\\d|-)?(\\d|,)*\\.?\\d*$").message("Ingrese un precio para el producto");
         validatePresenceOf("imagen").message("Porfavor, seleccione una imagen para el producto");
         
