@@ -20,7 +20,7 @@ import org.javalite.activeweb.freemarker.SelectOption;
 
 /**
  *
- * @author Soraya
+ * @author Matias
  */
 public class CompraController extends AppController{
 

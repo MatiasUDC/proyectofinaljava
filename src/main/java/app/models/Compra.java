@@ -10,12 +10,13 @@ import org.javalite.activejdbc.Model;
 import static org.javalite.activejdbc.Model.findAll;
 import org.javalite.activejdbc.annotations.BelongsTo;
 import org.javalite.activejdbc.annotations.BelongsToParents;
+import org.javalite.activejdbc.annotations.Table;
 
 /**
  *
- * @author Soraya
+ * @author Matias
  */
-
+@Table("compra")
 @BelongsToParents({
     @BelongsTo(foreignKeyName = "id_producto",parent = Producto.class),
     @BelongsTo(foreignKeyName = "id_usuario",parent = Usuario.class),
