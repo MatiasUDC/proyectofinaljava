@@ -5,17 +5,12 @@
  */
 package app.controllers;
 
-import app.models.Categoria;
 import app.models.Compra;
 import app.models.MetodoPago;
 import app.models.Producto;
 
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.*;
-import org.javalite.activeweb.FormItem;
 import org.javalite.activeweb.freemarker.SelectOption;
 
 /**

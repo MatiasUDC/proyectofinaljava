@@ -8,7 +8,6 @@ package app.models;
 import java.util.List;
 import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.Table;
-import org.javalite.activeweb.freemarker.SelectOption;
 
 /**
  *
@@ -27,6 +26,7 @@ public class Producto extends Model{
                 .lessThan(1001).onlyInteger()
                 .message("Profavor, Ingrese un numero de stock entre 1 y 10001.");
         validateRegexpOf("precio", "^(\\d|-)?(\\d|,)*\\.?\\d*$").message("Ingrese un precio para el producto");
+        validatePresenceOf("imagen").message("Porfavor, seleccione una imagen para el producto");
         
     }  
     

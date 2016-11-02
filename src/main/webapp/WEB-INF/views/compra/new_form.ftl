@@ -20,8 +20,8 @@
             <span class="error">${(flasher.errors.metodos)!}</span>
             </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="monto">Monto * : </label>
-            <label lass="col-sm-2 control-label"> ${ producto.precio } </label>
+            <label class="col-sm-2 control-label" for="monto">Precio total * : </label>
+            <d id="monto" class="col-sm-2">  </div>
             <span class="error">${(flasher.errors.monto)!}</span>
             </div>
         <br/>
@@ -35,7 +35,8 @@
 
 
 <script>
-/*    function operaciones(op)
+/*    
+    function operaciones(op)
     {
 
         var ops = {
@@ -59,5 +60,7 @@
             return resultado;
         }
     }
-*/
+    */
 </script>
+
+

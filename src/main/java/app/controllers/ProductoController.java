@@ -9,20 +9,13 @@ import app.models.Categoria;
 import app.models.Producto;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.*;
 import org.javalite.activeweb.FormItem;
 import org.javalite.activeweb.freemarker.SelectOption;
-import static org.javalite.common.Collections.map;
-import org.javalite.common.Util;
 
 /**
  *
