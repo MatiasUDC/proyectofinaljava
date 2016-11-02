@@ -25,6 +25,7 @@ public class ProductoController extends AppController {
 
     @GET
     public void index() {
+        
         view("productos", Producto.lista_productos());
 
     }
@@ -49,7 +50,7 @@ public class ProductoController extends AppController {
 
                 Date fecha = new Date();
                 String nameFile = fecha.getTime()+item.getName();
-                item.saveTo("" + nameFile);
+                item.saveTo(appContext().get("path_imagen") + nameFile);
                 producto.set("imagen", nameFile);
                 
                 
@@ -81,6 +82,7 @@ public class ProductoController extends AppController {
         Producto p = (Producto) Producto.findById(getId());
         java.util.List<SelectOption> list = Categoria.selectedCategoria();
         render().layout("layouts/form_layout");
+        view("path_imagen",appContext().get("path_imagen"));
         view("categorias", list);
         view("producto", p);
 
