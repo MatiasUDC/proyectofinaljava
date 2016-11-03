@@ -78,7 +78,7 @@ public class ProductoController extends AppController {
     @GET
     public void edit() {
        
-        Producto p = (Producto) Producto.findById(getId());
+        Producto p = (Producto) Producto.getProducto(getId());
         java.util.List<SelectOption> list = Categoria.selectedCategoria(p.getInteger("id"));
         render().layout("layouts/form_layout");
         view("path_imagen",appContext().get("path_imagen"));
@@ -89,7 +89,7 @@ public class ProductoController extends AppController {
 
     @DELETE
     public void delete() {
-        Producto p = (Producto) Producto.findById(getId());
+        Producto p = (Producto) Producto.getProducto( getId());
         String nombre = p.getString("nombre");
         Producto.eliminar(p);
         flash("message", "Producto: '" + nombre + "' eliminado");
@@ -98,7 +98,7 @@ public class ProductoController extends AppController {
 
     @PUT
     public void update() {
-        Producto p = (Producto) Producto.findById(getId());
+        Producto p = (Producto) Producto.getProducto(getId());
         p.fromMap(params1st());
         if(!Producto.actualizar(p)){
             flash("message", "No se ha podido guardar el producto, revise los siguientes items");
@@ -109,5 +109,13 @@ public class ProductoController extends AppController {
             flash("message", "Producto: '" + p.get("nombre") + "' modificado");
             redirect(ProductoController.class);
         }
+    }
+    
+    public void show(){
+         Producto p = Producto.getProducto(getId());
+         Categoria c;
+         c = Categoria.getCategoria(p.get("categoria_id"));
+         view("categoria",c);
+         view("producto", p);
     }
 }

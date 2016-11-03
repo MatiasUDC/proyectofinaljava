@@ -62,4 +62,8 @@ public class Categoria extends Model{
     public static boolean actualizar(Categoria c) {
         return c.saveIt();
     }
+    
+    public static Categoria getCategoria(Object id){
+        return findById(id);
+    }
 }
