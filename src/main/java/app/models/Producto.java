@@ -7,6 +7,7 @@ package app.models;
 
 import java.util.List;
 import org.javalite.activejdbc.Model;
+import org.javalite.activejdbc.annotations.BelongsTo;
 import org.javalite.activejdbc.annotations.Table;
 
 /**
@@ -14,6 +15,7 @@ import org.javalite.activejdbc.annotations.Table;
  * @author universidad
  */
 @Table("productos")
+@BelongsTo(parent = Categoria.class, foreignKeyName = "categoria_id")
 public class Producto extends Model{
     static{
         validatePresenceOf("nombre").message("Porfavor, ingrese el nombre del producto");

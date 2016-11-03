@@ -114,7 +114,7 @@ public class ProductoController extends AppController {
     public void show(){
          Producto p = Producto.getProducto(getId());
          Categoria c;
-         c = Categoria.getCategoria(p.get("categoria_id"));
+         c = p.parent(Categoria.class);
          view("categoria",c);
          view("producto", p);
     }
