@@ -15,6 +15,7 @@ import org.javalite.activeweb.AppController;
  */
 public class HomeController extends AppController {
     public void index() {
+        view("path_imagen",appContext().get("path_imagen"));
         List productos = Producto.lista_productos();
         view("productos", productos);
     }

@@ -37,15 +37,29 @@ public class Categoria extends Model{
         return list;
     }
 
+        public static List<SelectOption> selectedCategoria(Integer id){
+        List<SelectOption> list = new LinkedList<>();
+        List categorias = findAll();
+        for (Iterator it = categorias.iterator(); it.hasNext();) {
+            Categoria categoria = (Categoria) it.next();
+            if(categoria.get("id").equals(id)){
+                list.add(new SelectOption(categoria.get("id"), categoria.getString("nombre"), true));
+            } else {
+                list.add(new SelectOption(categoria.get("id"), categoria.getString("nombre")));
+            }
+        }
+        return list;
+    }
+    
     public static boolean crear(Categoria c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return c.save();
     }
 
-    public static void eliminar(Categoria p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static boolean eliminar(Categoria c) {
+        return c.delete();
     }
 
-    public static boolean actualizar(Categoria p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static boolean actualizar(Categoria c) {
+        return c.saveIt();
     }
 }

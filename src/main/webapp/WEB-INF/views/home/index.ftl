@@ -1,10 +1,5 @@
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
         <@content for="title">Home</@content>
-    </head>
-    <body>
+
         <ol class="breadcrumb">
             <li><a href="#">Home</a></li>
         </ol>
@@ -13,7 +8,7 @@
                 <div class="row">
                   <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                      <img src="..." alt="...">
+                      <img src="${context_path}/${ path_imagen }${ item.imagen }" alt="${ item.imagen }">
                       <div class="caption">
                         <h3></h3>
                         <p>${ item.descripcion }</p>
@@ -24,12 +19,8 @@
                 </div>
             </#list>
 
-        <@link_to controller="producto">productos</@link_to></br>
-        
+        <a class="btn btn-default" href="producto">producto</a></br>
+        <a class="btn btn-default" href="categoria">categoria</a></br>
         <@link_to controller="compra">compras</@link_to></br>
         
-        <a class="btn btn-default" href="producto">otro tipo de enlace a producto</a>
         
-        
-        </body>
-    </html>

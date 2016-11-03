@@ -32,11 +32,10 @@
             <span class="error">${(flasher.errors.stock)!}</span>
         </div>
         <div class="form-group">
-                <label class="control-label">Selecione una Imagen</label>
-                <input id="file-21" class="file" type="file" accept="image/*">
-            </label>
-        </div> type="file">
+                <label class="control-label">Selecione una Imagen: </label>
+                <input id="input-repl-1a" type="file" class="file-loading" accept="image/*">
         </div>
+
         <div class="form-group">
             <button class="btn btn-default" type="submit">Guardar</button>
                 <@link_to class="btn btn-danger" controller="producto">Cancelar</@link_to>
@@ -46,16 +45,22 @@
 
 </@form>
 
+
 <script>
-    $(document).on('ready', function() {
-        $("#input-21").fileinput({
-            previewFileType: "image",
-            browseClass: "btn btn-success",
-            browseLabel: "Pick Image",
-            browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
-            removeClass: "btn btn-danger",
-            removeLabel: "Delete",
-            removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
-        });
-    });
-    </script>
+$("#input-repl-1a").fileinput({
+    uploadUrl: "/file-upload-batch/2",
+    autoReplace: true,
+    overwriteInitial: true,
+    showUploadedThumbs: false,
+    maxFileCount: 1,
+    initialPreview: [
+        "<img style='height:160px' src='${ context_path }/${ path_imagen }${ producto.imagen }'>",
+    ],
+    initialCaption: 'Initial-Image.jpg',
+    initialPreviewShowDelete: false,
+    showRemove: false,
+    showClose: false,
+    layoutTemplates: {actionDelete: ''}, // disable thumbnail deletion
+    allowedFileExtensions: ["jpg", "png", "gif"]
+});
+</script>

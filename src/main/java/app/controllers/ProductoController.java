@@ -25,7 +25,7 @@ public class ProductoController extends AppController {
 
     @GET
     public void index() {
-        
+        view("path_imagen",appContext().get("path_imagen"));
         view("productos", Producto.lista_productos());
 
     }
@@ -50,7 +50,7 @@ public class ProductoController extends AppController {
 
                 Date fecha = new Date();
                 String nameFile = fecha.getTime()+item.getName();
-                item.saveTo(appContext().get("path_imagen") + nameFile);
+                item.saveTo(appContext().get("path_imagen_disc") + nameFile);
                 producto.set("imagen", nameFile);
                 
                 
@@ -63,8 +63,7 @@ public class ProductoController extends AppController {
 
             
         }
-        String prod = producto.toString();
-        System.out.println(prod);
+
         if (!Producto.crear(producto)) {
             flash("message", "No se ha podido guardar el producto, revise los siguientes items");
             flash("errors", producto.errors());
@@ -80,7 +79,7 @@ public class ProductoController extends AppController {
     public void edit() {
        
         Producto p = (Producto) Producto.findById(getId());
-        java.util.List<SelectOption> list = Categoria.selectedCategoria();
+        java.util.List<SelectOption> list = Categoria.selectedCategoria(p.getInteger("id"));
         render().layout("layouts/form_layout");
         view("path_imagen",appContext().get("path_imagen"));
         view("categorias", list);
