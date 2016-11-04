@@ -37,12 +37,12 @@ public class Categoria extends Model{
         return list;
     }
 
-        public static List<SelectOption> selectedCategoria(Integer id){
+        public static List<SelectOption> selectedCategoria(Object id){
         List<SelectOption> list = new LinkedList<>();
         List categorias = findAll();
         for (Iterator it = categorias.iterator(); it.hasNext();) {
             Categoria categoria = (Categoria) it.next();
-            if(categoria.get("id").equals(id)){
+            if(categoria.getId().equals(id)){
                 list.add(new SelectOption(categoria.get("id"), categoria.getString("nombre"), true));
             } else {
                 list.add(new SelectOption(categoria.get("id"), categoria.getString("nombre")));

@@ -8,8 +8,8 @@
         <link href="${context_path}/bower_components/fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
 
         <script src="${context_path}/bower_components/fileinput/js/fileinput.js" type="text/javascript"></script>
-        <script src="${context_path}/bower_components/fileinput/js/fileinput_locale_es.js" type="text/javascript"></script>
-        <script src="${context_path}/bower_components/jquery-validation/dist/jquery.validate.js.js" type="text/javascript"></script>
+        <script src="${context_path}/bower_components/fileinput/js/locales/es.js" type="text/javascript"></script>
+        <script src="${context_path}/bower_components/jquery-validation/dist/jquery.validate.js" type="text/javascript"></script>
         <style>
             .error{
                 width: 400px;
@@ -21,6 +21,7 @@
                 color: rgb(211, 0, 0);
                 text-align: center;
             }
+            label.error{ color: red;  }
         </style>
     </head>
     <body>

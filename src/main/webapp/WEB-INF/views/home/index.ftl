@@ -10,7 +10,7 @@
             <@link_to class="list-group-item active" action="#">
                 <div class="media col-md-3">
                     <figure class="pull-left">
-                        <img class="media-object img-rounded img-responsive"  src="${context_path}/${ path_imagen }${ item.imagen }" alt="${ item.imagen }" alt="${ item.nombre }" >
+                        <img class="media-object img-rounded img-responsive"  src="${context_path}/${ path_imagen }${ item.imagen }" alt="${ item.imagen }" alt="${ item.nombre }" height="210" width="180">
                     </figure>
                 </div>
                 <div class="col-md-6">

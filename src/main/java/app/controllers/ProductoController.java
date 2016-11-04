@@ -7,6 +7,7 @@ package app.controllers;
 
 import app.models.Categoria;
 import app.models.Producto;
+import java.io.File;
 
 import java.io.IOException;
 import java.util.Date;
@@ -79,7 +80,9 @@ public class ProductoController extends AppController {
     public void edit() {
        
         Producto p = (Producto) Producto.getProducto(getId());
-        java.util.List<SelectOption> list = Categoria.selectedCategoria(p.getInteger("id"));
+        Categoria c;
+        c = p.parent(Categoria.class);
+        java.util.List<SelectOption> list = Categoria.selectedCategoria(c.getId());
         render().layout("layouts/form_layout");
         view("path_imagen",appContext().get("path_imagen"));
         view("categorias", list);
@@ -122,15 +125,14 @@ public class ProductoController extends AppController {
          view("producto", p);
          
     } 
-    
+   @POST
     public void imagen() throws IOException{
         Producto producto = Producto.getProducto(getId()); 
         List<FormItem> formItems = multipartFormItems();
-
+        String lastName = appContext().get("path_imagen_disc")+producto.getString("imagen");
         for (FormItem item : formItems) {
             
             if(item.isFile() && !item.getName().equals(producto.getString("imagen"))){
-                
                 Date fecha = new Date();
                 String nameFile = fecha.getTime()+item.getName();
                 item.saveTo(appContext().get("path_imagen_disc") + nameFile);
@@ -141,11 +143,14 @@ public class ProductoController extends AppController {
             } 
         }
 
-        if (!Producto.crear(producto)) {
+        if (!Producto.actualizar(producto)) {
             flash("message", "No se ha podido guardar la imegen en el producto, revise los siguientes items.");
         } else {
+            File imagen = new File(lastName);
+            imagen.deleteOnExit();
             flash("message", "Se ha agregado la imagen en el producto : " + producto.get("nombre") + " correctamente.");
         }
-        redirect(ProductoController.class, "show");
+        redirect(ProductoController.class, "show", producto.get("id"));
+
     }
 }

@@ -27,7 +27,7 @@ public class Producto extends Model{
                 .allowNull(true).greaterThan(1)
                 .lessThan(1001).onlyInteger()
                 .message("Profavor, ingrese un numero de stock entre 1 y 10001.");
-        validateRegexpOf("precio", "^(\\d|-)?(\\d|,)*\\.?\\d*$").message("Ingrese un precio para el producto");
+        //validateRegexpOf("precio", "^(\\d|-)?(\\d|,)*\\.?\\d*$").message("Ingrese un precio para el producto");
         validatePresenceOf("imagen").message("Porfavor, seleccione una imagen para el producto");
         
     }  

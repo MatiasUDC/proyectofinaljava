@@ -34,10 +34,10 @@
                     <h4 class="modal-title" id="myModalLabel">Cambiar Imagen</h4>
                   </div>
                   <div class="modal-body">
-                    <@form action="imagen" method="post" id="${producto.id}">
+                    <@form action="imagen" controller="producto" method="post" id="${producto.id}" enctype="multipart/form-data">
                         <div class="form-group">
                             <label class="control-label"><span class="glyphicon glyphicon-picture" aria-hidden="true"> Imagen : </label>
-                            <input id="input-repl-1a" type="file" class="file-loading" accept="image/*">
+                            <input name="imagen" id="input-repl-1a" type="file" class="file-loading" accept="image/*">
                         </div>
                     </@form>
                   </div>
