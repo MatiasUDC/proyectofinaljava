@@ -1,4 +1,4 @@
-<@content for="title">Metodos de Pago</@content>
+<@content for="title">Metodo de Pago</@content>
 
 <@link_to class="btn btn-default" action="new_form">Nuevo</@link_to>
     
@@ -26,4 +26,5 @@
   </table>
 </div>
 
+        
         

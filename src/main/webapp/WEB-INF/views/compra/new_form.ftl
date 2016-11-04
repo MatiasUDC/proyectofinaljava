@@ -3,7 +3,7 @@
 
 <div class="form-group" >
     <label lass="col-sm-2 control-label"> ${ producto.nombre } </label>
- </div>
+    </div>
 
 <@form  action="create" method="post">
 <div class="panel panel-success">
@@ -20,8 +20,8 @@
             <span class="error">${(flasher.errors.metodos)!}</span>
             </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="monto">Monto * : </label>
-            <label class="col-sm-2 control-label" id="monto"> ${ producto.precio } </label>
+            <label class="col-sm-2 control-label" for="monto">Monto Final * : </label>
+            <input class="col-sm-2 control-label" id="monto" value="${ producto.precio }"> 
             <span class="error">${(flasher.errors.monto)!}</span>
             </div>
         <br/>
@@ -35,17 +35,16 @@
 
 
 <script>
-/*    
-   
-        function operaciones()
-        {
-            var num1 = document.getElementById("cantidad").value;
-            var num2 = document.getElementById("monto").value;
-
-        
-        var resultado = (parseInt(num1) * parseInt(num2));
-        return document.getElementById('monto').value = resultado;
-1    */
-</script>
+        $(document).ready(function () {
+        $("#Multiplicar").click(function (e) {
+            var num1 = $("#Cantidad").val();
+            var num2 = $("#Monto").val();
+            var resultado = parseInt(num1) * parseFloat(num2);
+            $("#Monto").val(resultado);
+        });
+        });
+            
+            
+    </script>
 
 
