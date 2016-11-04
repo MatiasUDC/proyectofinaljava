@@ -96,8 +96,9 @@ public class ProductoController extends AppController {
         redirect(ProductoController.class);
     }
 
-    @PUT
+    @POST
     public void update() {
+        
         Producto p = (Producto) Producto.getProducto(getId());
         p.fromMap(params1st());
         if(!Producto.actualizar(p)){
