@@ -19,12 +19,13 @@
             </tr>
         </thead>
         <tbody>
-            <#list productos as item>
+            <#list compras as item>
             <tr>
-                <th>${item.producto.nombre}</th>
-                <th>${item.descripcion}</th>
-                <th>${item.stock}</th>
-                <th>${item.precio}</th>
+                <th></th>
+                <th>${item.id_producto}</th>
+                <th>${item.cantidad}</th>
+                <th>${item.id_metodo}</th>
+                <th>${item.monto}</th>
                 <th><@link_to class="btn btn-default" action="edit" id=item.id>Editar</@link_to></th>
                 <th><@form  id=item.id action="delete" method="delete" html_id=item.id><button class="btn btn-warning" type="submit">Eliminar</button></@form></th>
             </tr>

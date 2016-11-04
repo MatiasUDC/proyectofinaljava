@@ -11,7 +11,7 @@
     <div class="panel-footer">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="stock">Cantidad * : </label>
-            <input class="form-control" min="1" id="cantidad" type="number" name="cantidad" value="${(flasher.params.cantidad)!}" required>
+            <input class="form-control" min="1" id="cantidad" type="number" name="cantidad" value="${(flasher.params.cantidad)!}" onClick="" required>
             <span class="error">${(flasher.errors.cantidad)!}</span>
             </div>
         <div class="form-group">
@@ -36,31 +36,16 @@
 
 <script>
 /*    
-    function operaciones(op)
-    {
+   
+        function operaciones()
+        {
+            var num1 = document.getElementById("cantidad").value;
+            var num2 = document.getElementById("monto").value;
 
-        var ops = {
-                multiplicar: function multiplicarNumeros(n1, n2) {
-                return (parseInt(n1) * parseInt(n2));
-            }
-        };
-        var num1 = document.getElementById("cantidad").value;
-        var num2 = document.getElementById("precio").value;
-
-            //Comprobamos si los numeros son validos
-        if (isNaN(parseInt(document.getElementById('cantidad').value))) {
-            document.getElementById("num1").innerText = "0";
-            document.getElementById("num1").focus();
-        } else if (isNaN(parseDouble(document.getElementById('precio').value))) {
-            document.getElementById("num2").innerText = "0";
-            document.getElementById("num2").focus();
-        } else {
-        //Si se los numeros son correctos, operamos:
-            var resultado = ops.multiplicar(num1, num2);
-            return document.getElementById('monto').innerHTML = resultado;
-        }
-    }
-    */
+        
+        var resultado = (parseInt(num1) * parseInt(num2));
+        return document.getElementById('monto').value = resultado;
+1    */
 </script>
 
 

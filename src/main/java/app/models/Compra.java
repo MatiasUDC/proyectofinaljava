@@ -16,7 +16,7 @@ import org.javalite.activejdbc.annotations.Table;
  *
  * @author Matias
  */
-@Table("compra")
+@Table("compras")
 @BelongsToParents({
     @BelongsTo(foreignKeyName = "id_producto",parent = Producto.class),
     @BelongsTo(foreignKeyName = "id_usuario",parent = Usuario.class),

@@ -32,8 +32,8 @@ public class CompraController extends AppController{
     @GET
     public void newForm() {
         //declaro producto
-        Producto producto = Producto.findById(getId());
-        view("producto", producto);
+        //Producto producto = Producto.findById(getId());
+        //view("producto", producto);
         java.util.List<SelectOption> list = MetodoPago.selectedMetodoPago();
         view("metodos", list);
         render().layout("layouts/form_layout");
