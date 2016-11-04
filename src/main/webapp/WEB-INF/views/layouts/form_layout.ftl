@@ -9,6 +9,7 @@
 
         <script src="${context_path}/bower_components/fileinput/js/fileinput.js" type="text/javascript"></script>
         <script src="${context_path}/bower_components/fileinput/js/fileinput_locale_es.js" type="text/javascript"></script>
+        <script src="${context_path}/bower_components/jquery-validation/dist/jquery.validate.js.js" type="text/javascript"></script>
         <style>
             .error{
                 width: 400px;

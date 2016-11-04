@@ -49,6 +49,7 @@ public class Producto extends Model{
     }
     
     public static boolean actualizar(Producto producto){
+ 
         return producto.saveIt();
     }
     
