@@ -2,7 +2,7 @@
 <@content for="title">Modificar Metodo de Pago</@content>
 
 
-<@form action="update" method="put" id="${ metodo.id }">
+<@form action="update" method="put" id="${ metodos.id }">
 <div class="panel panel-success">
     <div class="panel-body">Modificar Categoria</div>
     <div class="panel-footer">
@@ -40,7 +40,7 @@
 </div>
 </@form>
 <script  type="text/javascript">
-    $("#${ categoria.id }").validate({
+    $("#${ metodos.id }").validate({
         rules: {
             nombre: {
                 required: true,
