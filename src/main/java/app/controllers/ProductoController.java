@@ -17,11 +17,12 @@ import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.*;
 import org.javalite.activeweb.FormItem;
 import org.javalite.activeweb.freemarker.SelectOption;
-
+import app.controllers.authorization.Protected;
 /**
  *
  * @author universidad
  */
+@Protected
 public class ProductoController extends AppController {
 
     @GET
