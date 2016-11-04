@@ -21,15 +21,15 @@
                 </div>
                 <div class="col-md-3 text-center">
                     <h2><small> Precio: <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>${ item.precio }</small></h2>
-                    <button type="button" class="btn btn-default btn-lg btn-block"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Comprar </button>
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Comprar </button>
                 </div>
             </@link_to>
             </#list>
         </div>
  
-      <@link_to class="btn btn-default" controller="producto">producto</@link_to></br>
+        <@link_to class="btn btn-default" controller="producto">producto</@link_to></br>
         <@link_to class="btn btn-default" controller="categoria">categoria</@link_to></br>
-    <@link_to class="btn btn-default" controller="compra">compras</@link_to></br>
+        <@link_to class="btn btn-default" controller="metodo">metodo</@link_to></br>
         
         
     <style>

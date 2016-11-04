@@ -7,7 +7,7 @@ package app.controllers;
 
 import app.models.Categoria;
 import app.models.Compra;
-import app.models.MetodoPago;
+import app.models.Metodo;
 import app.models.Producto;
 
 import java.io.IOException;
@@ -31,10 +31,10 @@ public class CompraController extends AppController{
 
     @GET
     public void newForm() {
-        //declaro producto
+        //ydeclaro producto
         //Producto producto = Producto.findById(getId());
         //view("producto", producto);
-        java.util.List<SelectOption> list = MetodoPago.selectedMetodoPago();
+        java.util.List<SelectOption> list = Metodo.selectedMetodos();
         view("metodos", list);
         render().layout("layouts/form_layout");
     }
