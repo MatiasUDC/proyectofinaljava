@@ -32,10 +32,6 @@
             <span class="error">${(flasher.errors.stock)!}</span>
         </div>
         <div class="form-group">
-                <label class="control-label"><span class="glyphicon glyphicon-picture" aria-hidden="true"> Imagen : </label>
-                <input id="input-repl-1a" type="file" class="file-loading" accept="image/*">
-        </div>
-        <div class="form-group">
             <button class="btn btn-default" type="submit">Guardar</button>
                 <@link_to class="btn btn-danger" controller="producto">Cancelar</@link_to>
             </div>
@@ -45,20 +41,3 @@
 </@form>
 
 
-<script>
-$("#input-repl-1a").fileinput({
-    autoReplace: true,
-    overwriteInitial: true,
-    showUploadedThumbs: false,
-    maxFileCount: 1,
-    initialPreview: [
-        "<img style='height:160px' src='${ context_path }/${ path_imagen }${ producto.imagen }'>",
-    ],
-    initialCaption: '${ producto.imagen }',
-    initialPreviewShowDelete: false,
-    showRemove: false,
-    showClose: false,
-    layoutTemplates: {actionDelete: ''}, // disable thumbnail deletion
-    allowedFileExtensions: ["jpg", "png", "gif"]
-});
-</script>

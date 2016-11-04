@@ -7,7 +7,7 @@
         <h1 class="text-center">Productos</h1>
         <div class="list-group">
             <#list productos as item>
-            <@link_to class="list-group-item active" controller="producto" action="show" id=item.id>
+            <@link_to class="list-group-item active" action="#">
                 <div class="media col-md-3">
                     <figure class="pull-left">
                         <img class="media-object img-rounded img-responsive"  src="${context_path}/${ path_imagen }${ item.imagen }" alt="${ item.imagen }" alt="${ item.nombre }" >
