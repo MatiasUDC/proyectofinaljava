@@ -3,10 +3,8 @@
     <head>
         <#include "header.ftl" >
         <link href="${context_path}/bower_components/select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css"/>
-        <script src="${context_path}/bower_components/select/dist/js/bootstrap-select.js" type="text/javascript"></script>
-              
+        <script src="${context_path}/bower_components/select/dist/js/bootstrap-select.js" type="text/javascript"></script> 
         <link href="${context_path}/bower_components/fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
-
         <script src="${context_path}/bower_components/fileinput/js/fileinput.js" type="text/javascript"></script>
         <script src="${context_path}/bower_components/fileinput/js/locales/es.js" type="text/javascript"></script>
         <script src="${context_path}/bower_components/jquery-validation/dist/jquery.validate.js" type="text/javascript"></script>

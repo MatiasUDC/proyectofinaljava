@@ -1,8 +1,8 @@
     <@content for="title">${ producto.nombre }</@content>
 <ol class="breadcrumb">
     <li><@link_to controller="home" action="index">home</@link_to></li>
-    <li><@link_to controller="categoria" action="index">${ categoria.nombre }</@link_to></li>
-    <li><@link_to controller="producto" action="index">productos</@link_to></li>
+    <li><@link_to controller="/admin/categoria" action="index">${ categoria.nombre }</@link_to></li>
+    <li><@link_to controller="/admin/producto" action="index">productos</@link_to></li>
     <li><a href="#">${producto.nombre}</a></li>
     </ol>
 
@@ -34,7 +34,7 @@
                     <h4 class="modal-title" id="myModalLabel">Cambiar Imagen</h4>
                   </div>
                   <div class="modal-body">
-                    <@form action="imagen" controller="producto" method="post" id="${producto.id}" enctype="multipart/form-data">
+                    <@form action="imagen" controller="/admin/producto" method="post" id="${producto.id}" enctype="multipart/form-data">
                         <div class="form-group">
                             <label class="control-label"><span class="glyphicon glyphicon-picture" aria-hidden="true"> Imagen : </label>
                             <input name="imagen" id="input-repl-1a" type="file" class="file-loading" accept="image/*">

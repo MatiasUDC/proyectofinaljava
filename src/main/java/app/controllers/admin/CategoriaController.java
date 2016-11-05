@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app.controllers;
+package app.controllers.admin;
+import app.controllers.authorization.Protected;
 import org.javalite.activeweb.AppController;
 import app.models.Categoria;
 
@@ -19,6 +20,7 @@ import org.javalite.activeweb.annotations.PUT;
  *
  * @author universidad
  */
+@Protected
 public class CategoriaController extends AppController {
     public void index(){
         List categorias = Categoria.lista_categorias();

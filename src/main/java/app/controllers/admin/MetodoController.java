@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app.controllers;
+package app.controllers.admin;
+import app.controllers.authorization.Protected;
 import org.javalite.activeweb.AppController;
 import app.models.Metodo;
 
@@ -16,6 +17,7 @@ import org.javalite.activeweb.annotations.PUT;
  *
  * @author Matias
  */
+@Protected
 public class MetodoController extends AppController{
    public void index(){
         List metodos = Metodo.lista_metodos();

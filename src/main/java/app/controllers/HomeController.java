@@ -18,6 +18,9 @@ public class HomeController extends AppController {
         view("path_imagen",appContext().get("path_imagen"));
         List productos = Producto.lista_productos();
         view("productos", productos);
+        List recomendados = Producto.getProductosRecomendados();
+        view("recomendados", recomendados);
+        render().layout("layouts/public_layout");
     }
     
 }

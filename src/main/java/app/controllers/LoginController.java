@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package app.controllers;
+import app.controllers.administracion.ProductoController;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.POST;
 /**
@@ -13,7 +14,9 @@ import org.javalite.activeweb.annotations.POST;
 public class LoginController extends AppController {
 
 
-    public void index(){}
+    public void index(){
+        render().layout("layouts/public_layout");
+    }
 
     @POST
     public void login(){
@@ -21,12 +24,14 @@ public class LoginController extends AppController {
         if(blank("email", "password")){
             flash("message", "Enter both, email and password");
             redirect();
-        }else if (param("email").equals("activeweb@javalite.io") && param("password").equals("password1")){
-            session("user", "activeweb@javalite.io");
-            redirect(HomeController.class);
+        }else if (param("email").equals("admin@admin.com") && param("password").equals("1234")){
+            session("user", "admin");
+            redirect(ProductoController.class);
         }else{
-            flash("message","Correct values to login: activeweb@javalite.io/password1 :)");
-            redirect();
+            session("user", param("email"));
+            redirect(HomeController.class);
+            //flash("message","Correctos valores para login: admin@admin.com/1234 :)");
+            //redirect();
         }
     }
 

@@ -24,12 +24,12 @@ public class Categoria extends Model{
     }
     
     public static List lista_categorias() {
-        return findAll();
+        return findAll().orderBy("nombre desc");
     }
     
     public static List<SelectOption> selectedCategoria(){
         List<SelectOption> list = new LinkedList<>();
-        List categorias = findAll();
+        List categorias = findAll().orderBy("nombre desc");
         for (Iterator it = categorias.iterator(); it.hasNext();) {
             Categoria categoria = (Categoria) it.next();
             list.add(new SelectOption(categoria.get("id"), categoria.getString("nombre")));
@@ -39,7 +39,7 @@ public class Categoria extends Model{
 
         public static List<SelectOption> selectedCategoria(Object id){
         List<SelectOption> list = new LinkedList<>();
-        List categorias = findAll();
+        List categorias = findAll().orderBy("nombre desc");
         for (Iterator it = categorias.iterator(); it.hasNext();) {
             Categoria categoria = (Categoria) it.next();
             if(categoria.getId().equals(id)){

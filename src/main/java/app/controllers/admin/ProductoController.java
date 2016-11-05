@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app.controllers;
+package app.controllers.admin;
 
 import app.models.Categoria;
 import app.models.Producto;

@@ -33,7 +33,7 @@ public class Producto extends Model{
     }  
     
     public static List lista_productos(){
-        return findAll();
+        return findAll().orderBy("nombre desc");
     }
     
     public static boolean crear(Producto producto){
@@ -55,5 +55,9 @@ public class Producto extends Model{
     
     public static Producto getProducto(String id){
         return findById(id);
+    }
+    
+    public static List getProductosRecomendados(){
+        return where("recomendado  = ?", "1").orderBy("nombre desc");
     }
 }
