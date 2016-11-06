@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <button class="btn btn-default" type="submit">Guardar</button>
-                <@link_to class="btn btn-danger" controller="admin/producto">Cancelar</@link_to>
+                <@link_to class="btn btn-default" controller="/admin/producto">Cancelar</@link_to>
             </div>
             </div>
         </div>

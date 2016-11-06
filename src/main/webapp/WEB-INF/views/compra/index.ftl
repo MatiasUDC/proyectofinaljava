@@ -27,7 +27,7 @@
                 <th>${item.id_metodo}</th>
                 <th>${item.monto}</th>
                 <th><@link_to class="btn btn-default" action="edit" id=item.id>Editar</@link_to></th>
-                <th><@form  id=item.id action="delete" method="delete" html_id=item.id><button class="btn btn-warning" type="submit">Eliminar</button></@form></th>
+                <th><@form  id=item.id action="delete" method="delete" html_id=item.id><button class="btn btn-default" type="submit">Eliminar</button></@form></th>
             </tr>
             </#list>
         </tbody>

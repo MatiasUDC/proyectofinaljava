@@ -27,14 +27,14 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Cancelar creacion de cliente</h4>
+                            <h4 class="modal-title" id="myModalLabel">Cancelar edicion de categoria</h4>
                             </div>
-                        <div class="modal-body">
-                            Se perderan todos los datos completados<br/>¿Esta seguro de continuar?
-                            </div>
-                        <div class="modal-footer">
+                            <div class="modal-body">
+                                Se perderan todos los datos completados<br/>¿Esta seguro de continuar?
+                                </div>
+                            <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <a href="index" class="btn btn-danger">Continuar</a>
+                            <@link_to class="btn btn-danger" controller="/admin/categoria">Continuar</@link_to>
                             </div>
                         </div>
                     </div>

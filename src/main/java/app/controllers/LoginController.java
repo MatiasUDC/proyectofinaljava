@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package app.controllers;
-import app.controllers.administracion.ProductoController;
+import app.controllers.admin.ProductoController;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.POST;
 /**
@@ -37,6 +37,6 @@ public class LoginController extends AppController {
 
     public void logout(){
         session("user", null);
-        redirect("/");
+        redirect(HomeController.class);
     }
 }

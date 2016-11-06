@@ -16,6 +16,7 @@
             <span class="error">${(flasher.errors.descripcion)!}</span>
         </div>
         <button class="btn btn-default" type="submit" >Guardar</button>
+        <@link_to class="btn btn-danger" controller="/admin/categoria">Cancelar</@link_to>
     </div>
 </div>
 </@form>
