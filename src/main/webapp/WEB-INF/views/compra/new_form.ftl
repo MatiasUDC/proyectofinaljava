@@ -5,15 +5,16 @@
 <div class="panel panel-success">
     <div class="panel-body">Registrar Compra</div>
     <div class="panel-footer">
+        <input type="hidden" name="id_producto" value="${ producto.id}">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="nombre">Producto * : </label>
-            <input class="form-control"type="text" name="nombre" disabled="true" value="${ producto.nombre }"required>
+            <input class="form-control"type="text" name="nombre" disabled="true" value="${ producto.nombre }">
             <span class="error">${(flasher.errors.nombre)!}</span>
             </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="stock">Cantidad * : </label>
+            <label class="col-sm-2 control-label" for="cantidad">Cantidad * : </label>
             <input class="form-control" min="1" id="cantidad" type="number" name="cantidad" value="${(flasher.params.cantidad)!}" onClick="" required>
-            <input type="button" id="Multiplicar" value="Calcular Costo">
+            <input type="button" id="Costo" value="Costo">
             <span class="error">${(flasher.errors.cantidad)!}</span>
             </div>
         <div class="form-group">
@@ -24,9 +25,10 @@
             </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="monto">Monto Final * : </label>
-            <input class="col-sm-2 control-label" disabled="true" id="monto" value="${ producto.precio }"> 
+            <input class="col-sm-2 control-label" name="monto" id="monto" value="${ producto.precio }"> 
             <span class="error">${(flasher.errors.monto)!}</span>
             </div>
+       
         <br/>
         <div class="form-group">
             <button class="btn btn-default" type="submit">Registrar</button>
@@ -39,11 +41,11 @@
 
 <script>
         $(document).ready(function () {
-        $("#Multiplicar").click(function (e) {
-            var num1 = $("#Cantidad").val();
-            var num2 = $("#Monto").val();
+        $("#Costo").click(function (e) {
+            var num1 = $("#cantidad").val();
+            var num2 = $("#monto").val();
             var resultado = parseInt(num1) * parseFloat(num2);
-            $("#Monto").val(resultado);
+            $("#monto").val(resultado);
         });
         });
             

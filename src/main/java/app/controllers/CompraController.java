@@ -31,9 +31,9 @@ public class CompraController extends AppController{
 
     @GET
     public void newForm() {
-        //ydeclaro producto
-        //Producto producto = Producto.findById(getId());
-        //view("producto", producto);
+        //declaro producto
+        Producto producto = Producto.findById(12);
+        view("producto", producto);
         java.util.List<SelectOption> list = Metodo.selectedMetodos();
         view("metodos", list);
         render().layout("layouts/form_layout");
@@ -43,7 +43,6 @@ public class CompraController extends AppController{
     public void create() {
         Compra compra = new Compra();
         compra.fromMap(params1st());
-
         if (!Compra.registrar(compra)) {
             flash("message", "No se ha podido guardar el producto, revise los siguientes items");
             flash("errors", compra.errors());

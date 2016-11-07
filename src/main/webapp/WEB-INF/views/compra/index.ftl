@@ -1,4 +1,4 @@
-<@content for="title">Productos</@content>
+<@content for="title">Compras</@content>
 
 <@link_to class="btn btn-default" action="new_form">Nuevo</@link_to>
     
@@ -10,9 +10,9 @@
             <tr>
                 <th>Usuario</th>
                 <th>Producto</th>
-                <th>Monto</th>
                 <th>Cantidad</th>
                 <th>Metodo</th>
+                <th>Monto</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -21,7 +21,7 @@
         <tbody>
             <#list compras as item>
             <tr>
-                <th></th>
+                <th>${item.id_usuario}</th>
                 <th>${item.id_producto}</th>
                 <th>${item.cantidad}</th>
                 <th>${item.id_metodo}</th>
