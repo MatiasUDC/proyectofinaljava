@@ -223,6 +223,7 @@
                     <h2 class="title text-center">Elementos destacados</h2>
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
+                            
                             <#list productos as producto>
                                 <div class="single-products">
                                     <div class="productinfo text-center">
@@ -235,6 +236,7 @@
                                         <div class="overlay-content">
                                             <h2>$ ${ producto.precio }</h2>
                                             <p>${ producto.nombre }</p>
+                                            <@link_to controller="producto"  action="show" class="btn btn-default add-to-cart" id=producto.id>Ver Producto</@link_to>
                                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir a la carro</a>
 					</div>
                                     </div>
