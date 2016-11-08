@@ -100,7 +100,7 @@
                                             <h2>$ ${ producto.precio }</h2>
                                             <p>${ producto.nombre }</p>
                                             <@link_to controller="producto"  action="show" class="btn btn-default add-to-cart" id=producto.id>Ver Producto</@link_to>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Comprar</a>
+                                            <@link_to controller="compra"  action="new_form" class="btn btn-default add-to-cart" id=producto.id><i class="fa fa-shopping-cart"></i>Comprar</@link_to>
 					</div>
                                     </div>
 				</div>
@@ -113,7 +113,7 @@
                     <h2 class="title text-center">recomendados</h2>
                     	<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
-                                <#list recomendados as recomendado>
+                                <#list recomendados as recomendado>    
                                     <div class="item active">
                                         <div class="col-sm-3">
                                             <div class="product-image-wrapper">
@@ -122,7 +122,7 @@
                                                         <img src="${context_path}/${ path_imagen }${ recomendado.imagen }" alt="${ recomendado.imagen }" height="195" width="135"/>
                                                         <h2>$ ${ recomendado.precio }</h2>
 							<p>${ recomendado.nombre }</p>
-							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Comprar</a>
+							<@link_to controller="compra"  action="new_form" class="btn btn-default add-to-cart" id=recomendado.id><i class="fa fa-shopping-cart"></i>Comprar</@link_to>
                                                     </div>
 						</div>
                                             </div>

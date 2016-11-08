@@ -18,12 +18,13 @@ import org.javalite.activejdbc.annotations.Table;
  */
 @Table("compras")
 @BelongsToParents({
-    @BelongsTo(foreignKeyName = "id_producto",parent = Producto.class),
-    @BelongsTo(foreignKeyName = "id_usuario",parent = Usuario.class),
-    @BelongsTo(foreignKeyName = "id_metodo",parent = Metodo.class)    
+    @BelongsTo(foreignKeyName = "id_producto", parent = Producto.class),
+    @BelongsTo(foreignKeyName = "id_usuario", parent = Usuario.class),
+    @BelongsTo(foreignKeyName = "id_metodo", parent = Metodo.class)
 })
 public class Compra extends Model {
-    static{
+
+    static {
         /*
         validateNumericalityOf("Cantidad")
                 .allowNull(true).greaterThan(1)
@@ -31,36 +32,36 @@ public class Compra extends Model {
         validateNumericalityOf("id_metodo")
                 .allowNull(true)
                 .greaterThan(1).message("Porfavor, Seleccione una metodo para la compra");
-        */
+         */
     }
-    public static List lista_compras(){
-        
+
+    public static List lista_compras() {
+
         return findAll();
     }
-    
-    public static boolean registrar(Compra compra){
-        
+
+    public static boolean registrar(Compra compra) {
+
         return compra.save();
 
     }
-    
-    public static boolean baja(Compra compra){
-     
+
+    public static boolean baja(Compra compra) {
+
         return compra.delete();
 
     }
-    
-    public static boolean actualizar(Compra compra){
+
+    public static boolean actualizar(Compra compra) {
         return compra.saveIt();
     }
-    public static Producto TraerProducto(Compra compra){
-        
-        Producto producto = compra.parent(Producto.class);
-        
-        return producto;
+
+ 
+
+    public static List<Compra> TraerProducto(int id) {
+        Producto producto = Producto.findById(id);
+        List<Compra> compras = producto.getAll(Compra.class);
+        return compras;
     }
-    
-    
-    
-    
+
 }
