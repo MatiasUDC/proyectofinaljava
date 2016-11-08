@@ -58,6 +58,6 @@ public class Producto extends Model{
     }
     
     public static List getProductosRecomendados(){
-        return where("recomendado  = ?", "1").orderBy("nombre desc");
+        return where("recomendado  = ?", "1").orderBy("rand()").limit(3);
     }
 }

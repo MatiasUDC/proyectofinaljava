@@ -82,25 +82,10 @@
 	
     <section>
         <div class="container">
-            <div class="row">
-		<div class="col-sm-3">                        
-                    <div class="brands_products"><!--brands_products-->
-                        <h2>Categoria</h2>
-			<div class="brands-name">
-                            <ul class="nav nav-pills nav-stacked">
-                                <#list categorias as categoria>
-                                    <li><a href="#"><a href="#">${ categoria.nombre}</a></li>
-                                </#list>
-                            </ul>
-			</div>
-                    </div><!--/brands_products-->
-						
-                </div>
-            </div>
-            <div class="col-sm-9 padding-right">
+            <div class="col-sm-12 padding-right">
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Elementos destacados</h2>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="product-image-wrapper">
                             <#list productos as producto>
                                 <div class="single-products">
@@ -129,47 +114,22 @@
                     	<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 <#list recomendados as recomendado>
-                                    <#if recomendado??>
-                                        ${recomendado?counter}
                                     <div class="item active">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="product-image-wrapper">
                                                 <div class="single-products">
                                                     <div class="productinfo text-center">
                                                         <img src="${context_path}/${ path_imagen }${ recomendado.imagen }" alt="${ recomendado.imagen }" height="195" width="135"/>
                                                         <h2>$ ${ recomendado.precio }</h2>
 							<p>${ recomendado.nombre }</p>
-							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir a la carro</a>
+							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Comprar</a>
                                                     </div>
 						</div>
                                             </div>
 					</div>
                                     </div>
-                                    <#else>
-                                    
-                                    <div class="item">	
-                                        <div class="col-sm-4">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        <img src="${context_path}/bower_components/images/home/recommend1.jpg" alt="" />
-							<h2>$56</h2>
-							<p>Polo Edición negro</p>
-							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir a la carro</a>
-                                                    </div>
-						</div>
-                                            </div>
-					</div>
-                                    </div>
-                                    </#if>
                                 </#list>
                             </div>
-                                <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a> 
 			</div>
                     </div><!--/recommended_items-->
 		</div>
