@@ -26,13 +26,15 @@ public class CompraController extends AppController{
 
     @GET
     public void index() {
+        
+        //view("producto", Compra.TraerProducto()
         view("compras", Compra.lista_compras());
     }
 
     @GET
     public void newForm() {
         //declaro producto
-        Producto producto = Producto.findById(12);
+        Producto producto = Producto.findById(getId());
         view("producto", producto);
         java.util.List<SelectOption> list = Metodo.selectedMetodos();
         view("metodos", list);
@@ -49,7 +51,7 @@ public class CompraController extends AppController{
             flash("params", params1st());
             redirect(CompraController.class, "new_form");
         } else {
-            flash("message", "Compra de : " + compra.get("id_producto") + "fue realizada correctamente" );
+            flash("message", "La Compra fue realizada correctamente" );
             redirect(CompraController.class);
         }
     }

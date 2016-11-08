@@ -115,6 +115,8 @@
                                             <h2>$ ${ producto.precio }</h2>
                                             <p>${ producto.nombre }</p>
                                             <@link_to controller="producto"  action="show" class="btn btn-default add-to-cart" id=producto.id>Ver Producto</@link_to>
+                                            <@link_to controller="compra"  action="new_form" class="btn btn-default add-to-cart" id=producto.id>Comprar</@link_to>
+                                            
                                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Comprar</a>
 					</div>
                                     </div>
@@ -128,40 +130,7 @@
                     <h2 class="title text-center">recomendados</h2>
                     	<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
-                                <#list recomendados as recomendado>
-                                    <#if recomendado??>
-                                        ${recomendado?counter}
-                                    <div class="item active">
-                                        <div class="col-sm-4">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        <img src="${context_path}/${ path_imagen }${ recomendado.imagen }" alt="${ recomendado.imagen }" height="195" width="135"/>
-                                                        <h2>$ ${ recomendado.precio }</h2>
-							<p>${ recomendado.nombre }</p>
-							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir a la carro</a>
-                                                    </div>
-						</div>
-                                            </div>
-					</div>
-                                    </div>
-                                    <#else>
-                                    
-                                    <div class="item">	
-                                        <div class="col-sm-4">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        <img src="${context_path}/bower_components/images/home/recommend1.jpg" alt="" />
-							<h2>$56</h2>
-							<p>Polo Edición negro</p>
-							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Añadir a la carro</a>
-                                                    </div>
-						</div>
-                                            </div>
-					</div>
-                                    </div>
-                                    </#if>
+                                <#list recomendados as recomendado>    
                                 </#list>
                             </div>
                                 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
