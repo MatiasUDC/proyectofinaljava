@@ -1,25 +1,24 @@
 
-<@content for="title">Registrar Compra</@content>
+<@content for="title">Editar Compra</@content>
 
-<@form  action="create" method="post" html_id="formulario_compra">
+<@form  action="create" method="post" id="${compra.id}" html_id="formulario_compra">
 <div class="panel panel-success">
-    <div class="panel-body">Registrar Compra</div>
+    <div class="panel-body">Editar Compra</div>
     <div class="panel-footer">
-        <input type="hidden" name="id_producto" value="${ producto.id}">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="nombre">Producto * : </label>
-            <input class="form-control"type="text" name="nombre" disabled="true" value="${ producto.nombre }">
+            <input class="form-control"type="text" name="nombre" disabled="true" value="${ compra.producto.nombre }">
             <span class="error">${(flasher.errors.nombre)!}</span>
             </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="cantidad">Cantidad * : </label>
-            <input class="form-control" min="1" id="cantidad" type="number" name="cantidad" value="${(flasher.params.cantidad)!}" onClick="" required>
+            <input class="form-control" min="1" id="cantidad" type="number" name="cantidad" value="${(compra.cantidad)!}" onClick="" required>
             <input type="button" id="Costo" value="Costo">
             <span class="error">${(flasher.errors.cantidad)!}</span>
             </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="metodo">Metodo * : </label><br/><br/>
-             <@select id="metodos" class="selectpicker show-menu-arrow" name="id_metodo" list=metodos> <option value="0">Seleccione un Metodo de Pago </option> </@> 
+             <@select id="metodos" class="selectpicker show-menu-arrow" name="id_metodo" list=metodos> <option value="${(compra.id_metodo)}">${(compra.metodos.nombre)}</option> </@> 
             <span class="error">${(flasher.errors.metodos)!}</span>
             </div>
         <div class="form-group" id="coutas"style="display:none">
@@ -34,25 +33,24 @@
             </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="monto">Monto Final * : </label>
-            <input class="col-sm-2 control-label" name="monto" id="monto" value="${ producto.precio }"> 
+            <input class="col-sm-2 control-label" name="monto" id="monto" value="${ compra.monto }"> 
+            <input class="col-sm-2 control-label" name="monto real" id="montoreal" value="${compra.producto.precio}" type="hidden">
             <span class="error">${(flasher.errors.monto)!}</span>
             </div>
 
         <br/>
-        <div class="form-group">
-            <button class="btn btn-default" type="submit">Registrar</button>
-                <@link_to class="btn btn-danger" controller="compra">Cancelar</@link_to>
+             <div class="form-group">
+                <button class="btn btn-default" type="submit">Guardar</button>
+                <@link_to class="btn btn-default" controller="/admin/producto">Cancelar</@link_to>
             </div>
         </div>
     </div>
 </@form>
-
-
 <script>
         $(document).ready(function () {
         $("#Costo").click(function (e) {
             var num1 = $("#cantidad").val();
-            var num2 = $("#monto").val();
+            var num2 = $("#montoreal").val();
             var resultado = parseInt(num1) * parseFloat(num2);
             $("#monto").val(resultado);
         });
@@ -106,4 +104,3 @@
             });
         });
     </script>
-
