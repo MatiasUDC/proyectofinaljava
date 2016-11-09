@@ -60,10 +60,9 @@ public class CompraController extends AppController{
     public void edit() {
        
         Compra c =  (Compra) Compra.findById(getId());
-        //java.util.List<SelectOption> list = MetodoPago.selectedMetodos();
-        render().layout("layouts/form_layout");
-        //view("metodos", list);
-        view("producto", c);
+        java.util.List<SelectOption> list = Metodo.selectedMetodos();
+        view("metodos", list);
+        view("compra", c);
 
     }
 
