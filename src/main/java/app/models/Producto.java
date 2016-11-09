@@ -60,4 +60,8 @@ public class Producto extends Model{
     public static List getProductosRecomendados(){
         return where("recomendado  = ?", "1").orderBy("rand()").limit(3);
     }
+    
+    public static List getProductoAjax(String criterio){
+        return where("upper(nombre) LIKE ?","%"+criterio.trim().toUpperCase()+"%");
+    }
 }

@@ -71,9 +71,10 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="search_box pull-right">
-                            <input type="text" placeholder="Busqueda"/>
-                        </div>
+                        <form>
+                            <input id="busqueda" type="text" placeholder="Busqueda"/>
+                            <button id="buscar" type="button">Buscar</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -84,9 +85,9 @@
         <div class="container">
             <div class="col-sm-12 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center">Elementos destacados</h2>
+                    <h2 class="title text-center">Producto</h2>
                     <div class="col-sm-3">
-                        <div class="product-image-wrapper">
+                        <div  id="prod" class="product-image-wrapper">
                             <#list productos as producto>
                                 <div class="single-products">
                                     <div class="productinfo text-center">
@@ -138,3 +139,11 @@
     </section>
     
  
+<script>
+    $(function() {
+	$('#buscar').click(function(event) {
+            var busqueda = $('#busqueda').val();
+            $("#prod").load('home', { busqueda : busqueda },function(responseTxt, statusTxt, xhr){});
+	});
+    });
+</script>
