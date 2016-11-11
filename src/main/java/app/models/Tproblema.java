@@ -10,12 +10,14 @@ import java.util.LinkedList;
 import java.util.List;
 import org.javalite.activejdbc.Model;
 import static org.javalite.activejdbc.Model.findAll;
+import org.javalite.activejdbc.annotations.Table;
 import org.javalite.activeweb.freemarker.SelectOption;
 
 /**
  *
  * @author Matias
  */
+@Table("tipo_problema")
 public class Tproblema extends Model {
 
     public static List<SelectOption> selectedProblemas() {
@@ -26,6 +28,9 @@ public class Tproblema extends Model {
             list.add(new SelectOption(tipoproblema.get("id"), tipoproblema.getString("nombre")));
         }
         return list;
+    }
+      public static List lista_problemas() {
+        return findAll();
     }
 
     public static boolean crear(Tproblema p) {

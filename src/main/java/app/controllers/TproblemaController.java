@@ -5,7 +5,6 @@
  */
 package app.controllers;
 
-import app.controllers.authorization.Protected;
 import org.javalite.activeweb.AppController;
 import app.models.Metodo;
 import app.models.Problema;
@@ -23,7 +22,7 @@ import org.javalite.activeweb.annotations.PUT;
  */
 public class TproblemaController extends AppController {
      public void index(){
-        List problemas = Tproblema.selectedProblemas();
+        List problemas = Tproblema.lista_problemas();
         view("problemas", problemas);
     }
     

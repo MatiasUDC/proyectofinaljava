@@ -9,6 +9,7 @@ import app.models.Compra;
 import app.models.Problema;
 import app.models.Metodo;
 import app.models.Producto;
+import app.models.Tproblema;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class ProblemaController extends AppController {
     public void edit() {
        
         Problema c =  (Problema) Problema.findById(getId());
-        java.util.List<SelectOption> list = Tproblema.selectedProblema();
+        java.util.List<SelectOption> list = Tproblema.selectedProblemas();
         view("tipo", list);
         view("problema", c);
 
