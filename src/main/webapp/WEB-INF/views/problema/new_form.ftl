@@ -3,9 +3,10 @@
 
 <@form  action="create" method="post">
 <div class="panel panel-success">
-    <div class="panel-body">Crear Metodo de Pago</div>
+    <div class="panel-body">Registrar Problema</div>
     <div class="panel-footer">
         <div class="form-group">
+            <input type="hidden" name="id_compra" value="${ compra.id}">
             <div class="form-group">
             <label class="col-sm-2 control-label" for="nombre">Producto * : </label>
             <input class="form-control"type="text" name="producto" disabled="true" value="${ compra.producto.nombre }">
