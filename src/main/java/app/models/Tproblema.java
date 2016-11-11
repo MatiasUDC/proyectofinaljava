@@ -10,6 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 import org.javalite.activejdbc.Model;
 import static org.javalite.activejdbc.Model.findAll;
+import org.javalite.activejdbc.annotations.BelongsTo;
+import org.javalite.activejdbc.annotations.BelongsToParents;
 import org.javalite.activejdbc.annotations.Table;
 import org.javalite.activeweb.freemarker.SelectOption;
 
@@ -18,6 +20,9 @@ import org.javalite.activeweb.freemarker.SelectOption;
  * @author Matias
  */
 @Table("tipo_problema")
+@BelongsToParents({
+    @BelongsTo(foreignKeyName = "tipo", parent = Problema.class)
+        })
 public class Tproblema extends Model {
 
     public static List<SelectOption> selectedProblemas() {
