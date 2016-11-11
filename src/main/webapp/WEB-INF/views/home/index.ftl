@@ -73,7 +73,7 @@
                     <div class="col-sm-3">
                         <form>
                             <input id="busqueda" type="text" placeholder="Busqueda"/>
-                            <button id="buscar" type="button">Buscar</button>
+                            <button id="buscar" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                         </form>
                     </div>
                 </div>
@@ -85,10 +85,10 @@
         <div class="container">
             <div class="col-sm-12 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center">Producto</h2>
-                    <div class="col-sm-3">
-                        <div  id="prod" class="product-image-wrapper">
-                            <#list productos as producto>
+                    <h2 class="title text-center">Productos</h2>
+                    <#list productos as producto>
+                        <div class="col-sm-3">
+                            <div  id="prod" class="product-image-wrapper">
                                 <div class="single-products">
                                     <div class="productinfo text-center">
                                         <img src="${context_path}/${ path_imagen }${ producto.imagen}" alt="${ producto.imagen}" height="190" width="130" />
@@ -105,37 +105,36 @@
 					</div>
                                     </div>
 				</div>
-                            </#list>
-			</div>
-                    </div>
+                            </div>
+                        </div>
+                    </#list>
 		</div><!--features_items-->
 
 		<div class="recommended_items"><!--recommended_items-->
                     <h2 class="title text-center">recomendados</h2>
-                    	<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                                <#list recomendados as recomendado>    
-                                    <div class="item active">
-                                        <div class="col-sm-3">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        <img src="${context_path}/${ path_imagen }${ recomendado.imagen }" alt="${ recomendado.imagen }" height="195" width="135"/>
-                                                        <h2>$ ${ recomendado.precio }</h2>
-							<p>${ recomendado.nombre }</p>
-							<@link_to controller="compra"  action="new_form" class="btn btn-default add-to-cart" id=recomendado.id><i class="fa fa-shopping-cart"></i>Comprar</@link_to>
-                                                    </div>
-						</div>
+                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <#list recomendados as recomendado>    
+                                <div class="item active">
+                                    <div class="col-sm-3">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <img src="${context_path}/${ path_imagen }${ recomendado.imagen }" alt="${ recomendado.imagen }" height="195" width="135"/>
+                                                    <h2>$ ${ recomendado.precio }</h2>
+                                                    <p>${ recomendado.nombre }</p>
+                                                    <@link_to controller="compra"  action="new_form" class="btn btn-default add-to-cart" id=recomendado.id><i class="fa fa-shopping-cart"></i>Comprar</@link_to>
+                                                </div>
                                             </div>
-					</div>
+                                        </div>
                                     </div>
-                                </#list>
-                            </div>
-			</div>
-                    </div><!--/recommended_items-->
-		</div>
+                                </div>
+                            </#list>
+                        </div>
+                    </div>
+                </div><!--/recommended_items-->
             </div>
-	</div>
+        </div>
     </section>
     
  
@@ -143,7 +142,7 @@
     $(function() {
 	$('#buscar').click(function(event) {
             var busqueda = $('#busqueda').val();
-            $("#prod").load('home', { busqueda : busqueda },function(responseTxt, statusTxt, xhr){});
+            $("#prod").load('home/busqueda', { busqueda : busqueda },function(responseTxt, statusTxt, xhr){});
 	});
     });
 </script>

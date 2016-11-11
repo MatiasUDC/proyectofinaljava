@@ -5,6 +5,9 @@
  */
 package app.controllers;
 import app.controllers.admin.ProductoController;
+import app.models.Rol;
+import app.models.Usuario;
+import java.util.List;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.POST;
 /**
@@ -22,16 +25,22 @@ public class LoginController extends AppController {
     public void login(){
 
         if(blank("email", "password")){
-            flash("message", "Enter both, email and password");
+            flash("message", "Ingerse , email y contraseña");
             redirect();
-        }else if (param("email").equals("admin@admin.com") && param("password").equals("1234")){
-            session("user", "admin");
-            redirect(ProductoController.class);
         }else{
-            session("user", param("email"));
-            redirect(HomeController.class);
-            //flash("message","Correctos valores para login: admin@admin.com/1234 :)");
-            //redirect();
+            List users = Usuario.getUsurio(param("email"), param("password"));
+            if(users.isEmpty()){
+                flash("message", "No se ha encontrado la convinacion de email y contraseña");
+                redirect();
+            }
+            Usuario user = (Usuario) users.get(0);
+            if (user.parent(Rol.class).get("nombre").equals("admin")){
+                session("user", "admin");
+                redirect(ProductoController.class);
+            } else if (user.parent(Rol.class).get("nombre").equals("user")){
+                session("user", param("email"));
+                redirect(HomeController.class);
+            }
         }
     }
 

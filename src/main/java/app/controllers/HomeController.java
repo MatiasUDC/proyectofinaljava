@@ -5,10 +5,12 @@
  */
 package app.controllers;
 
-import app.models.Categoria;
 import app.models.Producto;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.javalite.activeweb.AppController;
+import org.javalite.activeweb.annotations.POST;
 
 /**
  *
@@ -21,16 +23,20 @@ public class HomeController extends AppController {
         List recomendados = Producto.getProductosRecomendados();
         view("recomendados", recomendados);
         List productos;
-        if(!xhr()){
             productos = Producto.lista_productos();
             view("productos", productos);
             render().layout("layouts/public_layout");
-        } else {
-            productos = Producto.getProductoAjax(params1st().get("busqueda"));
-            view("productos", productos);
-            render().noLayout();
-        }
         
     }
-    
+    @POST
+    public void busqueda(){
+        List productos = Producto.getProductoAjax(params1st().get("busqueda"));
+        if(productos.isEmpty()){
+            String message = "No se han econtrado resultados...";
+            view("message", message);
+        }
+        view("productos", productos);
+        view("path_imagen",appContext().get("path_imagen"));
+        render().noLayout();
+    }
 }
