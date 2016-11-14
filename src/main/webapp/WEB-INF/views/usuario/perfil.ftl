@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="#"><img src="${context_path}/bower_components/images/home/logo.png" alt="" /></a>
+                            <@link_to controller="home"><img src="${context_path}/bower_components/images/home/logo.png" alt="" /></@link_to>
                         </div>
                     </div>
                     <div class="col-sm-8">
