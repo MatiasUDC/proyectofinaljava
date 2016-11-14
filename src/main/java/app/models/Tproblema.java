@@ -19,10 +19,8 @@ import org.javalite.activeweb.freemarker.SelectOption;
  *
  * @author Matias
  */
-@Table("tipo_problema")
-@BelongsToParents({
-    @BelongsTo(foreignKeyName = "tipo", parent = Problema.class)
-        })
+@Table("tipoproblema")
+
 public class Tproblema extends Model {
 
     public static List<SelectOption> selectedProblemas() {

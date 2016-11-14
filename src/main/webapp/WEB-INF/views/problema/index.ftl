@@ -22,7 +22,7 @@
             <tr>
                 <th>${item.compra.id_usuario}</th>
                 <th>${item.compra.producto.nombre}</th>
-                <th>${item.tipo}</th>
+                <th>${item.tipoproblema.nombre}</th>
                 <th>${item.descripcion}</th>
                 <th><@form  id=item.id action="delete" method="delete" html_id=item.id><button class="btn btn-default" type="submit">Problema Resuelto</button></@form></th>
             </tr>

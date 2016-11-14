@@ -32,7 +32,7 @@ public class ProblemaController extends AppController {
     @GET
     public void newForm() {
         //declaro producto
-        Compra compra = Compra.findById(6);
+        Compra compra = Compra.findById(getId());
         view("compra", compra);
         java.util.List<SelectOption> list = Tproblema.selectedProblemas();
         view("tipos", list);
