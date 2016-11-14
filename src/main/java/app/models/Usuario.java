@@ -8,6 +8,8 @@ package app.models;
 import java.util.List;
 import org.javalite.activejdbc.Model;
 import static org.javalite.activejdbc.Model.findAll;
+import org.javalite.activejdbc.annotations.BelongsTo;
+import org.javalite.activejdbc.annotations.BelongsToParents;
 import org.javalite.activejdbc.annotations.Table;
 
 /**
@@ -15,7 +17,10 @@ import org.javalite.activejdbc.annotations.Table;
  * @author Matias
  */
 @Table("usuario")
-public class Usuario extends Model{
+@BelongsToParents({ 
+@BelongsTo(foreignKeyName="perfil_id",parent=Perfil.class), 
+@BelongsTo(foreignKeyName="rol_id",parent=Rol.class) 
+})public class Usuario extends Model{
     
      public static List lista_usuario() {
         return findAll();
@@ -31,5 +36,13 @@ public class Usuario extends Model{
 
     public static boolean actualizar(Usuario u) {
         return u.saveIt();
+    }
+    
+    public static List getUsurio( String email, String password ){
+        return where( "email = ? and password = ?", email, password );
+        
+    }
+    public Rol getRol(Usuario user){
+        return user.parent(Rol.class);
     }
 }
