@@ -9,35 +9,22 @@ import app.models.Categoria;
 import app.models.Producto;
 import java.util.List;
 import org.javalite.activeweb.AppController;
-import org.javalite.activeweb.annotations.POST;
 
 /**
  *
  * @author universidad
  */
-public class HomeController extends AppController {
-    
-    public void index() {
+public class CategoriaController extends AppController{
+    public void show(){
+        Categoria c = Categoria.getCategoria(getId());
+        List productos = Producto.where("categoria_id = ?", c.get("id"));
         view("path_imagen",appContext().get("path_imagen"));
         List recomendados = Producto.getProductosRecomendados();
         List cs = Categoria.lista_categorias();
         view("categorias", cs);
         view("recomendados", recomendados);
-        List productos;
-        productos = Producto.lista_productos();
         view("productos", productos);
-        render().layout("layouts/public_layout");
+        render("/home/index").layout("layouts/public_layout");
         
-    }
-    @POST
-    public void busqueda(){
-        List productos = Producto.getProductoAjax(params1st().get("busqueda"));
-        if(productos.isEmpty()){
-            String message = "No se han econtrado resultados...";
-            view("message", message);
-        }
-        view("productos", productos);
-        view("path_imagen",appContext().get("path_imagen"));
-        render().noLayout();
     }
 }

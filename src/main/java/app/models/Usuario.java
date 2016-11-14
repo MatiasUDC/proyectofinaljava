@@ -23,7 +23,7 @@ import org.javalite.activejdbc.annotations.Table;
 })
 public class Usuario extends Model{
     public static List getUsurio( String email, String password ){
-        return where( "emial = ? and password = ?", email, password );
+        return where( "email = ? and password = ?", email, password );
         
     }
     public Rol getRol(Usuario user){

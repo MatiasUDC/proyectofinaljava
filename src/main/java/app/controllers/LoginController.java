@@ -36,9 +36,11 @@ public class LoginController extends AppController {
             Usuario user = (Usuario) users.get(0);
             if (user.parent(Rol.class).get("nombre").equals("admin")){
                 session("user", "admin");
+                session("id_user", user.get("id").toString());
                 redirect(ProductoController.class);
             } else if (user.parent(Rol.class).get("nombre").equals("user")){
                 session("user", param("email"));
+                session("id_user", user.get("id").toString());
                 redirect(HomeController.class);
             }
         }

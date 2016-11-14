@@ -79,17 +79,14 @@
                     <div class="left-sidebar">
                         <h2>Categoria</h2>
                         <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                        <#list categorias as categoria>   
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Remeras</a></h4>
+                                    <h4 class="panel-title"><a href="#">${categoria.nombre}</a></h4>
                                 </div>
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Zapatillas</a></h4>
-                                </div>
-                            </div>
-                        </div><!--/category-products-->					
+                        </#list>
+                        </div><!--/category-products-->				
                     </div>
                 </div>
 				

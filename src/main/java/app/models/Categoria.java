@@ -20,7 +20,6 @@ import org.javalite.activeweb.freemarker.SelectOption;
 public class Categoria extends Model{
     static{
         validatePresenceOf("nombre").message("Porfavor, ingrese el nombre del producto");
-        validatePresenceOf("descripcion").message("Porfavor, ingrese una descripcion del producto");
     }
     
     public static List lista_categorias() {
