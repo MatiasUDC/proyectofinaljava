@@ -1,3 +1,4 @@
+            <h2 class="title text-center">Productos</h2>
             ${ message }
             <#list productos as producto>
                 <div class="single-products">

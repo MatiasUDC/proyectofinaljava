@@ -25,6 +25,7 @@ public class CategoriaController extends AppController {
     public void index(){
         List categorias = Categoria.lista_categorias();
         view("categorias", categorias);
+        view("index_categoria", true );
     }
     
     @GET

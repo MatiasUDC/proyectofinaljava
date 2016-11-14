@@ -1,7 +1,6 @@
 <@content for="title">Productos</@content>
 
 <@link_to class="btn btn-default" action="new_form">Nuevo</@link_to>
-<@link_to class="btn btn-default" controller="home">Home</@link_to>
 <@flash name="message"/>
    
 <div class="table-responsive">

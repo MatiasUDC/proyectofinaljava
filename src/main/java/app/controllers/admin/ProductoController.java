@@ -29,7 +29,7 @@ public class ProductoController extends AppController {
     public void index() {
         view("path_imagen",appContext().get("path_imagen"));
         view("productos", Producto.lista_productos());
-
+        view("index_producto", true );
     }
 
     @GET

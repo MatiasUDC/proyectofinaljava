@@ -103,11 +103,11 @@
                     </div>
                 </div>
                 <div class="col-sm-9 padding-right">
-                    <div class="features_items"><!--features_items-->
+                    <div id="prod" class="features_items"><!--features_items-->
                         <h2 class="title text-center">Productos</h2>
                         <#list productos as producto>
                             <div class="col-sm-3">
-                                <div  id="prod" class="product-image-wrapper">
+                                <div  class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
                                             <img src="${context_path}/${ path_imagen }${ producto.imagen}" alt="${ producto.imagen}" height="190" width="130" />
@@ -158,8 +158,6 @@
             </div>
         </div>
     </section>
-    
- 
 <script>
     $(function() {
 	$('#buscar').click(function(event) {

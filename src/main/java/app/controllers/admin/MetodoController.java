@@ -22,6 +22,7 @@ public class MetodoController extends AppController{
    public void index(){
         List metodos = Metodo.lista_metodos();
         view("metodos", metodos);
+        view("index_metodo", true );
     }
     
     @GET
