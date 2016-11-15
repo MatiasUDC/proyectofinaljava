@@ -107,7 +107,7 @@
                                     <input type="text" value="3" />
                                     <button type="button" class="btn btn-fefault cart">
                                         <i class="fa fa-shopping-cart"></i>
-					Añadir al carro
+					Comprar
                                     </button>
 				</span>
 				<p><b>Disponible</b> En stock</p>
@@ -121,29 +121,30 @@
                     <div class="category-tab shop-details-tab"><!--category-tab-->
                         <div class="col-sm-12">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#reviews" data-toggle="tab">Comentarios (5)</a></li>
+                                <li class="active"><a href="#reviews" data-toggle="tab">Comentarios (${comentarios?size})</a></li>
                             </ul>
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane fade active in" id="reviews" >
                                 <div class="col-sm-12">
+                                    <#list comentarios as comentario>
                                     <ul>
-                                        <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-                                        <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-                                        <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
+                                        <li><a href=""><i class="fa fa-user"></i>${comentario.usuario.nombre}</a></li>
+                                        <li><a href=""><i class="fa fa-calendar-o"></i>${comentario.fecha_alta}</a></li>
                                     </ul>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                    <p><b>Write</b></p>
-                                    <form action="#">
+                                    <p>${comentario.comentario}</p>
+                                    </#list>
+                                    <p><b>Escribe un comentario</b></p>
+                                    <@form  id=producto.id controller="comentario" action="crear" method="post" html_id=producto.id>
                                         <span>
-                                            <input type="text" placeholder="Your Name"/>
-                                            <input type="email" placeholder="Email Address"/>
+                                            <input type="text" placeholder="Ingrese su Nombre"/>
+                                            <input type="email" placeholder="Direccion de Email"/>
                                         </span>
                                         <textarea name="" ></textarea>
-                                        <button type="button" class="btn btn-default pull-right">
+                                        <button type="submit" class="btn btn-default pull-right">
                                             Comentar
                                         </button>
-                                    </form>
+                                    </@form>
                                 </div>
                             </div>
                         </div>

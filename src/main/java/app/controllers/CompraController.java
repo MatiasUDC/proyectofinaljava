@@ -5,23 +5,20 @@
  */
 package app.controllers;
 
-import app.models.Categoria;
+import app.controllers.authorization.Protected;
 import app.models.Compra;
 import app.models.Metodo;
 import app.models.Producto;
 
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.*;
-import org.javalite.activeweb.FormItem;
 import org.javalite.activeweb.freemarker.SelectOption;
 
 /**
  *
  * @author Matias
  */
+@Protected
 public class CompraController extends AppController{
 
     @GET

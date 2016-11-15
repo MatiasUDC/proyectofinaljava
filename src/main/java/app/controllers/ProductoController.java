@@ -7,6 +7,7 @@ package app.controllers;
 
 import app.models.Categoria;
 import app.models.Producto;
+import app.models.Comentario;
 import java.util.List;
 import org.javalite.activeweb.AppController;
 
@@ -18,12 +19,15 @@ public class ProductoController extends AppController {
     public void show(){
         Producto p = (Producto) Producto.getProducto(getId());
         List cs =  Categoria.lista_categorias();
-      
-        render().layout("layouts/public_layout");
+        List comentarios = Comentario.listaCompentariosProducto(p);
+        List recomendados = Producto.getProductosRecomendados();
+        
         view("categorias", cs);
         view("producto", p);
         view("path_imagen", appContext().get("path_imagen"));
-        List recomendados = Producto.getProductosRecomendados();
         view("recomendados", recomendados);
+        view("comentarios", comentarios);
+        
+        render().layout("layouts/public_layout");
     }
 }

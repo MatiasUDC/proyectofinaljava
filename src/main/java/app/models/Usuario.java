@@ -20,7 +20,8 @@ import org.javalite.activejdbc.annotations.Table;
 @BelongsToParents({ 
 @BelongsTo(foreignKeyName="perfil_id",parent=Perfil.class), 
 @BelongsTo(foreignKeyName="rol_id",parent=Rol.class) 
-})public class Usuario extends Model{
+})
+public class Usuario extends Model{
     
      public static List lista_usuario() {
         return findAll();
@@ -44,5 +45,9 @@ import org.javalite.activejdbc.annotations.Table;
     }
     public Rol getRol(Usuario user){
         return user.parent(Rol.class);
+    }
+    public static List getUsurio( String email ){
+        return where( "email = ?", email );
+        
     }
 }

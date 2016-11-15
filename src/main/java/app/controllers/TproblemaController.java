@@ -6,7 +6,6 @@
 package app.controllers;
 
 import org.javalite.activeweb.AppController;
-import app.models.Metodo;
 import app.models.Problema;
 import app.models.Tproblema;
 
