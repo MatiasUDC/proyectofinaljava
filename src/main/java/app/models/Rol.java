@@ -14,5 +14,7 @@ import org.javalite.activejdbc.annotations.Table;
  */
 @Table("rol")
 public class Rol extends Model{
-    
+    public static List getRol("String nombre"){
+    	return where("nombre = ?", nombre).limit(1);
+    }
 }

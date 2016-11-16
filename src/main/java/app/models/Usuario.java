@@ -50,4 +50,9 @@ public class Usuario extends Model{
         return where( "email = ?", email );
         
     }
+
+    public static List getAllUserRol(String nombreRol){
+        return  customer.get(Rol.class, "nombre = ?", nombreRol);
+    }
+
 }
