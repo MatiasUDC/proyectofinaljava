@@ -8,6 +8,8 @@ package app.controllers.admin;
 
 import org.javalite.activeweb.AppController;
 import app.models.Tienda;
+import java.util.List;
+import org.javalite.activeweb.annotations.PUT;
 /**
  *
  * @author universidad
@@ -29,7 +31,7 @@ public class HomeController extends AppController{
     	Tienda t = (Tienda) tienda.get(0);
         if(!Tienda.actualizarInfoTienda(t)){
             flash("message", "No se ha podido guardar la informacion, revise los siguientes items");
-            flash("errors", c.errors());
+            flash("errors", t.errors());
             flash("params", params1st());
             redirect(HomeController.class, "edit");
         }else {

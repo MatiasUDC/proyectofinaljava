@@ -44,7 +44,7 @@ public class Usuario extends Model{
         
     }
     public Rol getRol(Usuario user){
-        return user.parent(RoL.class);
+        return user.parent(Rol.class);
     }
     public static List getUsurio( String email ){
         return where( "email = ?", email );
