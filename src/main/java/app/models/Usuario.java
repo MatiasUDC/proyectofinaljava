@@ -23,7 +23,7 @@ import org.javalite.activejdbc.annotations.Table;
 })
 public class Usuario extends Model{
     
-     public static List lista_usuario() {
+    public static List lista_usuario() {
         return findAll();
     }
 
@@ -44,7 +44,7 @@ public class Usuario extends Model{
         
     }
     public Rol getRol(Usuario user){
-        return user.parent(Rol.class);
+        return user.parent(RoL.class);
     }
     public static List getUsurio( String email ){
         return where( "email = ?", email );
