@@ -24,7 +24,7 @@ public class Comentario extends Model{
     public static List listaCompentariosProducto(Producto prod){
         return prod.getAll(Comentario.class).orderBy("fecha_alta desc");
     }
-    
+            
     public static void comentar(Comentario comentario){
         comentario.saveIt();
     }
