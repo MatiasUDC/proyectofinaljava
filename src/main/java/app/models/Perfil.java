@@ -12,7 +12,7 @@ import org.javalite.activejdbc.annotations.Table;
  *
  * @author universidad
  */
-@Table("perfil")
+@Table("perfiles")
 public class Perfil extends Model{
     
 }

@@ -5,57 +5,61 @@
  */
 package app.controllers.admin;
 
-import app.models.Compra;
-import app.models.Problema;
+
 import app.models.Producto;
 
 import java.util.List;
 import org.javalite.activeweb.AppController;
 import app.controllers.authorization.Protected;
+import app.models.Categoria;
+import app.models.Rol;
+import app.models.Usuario;
+import org.javalite.activeweb.annotations.GET;
+import org.javalite.activeweb.annotations.POST;
 /**
  *
  * @author Matias
  */
+@Protected
 public class UsuarioController extends AppController{
     public void index(){
         List productos = Producto.lista_productos();
         view("productos",productos);
-        render().layout("layouts/public_layout");
-        /*
-        List usuario = Usuario.lista_usuario();
-        view("usuario", usuario);*/    
+        view("index_usuario", true );
+
+        List usuarios = Usuario.lista_usuario();
+        view("users", usuarios);  
     }
-    public void compra(){
-        List compras = Compra.lista_compras();
-        view("compras",compras);
-        render().layout("layouts/public_layout");
-        /*
-        List usuario = Usuario.lista_usuario();
-        view("usuario", usuario);*/    
+    
+    @GET
+    public void newForm() {
+        List roles = Rol.selectedRol();
+        view("roles", roles);
+        render().layout("layouts/form_layout");
     }
-    public void problema(){
-        List problemas = Problema.lista_problemas();
-        view("problemas",problemas);
-        render().layout("layouts/public_layout");
-        /*
-        List usuario = Usuario.lista_usuario();
-        view("usuario", usuario);*/    
-    }
-    public void comentario(){
-        //List comentarios = Comentario.lista_comentarios_usuario();
-        //view("comentarios",comentarios);
-        render().layout("layouts/public_layout");
-            
-    }
-    public void perfil(){
-        /*
-        if(!(Perfil.getperfilusuario()){
-            Perfil perfil = Perfil = getperfilusuario();
-            view("perfil", perfil);
-            render().layout("layouts/public_layout");
+    
+    @POST
+    public void create() {
+        Usuario u = new Usuario();
+        u.fromMap(params1st());
+
+        if (!Usuario.crear(u)) {
+            flash("message", "No se ha podido guardar la categoria, revise los siguientes items");
+            flash("errors", u.errors());
+            flash("params", params1st());
+            redirect(CategoriaController.class, "new_form");
         } else {
-            render().layout("perfil/new_form");            
+            flash("message", "Nueva usuario registrado: " + u.get("nombre"));
+            redirect(UsuarioController.class);
         }
-        */
+    }
+        @GET
+    public void edit() {
+       
+        Usuario u = (Usuario) Usuario.findById(getId());
+        List roles = Rol.selectedRol(u.get("rol_id"));
+        view("roles", roles);
+        view("usuario", u);
+        render().layout("layouts/form_layout");
     }
 }

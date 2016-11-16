@@ -16,7 +16,7 @@ import org.javalite.activejdbc.annotations.Table;
  *
  * @author Matias
  */
-@Table("usuario")
+@Table("usuarios")
 @BelongsToParents({ 
 @BelongsTo(foreignKeyName="perfil_id",parent=Perfil.class), 
 @BelongsTo(foreignKeyName="rol_id",parent=Rol.class) 
@@ -27,8 +27,19 @@ public class Usuario extends Model{
         return findAll();
     }
 
-    public static boolean crear(Usuario u) {
-        return u.save();
+    public static boolean crear(Usuario u) {  
+        boolean save = u.save();
+        if(save){
+            String name = u.get("email").toString().
+                    substring(u.get("email").toString().
+                            lastIndexOf('@'));
+            Perfil perfil = new Perfil();
+            perfil.set("nombre", name);
+            perfil.saveIt();
+            u.set(perfil);
+            save = u.saveIt();
+        }
+        return save;
     }
 
     public static boolean eliminar(Usuario u) {
@@ -43,16 +54,15 @@ public class Usuario extends Model{
         return where( "email = ? and password = ?", email, password );
         
     }
-    public Rol getRol(Usuario user){
+    public static Rol getRol(Usuario user){
         return user.parent(Rol.class);
     }
     public static List getUsurio( String email ){
         return where( "email = ?", email );
         
     }
-
-    public static List getAllUserRol(String nombreRol){
-        return  customer.get(Rol.class, "nombre = ?", nombreRol);
+    public static List getUsersRol(Rol rol){
+        return where( "rol_id = ? ", rol.get("id") );
     }
 
 }

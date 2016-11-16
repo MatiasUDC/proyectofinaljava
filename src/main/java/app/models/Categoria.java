@@ -36,7 +36,7 @@ public class Categoria extends Model{
         return list;
     }
 
-        public static List<SelectOption> selectedCategoria(Object id){
+    public static List<SelectOption> selectedCategoria(Object id){
         List<SelectOption> list = new LinkedList<>();
         List categorias = findAll().orderBy("nombre desc");
         for (Iterator it = categorias.iterator(); it.hasNext();) {

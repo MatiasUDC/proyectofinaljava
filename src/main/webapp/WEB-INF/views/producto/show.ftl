@@ -103,12 +103,10 @@
 				<p>Web ID: ${ producto.id }</p>
 				<span>
                                     <span>$ ${ producto.precio }</span>
-                                    <label>Catidad:</label>
-                                    <input type="text" value="3" />
-                                    <button type="button" class="btn btn-fefault cart">
+                                    <@link_to class="btn btn-fefault cart" controller="compra" action="new_form" id=producto.id>
                                         <i class="fa fa-shopping-cart"></i>
 					Comprar
-                                    </button>
+                                    </@link_to>
 				</span>
 				<p><b>Disponible</b> En stock</p>
 				<p><b>Stock</b> ${ producto.stock }</p>
@@ -129,17 +127,13 @@
                                 <div class="col-sm-12">
                                     <#list comentarios as comentario>
                                     <ul>
-                                        <li><a href=""><i class="fa fa-user"></i>${comentario.usuario.nombre}</a></li>
+                                        <li><a href=""><i class="fa fa-user"></i>${comentario.usuario.email}</a></li>
                                         <li><a href=""><i class="fa fa-calendar-o"></i>${comentario.fecha_alta}</a></li>
                                     </ul>
                                     <p>${comentario.comentario}</p>
                                     </#list>
                                     <p><b>Escribe un comentario</b></p>
-                                    <@form  id=producto.id controller="comentario" action="crear" method="post" html_id=producto.id>
-                                        <span>
-                                            <input type="text" placeholder="Ingrese su Nombre"/>
-                                            <input type="email" placeholder="Direccion de Email"/>
-                                        </span>
+                                    <@form  id=producto.id controller="comentario" action="create" method="post" html_id=producto.id>
                                         <textarea name="" ></textarea>
                                         <button type="submit" class="btn btn-default pull-right">
                                             Comentar
