@@ -7,6 +7,7 @@ package app.controllers;
 
 import app.models.Categoria;
 import app.models.Producto;
+import app.models.Usuario;
 import java.util.List;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.POST;
@@ -26,6 +27,12 @@ public class HomeController extends AppController {
         List productos;
         productos = Producto.lista_productos();
         view("productos", productos);
+        Usuario usuario = null;
+        usuario = (Usuario) Usuario.getUsurio((String) session("user"));
+        if(usuario != null){
+            view("usuario", usuario);
+        }
+            
         render().layout("layouts/public_layout");
         
     }

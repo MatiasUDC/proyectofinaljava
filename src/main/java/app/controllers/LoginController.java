@@ -47,7 +47,7 @@ public class LoginController extends AppController {
     }
 
     public void logout(){
-        session("user", null);
+        session().invalidate();
         redirect(HomeController.class);
     }
 }

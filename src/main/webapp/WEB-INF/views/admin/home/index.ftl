@@ -9,13 +9,16 @@
                         <p>Nombre: <c:out value="${tienda.nombre}"/></p>
                     </blockquote>
                     <blockquote>
-                        <p>Apellido: <c:out value="${tienda.telefono}"/></p>
+                        <p>Telefono: <c:out value="${tienda.telefono}"/></p>
                     </blockquote>
                     <blockquote>
-                        <p>DNI: <c:out value="${tienda.email}"/></p>
+                        <p>Email: <c:out value="${tienda.email}"/></p>
                     </blockquote>
                     <blockquote>
-                        <p>Fecha de Nacimiento: <c:out value="${tienda.facebook}"/></p>
+                        <p>Direccion: <c:out value="${tienda.direccion}"/></p>
+                    </blockquote>
+                    <blockquote>
+                        <p>Facebook: <c:out value="${tienda.facebook}"/></p>
                     </blockquote>
                    </a></p>
                 </div>
