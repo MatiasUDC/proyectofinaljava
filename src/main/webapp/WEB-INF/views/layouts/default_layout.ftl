@@ -37,7 +37,7 @@
                         <#if index_problema ?? ><!-- active usuarios -->
                         <li role="presentation" class="active"><@link_to action="#">Usuarios</@link_to></li> 
                         <#else>
-                        <li role="presentation"><@link_to action="/admin/usuario">Usuarios</@link_to></li> 
+                        <li role="presentation"><@link_to controller="/admin/usuario" action="index" >Usuarios</@link_to></li> 
                         </#if>
                     </ul>
                 </div>

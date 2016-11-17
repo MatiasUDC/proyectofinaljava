@@ -30,18 +30,19 @@ public class LoginController extends AppController {
         }else{
             List users = Usuario.getUsurio(param("email"), param("password"));
             if(users.isEmpty()){
-                flash("message", "No se ha encontrado la convinacion de email y contraseña");
+                flash("message", "No se ha encontrado la combinacion de email y contraseña");
                 redirect();
-            }
-            Usuario user = (Usuario) users.get(0);
-            if (user.parent(Rol.class).get("nombre").equals("admin")){
-                session("user", "admin");
-                session("id_user", user.get("id").toString());
-                redirect(ProductoController.class);
-            } else if (user.parent(Rol.class).get("nombre").equals("user")){
-                session("user", param("email"));
-                session("id_user", user.get("id").toString());
-                redirect(HomeController.class);
+            } else {
+                Usuario user = (Usuario) users.get(0);
+                if (user.parent(Rol.class).get("nombre").equals("admin")){
+                    session("user", "admin");
+                    session("id_user", user.get("id").toString());
+                    redirect(ProductoController.class);
+                } else if (user.parent(Rol.class).get("nombre").equals("user")){
+                    session("user", param("email"));
+                    session("id_user", user.get("id").toString());
+                    redirect(HomeController.class);
+                }
             }
         }
     }

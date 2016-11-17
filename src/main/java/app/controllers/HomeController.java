@@ -27,10 +27,13 @@ public class HomeController extends AppController {
         List productos;
         productos = Producto.lista_productos();
         view("productos", productos);
-        Usuario usuario = null;
-        usuario = (Usuario) Usuario.getUsurio((String) session("user"));
-        if(usuario != null){
-            view("usuario", usuario);
+        List usuario;
+        usuario = Usuario.getUsurio((String) session("user"));
+        if(!usuario.isEmpty()){
+            Usuario user = (Usuario) usuario.get(0);
+            if(user != null){
+                view("usuario", usuario);
+            }
         }
             
         render().layout("layouts/public_layout");

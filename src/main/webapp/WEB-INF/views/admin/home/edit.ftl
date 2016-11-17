@@ -1,4 +1,4 @@
-<@form action="edit" method="post" id="${ tienda.id }">
+<@form action="update" method="put" id="${ tienda.id }">
 <div class="panel panel-success">
     <div class="panel-body">Modificar Informacion de Tienda</div>
     <div class="panel-footer">
@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="email">Email * : </label>
-            <input class="form-control"type="text" name="email" value="${ tienda.email }"required>
+            <input class="form-control"type="email" name="email" value="${ tienda.email }"required>
             <span class="error">${(flasher.errors.email)!}</span>
         </div>
         <div class="form-group">

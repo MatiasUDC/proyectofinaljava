@@ -17,6 +17,9 @@ import org.javalite.activeweb.annotations.PUT;
 public class HomeController extends AppController{
     public void index(){
         view("index_tienda", true );
+        List tienda = Tienda.getTienda();
+    	Tienda t = (Tienda) tienda.get(0);
+        view( "tienda",t );
     }
     public void edit(){
     	List tienda = Tienda.getTienda();
@@ -27,8 +30,7 @@ public class HomeController extends AppController{
 
     @PUT
     public void update() {
-    	List tienda = Tienda.getTienda();
-    	Tienda t = (Tienda) tienda.get(0);
+    	Tienda t = (Tienda) Tienda.findById(getId());
         if(!Tienda.actualizarInfoTienda(t)){
             flash("message", "No se ha podido guardar la informacion, revise los siguientes items");
             flash("errors", t.errors());

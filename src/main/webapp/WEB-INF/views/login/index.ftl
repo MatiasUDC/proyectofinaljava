@@ -87,6 +87,7 @@
                             <input type="password" name="password" placeholder="Contraseña" />
                             <button type="submit" class="btn btn-default">Login</button>
 			</@form>
+                        <@flash name="message"/>
                     </div><!--/login form-->
 		</div>
                 <div class="col-sm-1">

@@ -30,11 +30,11 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.20</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
         </dependency>
     </dependencies>
 
