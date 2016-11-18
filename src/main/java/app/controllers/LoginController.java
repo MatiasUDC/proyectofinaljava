@@ -6,6 +6,7 @@
 package app.controllers;
 import app.controllers.admin.ProductoController;
 import app.models.Rol;
+import app.models.Tienda;
 import app.models.Usuario;
 import java.util.List;
 import org.javalite.activeweb.AppController;
@@ -29,12 +30,12 @@ public class LoginController extends AppController {
     public void login(){
 
         if(blank("email", "password")){
-            flash("message", "Ingerse , email y contraseña");
+            flash("login", "Ingerse , email y contraseña");
             redirect();
         }else{
             List users = Usuario.getUsurio(param("email"), param("password"));
             if(users.isEmpty()){
-                flash("message", "No se ha encontrado la combinacion de email y contraseña");
+                flash("login", "No se ha encontrado la combinacion de email y contraseña");
                 redirect();
             } else {
                 Usuario user = (Usuario) users.get(0);
@@ -57,39 +58,49 @@ public class LoginController extends AppController {
     }
     
     public void signup() {
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class",
-                "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "465");
+        Usuario newUser = new Usuario();
+        newUser.set(params());
+        if(Usuario.crear(newUser)){
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class",
+                    "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.port", "465");
+            List tienda = Tienda.getTienda();
+            final Tienda t = (Tienda) tienda.get(0);
+            Session session = Session.getDefaultInstance(props,
+                    new javax.mail.Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(t.getString("email"), "contraseña");
+                }
+            });
 
-        Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("ejemplo@gmail.ar", "contraseña");
+            try {
+
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(t.getString("email")));
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(newUser.getString("email")));
+                message.setSubject("Verificacion de cuenta de " + t.getString("nombre"));
+                message.setText("Se ha registrado en ," + t.getString("nombre") 
+                        + "\n\n Ingrese en el siguiente enlace para validar su cuenta y poder ingresar\n\n" +
+                        "en: http://localhost:8084/tinda_java/usuario/verificar?key="+newUser.getString("token"));
+
+                Transport.send(message);
+
+                flash("singup", "Ingrese a su correo para validar su cuenta");
+                
+            } catch (MessagingException e) {
+                flash("singup", "No se ha podido enviar el correo de validacion de cuenta!.");
             }
-        });
-
-        try {
-
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("de@gmail.ar"));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("para@gmail.ar"));
-            message.setSubject("Testing Subject");
-            message.setText("Dear Mail Crawler,"
-                    + "\n\n No spam to my email, please!");
-
-            Transport.send(message);
-
-            System.out.println("Enviado");
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
+        } else { 
+            flash("singup", "No se ha podido registar, revise los siguientes items");
+            flash("errors", newUser.errors());
+            flash("params", params1st());
         }
-        redirect(HomeController.class);
+        redirect(LoginController.class);
     }
 }

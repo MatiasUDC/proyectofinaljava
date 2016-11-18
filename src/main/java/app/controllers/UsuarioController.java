@@ -8,6 +8,7 @@ package app.controllers;
 import app.models.Compra;
 import app.models.Problema;
 import app.models.Producto;
+import app.models.Usuario;
 
 import java.util.List;
 import org.javalite.activeweb.AppController;
@@ -56,5 +57,13 @@ public class UsuarioController extends AppController{
         /*
         List usuario = Usuario.lista_usuario();
         view("usuario", usuario);*/    
+    }
+    public void verificar(){
+        String token = param("key");
+        boolean verificada = Usuario.verificarCuenta(token);
+        if (verificada){
+            flash("login", "Cuenta verificada, puede iniciar sesión");
+        }
+        redirect(LoginController.class);
     }
 }
