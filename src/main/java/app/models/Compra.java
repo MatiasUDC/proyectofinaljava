@@ -20,19 +20,19 @@ import org.javalite.activejdbc.annotations.Table;
 @BelongsToParents({
     @BelongsTo(foreignKeyName = "id_producto", parent = Producto.class),
     @BelongsTo(foreignKeyName = "id_usuario", parent = Usuario.class),
-    @BelongsTo(foreignKeyName = "id_metodo", parent = Metodo.class)
+    @BelongsTo(foreignKeyName = "id_metodo", parent = Metodo.class),
+
 })
 public class Compra extends Model {
 
     static {
-        /*
+        
         validateNumericalityOf("Cantidad")
                 .allowNull(true).greaterThan(1)
                 .message("Por favor, Ingrese un monto de productos validos.");   
         validateNumericalityOf("id_metodo")
                 .allowNull(true)
                 .greaterThan(1).message("Porfavor, Seleccione una metodo para la compra");
-         */
     }
 
     public static List lista_compras() {
