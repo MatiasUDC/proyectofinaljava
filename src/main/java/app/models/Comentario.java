@@ -24,7 +24,12 @@ public class Comentario extends Model{
     public static List listaCompentariosProducto(Producto prod){
         return prod.getAll(Comentario.class).orderBy("fecha_alta desc");
     }
-            
+    public static List comentario_usuario(Usuario usuario){
+        return where("id_usuario = ?", usuario.getId()).orderBy("id_producto desc");
+    }
+    public static List listaCompentariosUsuario(Usuario usuario){
+        return usuario.getAll(Comentario.class);
+    }        
     public static void comentar(Comentario comentario){
         comentario.saveIt();
     }

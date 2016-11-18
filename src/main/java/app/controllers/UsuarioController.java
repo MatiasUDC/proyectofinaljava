@@ -8,6 +8,8 @@ package app.controllers;
 import app.models.Compra;
 import app.models.Problema;
 import app.models.Producto;
+import app.models.Usuario;
+import app.models.Comentario;
 
 import java.util.List;
 import org.javalite.activeweb.AppController;
@@ -42,8 +44,9 @@ public class UsuarioController extends AppController{
         view("usuario", usuario);*/    
     }
     public void comentario(){
-        //List problemas = Problema.lista_problemas();
-        //view("problemas",problemas);
+        Usuario usuario = Usuario.findById(getId());
+        List comentario = Comentario.comentario_usuario(usuario);
+        view("comentario",comentario);
         render().layout("layouts/public_layout");
         /*
         List usuario = Usuario.lista_usuario();

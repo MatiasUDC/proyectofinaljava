@@ -9,7 +9,8 @@ import app.controllers.authorization.Protected;
 import app.models.Compra;
 import app.models.Metodo;
 import app.models.Producto;
-
+import app.models.Token;
+import java.util.List;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.*;
 import org.javalite.activeweb.freemarker.SelectOption;
@@ -33,6 +34,8 @@ public class CompraController extends AppController{
         //declaro producto
         Producto producto = Producto.findById(getId());
         view("producto", producto);
+        java.util.List<SelectOption> token = Token.token();
+        view("token", token);
         java.util.List<SelectOption> list = Metodo.selectedMetodos();
         view("metodos", list);
         render().layout("layouts/form_layout");
@@ -42,12 +45,25 @@ public class CompraController extends AppController{
     public void create() {
         Compra compra = new Compra();
         compra.fromMap(params1st());
+        Producto producto = Producto.findById(getId());
+        if(producto.getInteger("stock") > compra.getInteger("cantidad")) {
+            int resta = producto.getInteger("stock") - compra.getInteger("cantidad");
+            producto.set("stock", resta);
+            
+        } else {
+            flash("message", "Stock insuficiente disponible para la compra, por favor prueba con otra cantidad");
+            flash("errors", compra.errors());
+            flash("params", params1st());
+            redirect(CompraController.class, "new_form");
+        }
+        
         if (!Compra.registrar(compra)) {
             flash("message", "No se ha podido guardar el producto, revise los siguientes items");
             flash("errors", compra.errors());
             flash("params", params1st());
             redirect(CompraController.class, "new_form");
         } else {
+            
             flash("message", "La Compra fue realizada correctamente" );
             redirect(CompraController.class);
         }
