@@ -20,11 +20,11 @@ import org.javalite.activeweb.freemarker.SelectOption;
  * @author Matias
  */
 @Protected
-public class CompraController extends AppController{
+public class CompraController extends AppController {
 
     @GET
     public void index() {
-        
+
         //view("producto", Compra.TraerProducto()
         view("compras", Compra.lista_compras());
     }
@@ -46,33 +46,39 @@ public class CompraController extends AppController{
         Compra compra = new Compra();
         compra.fromMap(params1st());
         Producto producto = Producto.findById(getId());
-        if(producto.getInteger("stock") > compra.getInteger("cantidad")) {
-            int resta = producto.getInteger("stock") - compra.getInteger("cantidad");
-            producto.set("stock", resta);
-            
+        if (producto.getInteger("stock") != 0) {
+            if (producto.getInteger("stock") > compra.getInteger("cantidad")) {
+                int resta = producto.getInteger("stock") - compra.getInteger("cantidad");
+                producto.set("stock", resta);
+                if (!Compra.registrar(compra)) {
+                    flash("message", "No se ha podido guardar el producto, revise los siguientes items");
+                    flash("errors", compra.errors());
+                    flash("params", params1st());
+                    redirect(CompraController.class, "new_form");
+                } else {
+
+                    flash("message", "La Compra fue realizada correctamente");
+                    redirect(CompraController.class);
+                }
+            } else {
+                flash("message", "Stock insuficiente disponible para la compra, por favor prueba con otra cantidad");
+                flash("errors", compra.errors());
+                flash("params", params1st());
+                redirect(CompraController.class, "new_form");
+            }
         } else {
-            flash("message", "Stock insuficiente disponible para la compra, por favor prueba con otra cantidad");
+            flash("message", "Producto no Disponible para compra por falta de Stock");
             flash("errors", compra.errors());
             flash("params", params1st());
-            redirect(CompraController.class, "new_form");
+            redirect(CompraController.class, "index");
         }
-        
-        if (!Compra.registrar(compra)) {
-            flash("message", "No se ha podido guardar el producto, revise los siguientes items");
-            flash("errors", compra.errors());
-            flash("params", params1st());
-            redirect(CompraController.class, "new_form");
-        } else {
-            
-            flash("message", "La Compra fue realizada correctamente" );
-            redirect(CompraController.class);
-        }
+
     }
 
     @GET
     public void edit() {
-       
-        Compra c =  (Compra) Compra.findById(getId());
+
+        Compra c = (Compra) Compra.findById(getId());
         java.util.List<SelectOption> list = Metodo.selectedMetodos();
         view("metodos", list);
         view("compra", c);
@@ -92,16 +98,15 @@ public class CompraController extends AppController{
     public void update() {
         Compra c = (Compra) Compra.findById(getId());
         c.fromMap(params1st());
-        if(!Compra.actualizar(c)){
+        if (!Compra.actualizar(c)) {
             flash("message", "No se ha podido actulizar la compra, revise los siguientes items");
             flash("errors", c.errors());
             flash("params", params1st());
             redirect(CompraController.class, "edit");
-        }else {
+        } else {
             flash("message", "Los datos de Compra del producto : '" + c.get("producto") + "' fueron modificados");
             redirect(CompraController.class);
         }
     }
 
-    
 }
