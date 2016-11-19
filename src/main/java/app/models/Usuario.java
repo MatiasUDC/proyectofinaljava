@@ -41,16 +41,25 @@ public class Usuario extends Model{
             token = token.concat(""+fecha.getTime());
             MessageDigest m;
             try {
+                /* Genero MD5 */
                 m = MessageDigest.getInstance("MD5");
                 m.update(token.getBytes(),0,token.length());
                 u.set("token", new BigInteger(1,m.digest()).toString(16));
+                /* genero nombre de perfil */
                 String name = u.get("email").toString().
-                        substring(u.get("email").toString().
+                        substring(0,u.get("email").toString().
                                 lastIndexOf('@'));
                 Perfil perfil = new Perfil();
                 perfil.set("nombre", name);
+                perfil.set("apellido", name);
                 perfil.saveIt();
-                u.set(perfil);
+                List rolUsuer = Rol.getRol("usuario");
+                if(rolUsuer.isEmpty()){
+                    perfil.delete();
+                    u.delete();
+                    return false;
+                }
+                u.set("perfil_id", perfil.get("id"));
                 save = u.saveIt();
             } catch (NoSuchAlgorithmException ex) {;}
         }

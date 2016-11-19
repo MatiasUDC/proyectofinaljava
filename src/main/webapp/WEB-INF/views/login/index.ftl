@@ -62,7 +62,6 @@
                     <div class="signup-form"><!--sign up form-->
                         <h2>Signup!</h2>
                         <@form action="signup" method="post">
-                            <input type="text" name="nombre" placeholder="Nombre"/>
                             <input type="email" name="email" placeholder="Direción Email"/>
                             <input type="password" name="password" placeholder="Password"/>
                             <button type="submit" class="btn btn-default">Signup</button>

@@ -57,11 +57,13 @@ public class LoginController extends AppController {
         redirect(HomeController.class);
     }
     
+    @POST
     public void signup() {
         Usuario newUser = new Usuario();
-        newUser.set(params());
+        newUser.fromMap(params1st());
         if(Usuario.crear(newUser)){
             Properties props = new Properties();
+            
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
             props.put("mail.smtp.socketFactory.class",
@@ -74,7 +76,7 @@ public class LoginController extends AppController {
                     new javax.mail.Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(t.getString("email"), "contraseña");
+                    return new PasswordAuthentication(t.getString("email"), "********");
                 }
             });
 
@@ -87,7 +89,7 @@ public class LoginController extends AppController {
                 message.setSubject("Verificacion de cuenta de " + t.getString("nombre"));
                 message.setText("Se ha registrado en ," + t.getString("nombre") 
                         + "\n\n Ingrese en el siguiente enlace para validar su cuenta y poder ingresar\n\n" +
-                        "en: http://localhost:8084/tinda_java/usuario/verificar?key="+newUser.getString("token"));
+                        "en: http://localhost:8084/tienda_java/usuario/verificar?key="+newUser.getString("token"));
 
                 Transport.send(message);
 
