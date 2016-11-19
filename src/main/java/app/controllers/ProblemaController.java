@@ -64,7 +64,7 @@ public class ProblemaController extends AppController {
     public void delete() {
         Problema c = (Problema) Problema.findById(getId());
         Problema.baja(c);
-        flash("message", "El problema de fue dado de baja correctamente");
+        flash("message", "El problema fue dado de baja correctamente");
         redirect(ProblemaController.class);
     }
 

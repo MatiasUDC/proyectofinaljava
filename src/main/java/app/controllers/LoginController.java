@@ -41,14 +41,16 @@ public class LoginController extends AppController {
                 redirect();
             } else {
                 Usuario user = (Usuario) users.get(0);
-                if (user.parent(Rol.class).getString("nombre").equals("admin")){
-                    session("user", "admin");
-                    session("id_user", user.get("id").toString());
-                    redirect(ProductoController.class);
-                } else if (user.parent(Rol.class).getString("nombre").equals("usuario")){
-                    session("userName", user.parent(Perfil.class).getString("nombre"));
-                    session("id_user", user.getInteger("id").toString());
-                    redirect(HomeController.class);
+                if(user.getBoolean("verificado")){//si la cuenta esta verificada
+                    session().put("user",user);
+                    if (user.parent(Rol.class).getString("nombre").equals("admin")){ 
+                        redirect(ProductoController.class);
+                    } else {
+                        redirect(HomeController.class);
+                    }
+                } else {
+                    flash("login", "Se ha registrado pero na ha verificado su cuenta, \n\ningrese a su correo y valide su cuenta");
+                    redirect();
                 }
             }
         }

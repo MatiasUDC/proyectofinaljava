@@ -27,17 +27,12 @@ public class HomeController extends AppController {
         List productos;
         productos = Producto.lista_productos();
         view("productos", productos);
-        List usuario;
-        usuario = Usuario.getUsurio(session("id_user").toString());
-        if(!usuario.isEmpty()){
-            Usuario user = (Usuario) usuario.get(0);
-            if(user != null){
-                view("usuario", usuario);
-            }
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        if(usuario != null){
+            view("usuario", usuario);
         }
-            
-        render().layout("layouts/public_layout");
-        
+        render().layout("layouts/public_layout"); 
     }
     @POST
     public void busqueda(){

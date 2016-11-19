@@ -20,7 +20,7 @@ public class ComentarioController extends AppController {
         Comentario com  = new Comentario();
         com.fromMap(params1st());
         com.set(prod);
-        Usuario user = (Usuario) Usuario.getUsurio(session("email").toString());
+        Usuario user = (Usuario) session().get("usuario");
         com.set(user);
     }
 }
