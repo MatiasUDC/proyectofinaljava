@@ -5,9 +5,11 @@
  */
 package app.controllers;
 import app.controllers.admin.ProductoController;
+import app.models.Perfil;
 import app.models.Rol;
 import app.models.Tienda;
 import app.models.Usuario;
+import app.utils.PropertiesFile;
 import java.util.List;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.POST;
@@ -39,13 +41,13 @@ public class LoginController extends AppController {
                 redirect();
             } else {
                 Usuario user = (Usuario) users.get(0);
-                if (user.parent(Rol.class).get("nombre").equals("admin")){
+                if (user.parent(Rol.class).getString("nombre").equals("admin")){
                     session("user", "admin");
                     session("id_user", user.get("id").toString());
                     redirect(ProductoController.class);
-                } else if (user.parent(Rol.class).get("nombre").equals("user")){
-                    session("user", param("email"));
-                    session("id_user", user.get("id").toString());
+                } else if (user.parent(Rol.class).getString("nombre").equals("usuario")){
+                    session("userName", user.parent(Perfil.class).getString("nombre"));
+                    session("id_user", user.getInteger("id").toString());
                     redirect(HomeController.class);
                 }
             }
@@ -62,21 +64,16 @@ public class LoginController extends AppController {
         Usuario newUser = new Usuario();
         newUser.fromMap(params1st());
         if(Usuario.crear(newUser)){
-            Properties props = new Properties();
-            
-            props.put("mail.smtp.host", "smtp.gmail.com");
-            props.put("mail.smtp.socketFactory.port", "465");
-            props.put("mail.smtp.socketFactory.class",
-                    "javax.net.ssl.SSLSocketFactory");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.port", "465");
+            final Properties propsEmail = PropertiesFile.getPropertiesMail();
+            final Properties propsAuthen = PropertiesFile.getPropertiesAuthentication();
+
             List tienda = Tienda.getTienda();
             final Tienda t = (Tienda) tienda.get(0);
-            Session session = Session.getDefaultInstance(props,
+            Session session = Session.getDefaultInstance(propsAuthen,
                     new javax.mail.Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(t.getString("email"), "********");
+                    return new PasswordAuthentication(propsEmail.getProperty("email"), propsEmail.getProperty("password"));
                 }
             });
 
@@ -89,7 +86,9 @@ public class LoginController extends AppController {
                 message.setSubject("Verificacion de cuenta de " + t.getString("nombre"));
                 message.setText("Se ha registrado en ," + t.getString("nombre") 
                         + "\n\n Ingrese en el siguiente enlace para validar su cuenta y poder ingresar\n\n" +
-                        "en: http://localhost:8084/tienda_java/usuario/verificar?key="+newUser.getString("token"));
+                        "en: http://localhost:8084/tienda_online/usuario/verificar?key="+newUser.getString("token")+"\n\n"+
+                        "Si usted no se ha registrado, porfavor ingrese \n\n"
+                                + "en: http://localhost:8084/tienda_online/usuario/baja?key="+newUser.getString("token"));
 
                 Transport.send(message);
 

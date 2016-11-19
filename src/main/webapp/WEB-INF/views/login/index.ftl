@@ -52,7 +52,7 @@
                             <input type="password" name="password" placeholder="Contraseña" />
                             <button type="submit" class="btn btn-default">Login</button>
 			</@form>
-                        <@flash name="login"/>
+                        <span>${(flasher.login)!}</span>
                     </div><!--/login form-->
 		</div>
                 <div class="col-sm-1">
@@ -66,7 +66,7 @@
                             <input type="password" name="password" placeholder="Password"/>
                             <button type="submit" class="btn btn-default">Signup</button>
                         </@form>
-                        <@flash name="signup"/>
+                        <span>${(flasher.signup)!}</span>
                         </form>
                     </div><!--/sign up form-->
                 </div>

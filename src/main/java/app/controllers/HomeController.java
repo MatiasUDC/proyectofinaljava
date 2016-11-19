@@ -28,7 +28,7 @@ public class HomeController extends AppController {
         productos = Producto.lista_productos();
         view("productos", productos);
         List usuario;
-        usuario = Usuario.getUsurio((String) session("user"));
+        usuario = Usuario.getUsurio(session("id_user").toString());
         if(!usuario.isEmpty()){
             Usuario user = (Usuario) usuario.get(0);
             if(user != null){

@@ -14,8 +14,6 @@ import org.javalite.activejdbc.annotations.Table;
 import java.security.*;
 import java.math.*;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author Matias
@@ -35,7 +33,7 @@ public class Usuario extends Model{
         
         boolean save = u.save();
         if(save){
-            u.set("verificada",0);
+            u.set("verificado",0);
             String token = u.getString("email");
             Date fecha = new Date();
             token = token.concat(""+fecha.getTime());
@@ -81,8 +79,8 @@ public class Usuario extends Model{
     public static Rol getRol(Usuario user){
         return user.parent(Rol.class);
     }
-    public static List getUsurio( String email ){
-        return where( "email = ?", email );
+    public static List getUsurio( String id ){
+        return where( "id = ?", id );
         
     }
     public static List getUsersRol(Rol rol){
@@ -90,10 +88,10 @@ public class Usuario extends Model{
     }
     
     public static boolean verificarCuenta(String token){
-        List usuario =  where( "token = ? AND validado = ?",  token, 0);
+        List usuario =  where( "token = ? AND verificado = ?",  token, 0);
         if(!usuario.isEmpty()){
             Usuario user = (Usuario) usuario.get(0);
-            user.set("validado", 1);
+            user.set("verificado", 1);
             user.saveIt();
             return true;
         }
