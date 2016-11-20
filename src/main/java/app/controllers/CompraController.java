@@ -10,6 +10,7 @@ import app.models.Compra;
 import app.models.Metodo;
 import app.models.Producto;
 import app.models.Token;
+import app.models.Usuario;
 import java.util.List;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.*;
@@ -24,9 +25,17 @@ public class CompraController extends AppController {
 
     @GET
     public void index() {
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        if(usuario != null){
+            if(Usuario.getRol(usuario).getString("nombre").equals("admin")){
+                redirect(app.controllers.admin.HomeController.class);
+            } else {
+                //view("producto", Compra.TraerProducto()
+                view("compras", Compra.lista_compras());
+            }
+        }
 
-        //view("producto", Compra.TraerProducto()
-        view("compras", Compra.lista_compras());
     }
 
     @GET

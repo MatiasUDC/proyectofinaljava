@@ -9,6 +9,7 @@ import app.controllers.authorization.Protected;
 import app.models.Compra;
 import app.models.Problema;
 import app.models.Tproblema;
+import app.models.Usuario;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.*;
 import org.javalite.activeweb.freemarker.SelectOption;
@@ -21,8 +22,15 @@ import org.javalite.activeweb.freemarker.SelectOption;
 @Protected
 public class ProblemaController extends AppController {
     public void index() {
-        
-        view("problemas", Problema.lista_problemas());
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        if(usuario != null){
+            if(Usuario.getRol(usuario).getString("nombre").equals("admin")){
+                redirect(app.controllers.admin.HomeController.class);
+            } else {
+                view("problemas", Problema.lista_problemas());
+            }
+        }
     }
 
     @GET

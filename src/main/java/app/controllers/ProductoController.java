@@ -8,6 +8,7 @@ package app.controllers;
 import app.models.Categoria;
 import app.models.Producto;
 import app.models.Comentario;
+import app.models.Usuario;
 import java.util.List;
 import org.javalite.activeweb.AppController;
 
@@ -17,6 +18,13 @@ import org.javalite.activeweb.AppController;
  */
 public class ProductoController extends AppController {
     public void show(){
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        if(usuario != null){
+            if(Usuario.getRol(usuario).getString("nombre").equals("admin")){
+                redirect(app.controllers.admin.HomeController.class);
+            }
+        }
         Producto p = (Producto) Producto.getProducto(getId());
         List cs =  Categoria.lista_categorias();
         List comentarios = Comentario.listaCompentariosProducto(p);

@@ -30,6 +30,9 @@ public class HomeController extends AppController {
         Usuario usuario;
         usuario = (Usuario) session().get("user");
         if(usuario != null){
+            if(Usuario.getRol(usuario).getString("nombre").equals("admin")){
+                redirect(app.controllers.admin.HomeController.class);
+            }
             view("usuario", usuario);
         }
         render().layout("layouts/public_layout"); 
