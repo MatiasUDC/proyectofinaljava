@@ -21,19 +21,21 @@ import org.javalite.activejdbc.annotations.Table;
     @BelongsTo(foreignKeyName = "id_producto", parent = Producto.class),
     @BelongsTo(foreignKeyName = "id_usuario", parent = Usuario.class),
     @BelongsTo(foreignKeyName = "id_metodo", parent = Metodo.class),
-
+    @BelongsTo(foreignKeyName = "id_token", parent = Token.class)
 })
 public class Compra extends Model {
 
     static {
-        
+        /*
         validateNumericalityOf("Cantidad")
                 .allowNull(true).greaterThan(1)
                 .message("Por favor, Ingrese un monto de productos validos.");   
         validateNumericalityOf("id_metodo")
                 .allowNull(true)
                 .greaterThan(1).message("Porfavor, Seleccione una metodo para la compra");
-    }
+        */
+}
+
 
     public static List lista_compras() {
 
@@ -51,17 +53,18 @@ public class Compra extends Model {
         return compra.delete();
 
     }
+    public static boolean bajaUsuario(Compra compra) {
 
+        return compra.delete();
+
+    }
     public static boolean actualizar(Compra compra) {
         return compra.saveIt();
     }
 
- 
-
-    public static List<Compra> TraerProducto(int id) {
+    public static Producto TraerProducto(int id) {
         Producto producto = Producto.findById(id);
-        List<Compra> compras = producto.getAll(Compra.class);
-        return compras;
+        return producto;
     }
 
 }

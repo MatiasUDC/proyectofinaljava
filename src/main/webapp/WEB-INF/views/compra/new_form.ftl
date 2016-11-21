@@ -22,7 +22,8 @@
              <@select id="metodos" class="selectpicker show-menu-arrow" name="id_metodo" list=metodos> <option value="0">Seleccione un Metodo de Pago </option> </@> 
             <span class="error">${(flasher.errors.metodos)!}</span>
             </div>
-        <div class="form-group" id="couta" style="display:none">
+        <div class="form-group" id="couta">
+            <label class="col-sm-2 control-label" for="cuotas">Cuotas * : </label><br/><br/>
             <select id="cuotas" placeholder="seleccione la cantidad de cuotas deseada" name="cuotas" class="contact_form">
                 <option value="0">1</option>
                 <option value="1">3</option>
@@ -32,10 +33,9 @@
                 <option value="5">24</option>
                 </select>
             </div>
-        <div class="form-group" id="token" style="display:none">
-            <label class="col-sm-2 control-label" for="metodo">Metodo * : </label><br/><br/>
-            <label class="col-sm-2 control-label" for="metodo">Metodo * : </label><br/><br/>
-             <@select id="token" class="selectpicker show-menu-arrow" name="token" list=token> <option value="0">Codigo de Pago </option> </@>
+        <div class="form-group" id="token">
+            <label class="col-sm-2 control-label" for="metodo">Token * : </label><br/><br/>
+             <@select id="id_token" class="selectpicker show-menu-arrow" name="token" list=token> <option value="0">Codigo de Pago </option> </@>
             </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="monto">Monto Final * : </label>
@@ -67,13 +67,13 @@
 <script>
     $(document).ready(function () {
     $("#id_metodos").change(function (evento) {
-       if (($("#id_metodos").val() == 1)||($("#id_metodos").val() == 2)){
+       if (($("#id_metodos").val() == 3)||($("#id_metodos").val() == 4)){
             $("#cuotas").show();
        }else{
             $("#cuotas").hide();
             $("#cuotas").val() == 0;
        }
-        if (($("#id_metodos").val() == 3)||($("#id_metodos").val() == 4)){
+        if (($("#id_metodos").val() == 1)||($("#id_metodos").val() == 2)){
             $("#token").show();
        }else{
             $("#token").hide();

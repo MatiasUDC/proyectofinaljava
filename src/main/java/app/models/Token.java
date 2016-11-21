@@ -5,10 +5,13 @@
  */
 package app.models;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import org.javalite.activejdbc.Model;
 import static org.javalite.activejdbc.Model.findAll;
 import org.javalite.activejdbc.annotations.Table;
+import org.javalite.activeweb.freemarker.SelectOption;
 
 /**
  *
@@ -17,6 +20,12 @@ import org.javalite.activejdbc.annotations.Table;
 @Table("tokencompra")
 public class Token extends Model{
     public static List token() {
-        return findAll().orderBy("rand()").limit(1);
+        List<SelectOption> list = new LinkedList<>();
+        List tokens = findAll();
+        for (Iterator it = tokens.iterator(); it.hasNext();) {
+            Token token = (Token) it.next();
+            list.add(new SelectOption(token.get("id"), token.getString("codigo")));
+        }
+        return list;
     }
 }
