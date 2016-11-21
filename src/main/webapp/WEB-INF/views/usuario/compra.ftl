@@ -111,14 +111,7 @@
                                     <h2>$ ${ compra.producto.precio }</h2>
                                     <p>${ compra.producto.nombre }</p>
                                             <@link_to controller="producto"  action="show" class="btn btn-default add-to-cart" id=compra.producto.id>Ver Producto</@link_to>
-                                    </div>
-                                <div class="product-overlay">
-                                    <div class="overlay-content">
-                                        <h2>$ ${ compra.producto.precio }</h2>
-                                        <p>${ compra.producto.nombre }</p>
-                                                <@link_to controller="producto"  action="show" class="btn btn-default add-to-cart" id=compra.producto.id>Ver Producto</@link_to>
-                                        </div>
-                                    </div>
+                                            <@link_to controller="compra"  action="deleteuser" class="btn btn-default " id=compra.id>Ver Producto</@link_to>
                                 </div>
                             </div>
                         </div>

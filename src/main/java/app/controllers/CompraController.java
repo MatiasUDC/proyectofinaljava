@@ -52,22 +52,28 @@ public class CompraController extends AppController {
 
     @POST
     public void create() {
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
         Compra compra = new Compra();
         compra.fromMap(params1st());
-        Producto producto = Producto.findById(getId());
-        if (producto.getInteger("stock") != 0) {
-            if (producto.getInteger("stock") > compra.getInteger("cantidad")) {
-                int resta = producto.getInteger("stock") - compra.getInteger("cantidad");
+        compra.set(usuario);
+        Producto producto = Compra.TraerProducto(compra.getInteger("id_producto"));
+        int stock = producto.getInteger("stock");
+        int cantidad = compra.getInteger("cantidad");
+        
+        if (stock != 0) {
+            if (stock > cantidad) {
+                int resta = stock - cantidad;
                 producto.set("stock", resta);
                 if (!Compra.registrar(compra)) {
-                    flash("message", "No se ha podido guardar el producto, revise los siguientes items");
+                    flash("message", "No se ha podido registar la compra, revise los siguientes items");
                     flash("errors", compra.errors());
                     flash("params", params1st());
                     redirect(CompraController.class, "new_form");
                 } else {
 
                     flash("message", "La Compra fue realizada correctamente");
-                    redirect(CompraController.class);
+                    redirect(HomeController.class);
                 }
             } else {
                 flash("message", "Stock insuficiente disponible para la compra, por favor prueba con otra cantidad");
