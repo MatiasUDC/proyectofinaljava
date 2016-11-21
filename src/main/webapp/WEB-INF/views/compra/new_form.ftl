@@ -46,7 +46,7 @@
         <br/>
         <div class="form-group">
             <button class="btn btn-default" type="submit">Registrar</button>
-                <@link_to class="btn btn-danger" controller="compra">Cancelar</@link_to>
+                <@link_to class="btn btn-danger" controller="home">Cancelar</@link_to>
             </div>
         </div>
     </div>

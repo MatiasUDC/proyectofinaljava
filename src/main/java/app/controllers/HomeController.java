@@ -33,9 +33,14 @@ public class HomeController extends AppController {
             if(Usuario.getRol(usuario).getString("nombre").equals("admin")){
                 redirect(app.controllers.admin.HomeController.class);
             }
-            view("usuario", usuario);
+            else
+            {
+                view("usuario", usuario);
+                render().layout("layouts/public_layout"); 
+            }
+        }else{
+            render().layout("layouts/public_layout"); 
         }
-        render().layout("layouts/public_layout"); 
     }
     @POST
     public void busqueda(){

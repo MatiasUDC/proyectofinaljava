@@ -65,7 +65,7 @@ public class LoginController extends AppController {
     public void signup() {
         Usuario newUser = new Usuario();
         newUser.fromMap(params1st());
-        if(Usuario.crear(newUser)){
+        if(Usuario.crear(newUser, true)){
             final Properties propsEmail = PropertiesFile.getPropertiesMail();
             final Properties propsAuthen = PropertiesFile.getPropertiesAuthentication();
 
@@ -86,21 +86,21 @@ public class LoginController extends AppController {
                 message.setRecipients(Message.RecipientType.TO,
                         InternetAddress.parse(newUser.getString("email")));
                 message.setSubject("Verificacion de cuenta de " + t.getString("nombre"));
-                message.setText("Se ha registrado en ," + t.getString("nombre") 
-                        + "\n\n Ingrese en el siguiente enlace para validar su cuenta y poder ingresar\n\n" +
+                message.setText("Gracias por registrarse en ," + t.getString("nombre") 
+                        + "\n\n Ingrese en el siguiente enlace para verificar su cuenta y poder ingresar\n\n" +
                         "en: http://localhost:8084/tienda_online/usuario/verificar?key="+newUser.getString("token")+"\n\n"+
-                        "Si usted no se ha registrado, porfavor ingrese \n\n"
+                        "Si usted no se ha registrado, porfavor ingrese\n"
                                 + "en: http://localhost:8084/tienda_online/usuario/baja?key="+newUser.getString("token"));
 
                 Transport.send(message);
 
-                flash("singup", "Ingrese a su correo para validar su cuenta");
+                flash("signup", "Ingrese a su correo para validar su cuenta");
                 
             } catch (MessagingException e) {
-                flash("singup", "No se ha podido enviar el correo de validacion de cuenta!.");
+                flash("signup", "No se ha podido enviar el correo de validacion de cuenta!.");
             }
         } else { 
-            flash("singup", "No se ha podido registar, revise los siguientes items");
+            flash("signup", "No se ha podido registar, revise los siguientes items");
             flash("errors", newUser.errors());
             flash("params", params1st());
         }

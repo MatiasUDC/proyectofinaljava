@@ -22,7 +22,7 @@ public class Producto extends Model{
         validatePresenceOf("descripcion").message("Porfavor, ingrese una descripcion del producto");
         validateNumericalityOf("categoria_id")
                 .allowNull(true)
-                .greaterThan(1).message("Porfavor, seleccione una categoria para el producto");
+                .greaterThan(0).message("Porfavor, seleccione una categoria para el producto");
         validateNumericalityOf("stock")
                 .allowNull(true).greaterThan(1)
                 .lessThan(1001).onlyInteger()
@@ -58,7 +58,7 @@ public class Producto extends Model{
     }
     
     public static List getProductosRecomendados(){
-        return where("recomendado  = ?", "1").orderBy("rand()").limit(3);
+        return findAll().orderBy("rand()").limit(3);
     }
     
     public static List getProductoAjax(String criterio){

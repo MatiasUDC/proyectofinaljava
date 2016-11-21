@@ -25,33 +25,24 @@ import java.util.Date;
 })
 public class Usuario extends Model{
     
-    public static List lista_usuario() {
-        return findAll();
+    public static List lista_usuario(Object id) {
+        return where("id != ?", id);
     }
 
-    public static boolean crear(Usuario u) {
+    public static boolean crear(Usuario u, boolean usuario) {
         
         boolean save = u.save();
         if(save){
-            u.set("verificado",0);
-            String token = u.getString("email");
-            Date fecha = new Date();
-            token = token.concat(""+fecha.getTime());
-            MessageDigest m;
-            try {
-                /* Genero MD5 */
-                m = MessageDigest.getInstance("MD5");
-                m.update(token.getBytes(),0,token.length());
-                u.set("token", new BigInteger(1,m.digest()).toString(16));
-                /* genero nombre de perfil */
+            if(!usuario){
+                u.set("verificado",1);
                 String name = u.get("email").toString().
-                        substring(0,u.get("email").toString().
-                                lastIndexOf('@'));
+                            substring(0,u.get("email").toString().
+                                    lastIndexOf('@'));
                 Perfil perfil = new Perfil();
                 perfil.set("nombre", name);
                 perfil.set("apellido", name);
                 perfil.saveIt();
-                List rolUsuer = Rol.getRol("usuario");
+                List rolUsuer = Rol.getRol("admin");
                 if(rolUsuer.isEmpty()){
                     perfil.delete();
                     u.delete();
@@ -59,7 +50,36 @@ public class Usuario extends Model{
                 }
                 u.set("perfil_id", perfil.get("id"));
                 save = u.saveIt();
-            } catch (NoSuchAlgorithmException ex) {;}
+            } else {
+                u.set("verificado",0);
+                String token = u.getString("email");
+                Date fecha = new Date();
+                token = token.concat(""+fecha.getTime());
+                MessageDigest m;
+                try {
+                    /* Genero MD5 */
+                    m = MessageDigest.getInstance("MD5");
+                    m.update(token.getBytes(),0,token.length());
+                    u.set("token", new BigInteger(1,m.digest()).toString(16));
+                    /* genero nombre de perfil */
+                    String name = u.get("email").toString().
+                            substring(0,u.get("email").toString().
+                                    lastIndexOf('@'));
+                    Perfil perfil = new Perfil();
+                    perfil.set("nombre", name);
+                    perfil.set("apellido", name);
+                    perfil.saveIt();
+                    List rolUsuer = Rol.getRol("usuario");
+                    if(rolUsuer.isEmpty()){
+                        perfil.delete();
+                        u.delete();
+                        return false;
+                    }
+                    u.set("perfil_id", perfil.get("id"));
+                    save = u.saveIt();
+                } catch (NoSuchAlgorithmException ex) {;}
+            
+            }
         }
         return save;
     }

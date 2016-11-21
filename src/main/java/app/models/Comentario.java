@@ -30,7 +30,7 @@ public class Comentario extends Model{
     public static List listaCompentariosUsuario(Usuario usuario){
         return usuario.getAll(Comentario.class);
     }        
-    public static void comentar(Comentario comentario){
-        comentario.saveIt();
+    public static boolean comentar(Comentario comentario){
+        return comentario.saveIt();
     }
 }

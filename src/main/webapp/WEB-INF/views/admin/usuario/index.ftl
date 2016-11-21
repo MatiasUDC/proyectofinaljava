@@ -15,7 +15,7 @@
         <tbody>
             <#list users as user>
             <tr>
-                <th>${user.perfiles.nombre}</th>
+                <th>${(user.perfiles.nombre)!}</th>
                 <th>${user.rol.nombre}</th>
                 <th><@form  id=user.id action="delete" method="delete" html_id=user.id><button class="btn btn-danger" type="submit">Eliminar</button></@form></th>
             </tr>

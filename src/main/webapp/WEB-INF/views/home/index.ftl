@@ -16,10 +16,6 @@
                         <div class="social-icons pull-right">
                             <ul class="nav navbar-nav">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -54,27 +50,7 @@
         <div class="header-bottom"><!--header-bottom-->
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-9">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <div class="mainmenu pull-left">
-                            <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="#">Productos</a></li>
-                                    <li><a href="#">Categorias</a></li> 
-                                </ul>
-                                <li><a href="#">Contacto</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
+                    <div class="col-md-6 col-md-offset-5">
                         <form>
                             <input id="busqueda" type="text" placeholder="Busqueda"/>
                             <button id="buscar" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>

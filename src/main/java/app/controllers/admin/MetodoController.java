@@ -7,6 +7,7 @@ package app.controllers.admin;
 import app.controllers.authorization.Protected;
 import org.javalite.activeweb.AppController;
 import app.models.Metodo;
+import app.models.Usuario;
 
 import java.util.List;
 import org.javalite.activeweb.annotations.DELETE;
@@ -20,62 +21,94 @@ import org.javalite.activeweb.annotations.PUT;
 @Protected
 public class MetodoController extends AppController{
    public void index(){
-        List metodos = Metodo.lista_metodos();
-        view("metodos", metodos);
-        view("index_metodo", true );
+        if(control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            List metodos = Metodo.lista_metodos();
+            view("metodos", metodos);
+            view("index_metodo", true );
+        }
     }
     
     @GET
     public void newForm() {
-        render().layout("layouts/form_layout");
+        if(control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            render().layout("layouts/form_layout");
+        }
     }
     
     @POST
     public void create() {
-        Metodo m = new Metodo();
-        m.fromMap(params1st());
-
-        if (!Metodo.crear(m)) {
-            flash("message", "No se ha podido crear el metodo de pago, revise los siguientes items");
-            flash("errors", m.errors());
-            flash("params", params1st());
-            redirect(MetodoController.class, "new_form");
+        if(control()){
+            redirect(app.controllers.HomeController.class);
         } else {
-            flash("message", "Nuevo Metodo de Pago agregado: " + m.get("nombre"));
-            redirect(MetodoController.class);
+            Metodo m = new Metodo();
+            m.fromMap(params1st());
+
+            if (!Metodo.crear(m)) {
+                flash("message", "No se ha podido crear el metodo de pago, revise los siguientes items");
+                flash("errors", m.errors());
+                flash("params", params1st());
+                redirect(MetodoController.class, "new_form");
+            } else {
+                flash("message", "Nuevo Metodo de Pago agregado: " + m.get("nombre"));
+                redirect(MetodoController.class);
+            }
         }
     }
+    
     @GET
     public void edit() {
-       
-        Metodo m = (Metodo) Metodo.findById(getId());
-        render().layout("layouts/form_layout");
-        view("metodos", m);
+        if(control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            Metodo m = (Metodo) Metodo.findById(getId());
+            render().layout("layouts/form_layout");
+            view("metodos", m);
+        }
 
 
     }
 
     @DELETE
     public void delete() {
-        Metodo  m = (Metodo) Metodo.findById(getId());
-        String nombre = m.getString("nombre");
-        Metodo.eliminar(m);
-        flash("message", "Metodo de Pago: '" + nombre + "' eliminado");
-        redirect(MetodoController.class);
+        if(control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            Metodo  m = (Metodo) Metodo.findById(getId());
+            String nombre = m.getString("nombre");
+            Metodo.eliminar(m);
+            flash("message", "Metodo de Pago: '" + nombre + "' eliminado");
+            redirect(MetodoController.class);
+        }
     }
     
     @PUT
     public void update() {
-        Metodo m = (Metodo) Metodo.findById(getId());
-        m.fromMap(params1st());
-        if(!Metodo.actualizar(m)){
-            flash("message", "No se ha podido guardar el metodo de pago, revise los siguientes items");
-            flash("errors", m.errors());
-            flash("params", params1st());
-            redirect(MetodoController.class, "edit");
-        }else {
-            flash("message", "Metodo de Pago: '" + m.get("nombre") + "' modificada");
-            redirect(MetodoController.class);
+        if(control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            Metodo m = (Metodo) Metodo.findById(getId());
+            m.fromMap(params1st());
+            if(!Metodo.actualizar(m)){
+                flash("message", "No se ha podido guardar el metodo de pago, revise los siguientes items");
+                flash("errors", m.errors());
+                flash("params", params1st());
+                redirect(MetodoController.class, "edit");
+            }else {
+                flash("message", "Metodo de Pago: '" + m.get("nombre") + "' modificada");
+                redirect(MetodoController.class);
+            }
         }
+    }
+    public boolean control(){
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        if(usuario != null){
+            return !Usuario.getRol(usuario).getString("nombre").equals("admin");
+        }
+        return false;
     }
 }

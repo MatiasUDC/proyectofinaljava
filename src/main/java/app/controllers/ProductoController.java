@@ -18,13 +18,6 @@ import org.javalite.activeweb.AppController;
  */
 public class ProductoController extends AppController {
     public void show(){
-        Usuario usuario;
-        usuario = (Usuario) session().get("user");
-        if(usuario != null){
-            if(Usuario.getRol(usuario).getString("nombre").equals("admin")){
-                redirect(app.controllers.admin.HomeController.class);
-            }
-        }
         Producto p = (Producto) Producto.getProducto(getId());
         List cs =  Categoria.lista_categorias();
         List comentarios = Comentario.listaCompentariosProducto(p);
@@ -35,7 +28,17 @@ public class ProductoController extends AppController {
         view("path_imagen", appContext().get("path_imagen"));
         view("recomendados", recomendados);
         view("comentarios", comentarios);
-        
-        render().layout("layouts/public_layout");
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        if(usuario != null){
+            if(Usuario.getRol(usuario).getString("nombre").equals("admin")){
+                redirect(app.controllers.admin.HomeController.class);
+            } else {
+                view("usuario", usuario);
+                render().layout("layouts/public_layout");
+            }
+        } else {
+            render().layout("layouts/public_layout");
+        }
     }
 }
