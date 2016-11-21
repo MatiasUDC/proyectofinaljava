@@ -74,7 +74,11 @@
                         <#list categorias as categoria>   
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">${categoria.nombre}</a></h4>
+                                    <h4 class="panel-title">
+                                        <@link_to controller="categoria"  action="show"  id=categoria.id>
+                                        ${categoria.nombre}
+                                        </@link_to>
+                                    </h4>
                                 </div>
                             </div>
                         </#list>
@@ -100,10 +104,8 @@
 					Comprar
                                     </@link_to>
 				</span>
-				<p><b>Disponible</b> En stock</p>
+				<p><b>Descripcion de Producto </b>${ producto.descripcion }</p>
 				<p><b>Stock</b> ${ producto.stock }</p>
-				<p><b>Condicion:</b> Nuevo</p>
-				<p><b>Marca:</b> E-SHOPPER</p>
                             </div><!--/product-information-->
 			</div>
                     </div><!--/product-details-->

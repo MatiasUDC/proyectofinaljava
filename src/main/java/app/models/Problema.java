@@ -37,7 +37,6 @@ public class Problema extends Model{
 
         return findAll();
     }
-
     public static boolean registrar(Problema problema) {
 
         return problema.save();

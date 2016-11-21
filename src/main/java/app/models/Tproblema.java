@@ -19,7 +19,7 @@ import org.javalite.activeweb.freemarker.SelectOption;
  *
  * @author Matias
  */
-@Table("tipoproblema")
+@Table("tipo_problema")
 
 public class Tproblema extends Model {
 
@@ -33,7 +33,7 @@ public class Tproblema extends Model {
         return list;
     }
       public static List lista_problemas() {
-        return findAll();
+        return findAll().orderBy("nombre");
     }
 
     public static boolean crear(Tproblema p) {
