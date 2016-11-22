@@ -18,6 +18,7 @@ import org.javalite.activeweb.annotations.*;
 import org.javalite.activeweb.FormItem;
 import org.javalite.activeweb.freemarker.SelectOption;
 import app.controllers.authorization.Protected;
+import app.models.Comentario;
 import app.models.Usuario;
 /**
  *
@@ -143,13 +144,18 @@ public class ProductoController extends AppController {
         if(control()){
             redirect(app.controllers.HomeController.class);
         } else {
+            
             Producto p = Producto.getProducto(getId());
+            List comentarios = Comentario.listaCompentariosProducto(p);
             Categoria c;
             c = p.parent(Categoria.class);
-            render().layout("layouts/form_layout");
+            
+            view("comentarios", comentarios);
             view("path_imagen",appContext().get("path_imagen"));
             view("categoria",c);
             view("producto", p);
+            
+            render().layout("layouts/form_layout");
         }
     } 
    @POST

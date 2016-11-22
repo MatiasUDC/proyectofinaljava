@@ -7,13 +7,14 @@ package app.models;
 
 import java.util.List;
 import org.javalite.activejdbc.Model;
-import static org.javalite.activejdbc.Model.findAll;
 import org.javalite.activejdbc.annotations.BelongsTo;
 import org.javalite.activejdbc.annotations.BelongsToParents;
 import org.javalite.activejdbc.annotations.Table;
 import java.security.*;
 import java.math.*;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,10 +22,15 @@ import java.util.Date;
  */
 @Table("usuarios")
 @BelongsToParents({
-    @BelongsTo(foreignKeyName = "perfil_id", parent = Perfil.class),
+    @BelongsTo(foreignKeyName = "perfil_id", parent = Perfil.class)
+    ,
     @BelongsTo(foreignKeyName = "rol_id", parent = Rol.class)
 })
 public class Usuario extends Model {
+
+    private static final int NO_VERIFICADO = 0;
+    private static final int VERIFICADO = 1;
+    private static final int MAXIMO_TAMANIO_TOKEN = 16;
 
     public static List lista_usuario(Object id) {
         return where("id != ?", id);
@@ -52,34 +58,28 @@ public class Usuario extends Model {
                 u.set("perfil_id", perfil.get("id"));
                 save = u.saveIt();
             } else {
-                u.set("verificado", 0);
+                u.set("verificado", NO_VERIFICADO);
                 String token = u.getString("email");
                 Date fecha = new Date();
                 token = token.concat("" + fecha.getTime());
-                MessageDigest m;
-                try {
-                    /* Genero MD5 */
-                    m = MessageDigest.getInstance("MD5");
-                    m.update(token.getBytes(), 0, token.length());
-                    u.set("token", new BigInteger(1, m.digest()).toString(16));
-                    /* genero nombre de perfil */
-                    String name = u.get("email").toString().
-                            substring(0, u.get("email").toString().
-                                    lastIndexOf('@'));
-                    Perfil perfil = new Perfil();
-                    perfil.set("nombre", name);
-                    perfil.set("apellido", name);
-                    perfil.saveIt();
-                    List rolUsuer = Rol.getRol("usuario");
-                    if (rolUsuer.isEmpty()) {
-                        perfil.delete();
-                        u.delete();
-                        return false;
-                    }
-                    u.set("perfil_id", perfil.get("id"));
-                    save = u.saveIt();
-                } catch (NoSuchAlgorithmException ex) {;
+
+                u.set("token", generarToken(token));
+                /* genero nombre de perfil */
+                String name = u.get("email").toString().
+                        substring(0, u.get("email").toString().
+                                lastIndexOf('@'));
+                Perfil perfil = new Perfil();
+                perfil.set("nombre", name);
+                perfil.set("apellido", name);
+                perfil.saveIt();
+                List rolUsuer = Rol.getRol("usuario");
+                if (rolUsuer.isEmpty()) {
+                    perfil.delete();
+                    u.delete();
+                    return false;
                 }
+                u.set("perfil_id", perfil.get("id"));
+                save = u.saveIt();
 
             }
         }
@@ -99,6 +99,11 @@ public class Usuario extends Model {
 
     }
 
+    public static List getUsurioEmail(String email) {
+        return where("email = ?", email);
+
+    }
+
     public static Rol getRol(Usuario user) {
         return user.parent(Rol.class);
     }
@@ -113,10 +118,10 @@ public class Usuario extends Model {
     }
 
     public static boolean verificarCuenta(String token) {
-        List usuario = where("token = ? AND verificado = ?", token, 0);
+        List usuario = where("token = ? AND verificado = ?", token, NO_VERIFICADO);
         if (!usuario.isEmpty()) {
             Usuario user = (Usuario) usuario.get(0);
-            user.set("verificado", 1);
+            user.set("verificado", VERIFICADO);
             user.saveIt();
             return true;
         }
@@ -127,5 +132,26 @@ public class Usuario extends Model {
         Perfil perfil = Perfil.findById(id);
         return perfil;
     }
-   
+
+    public static String generarToken(String token) {
+        try {
+            MessageDigest m;
+            /* Genero MD5 */
+            m = MessageDigest.getInstance("MD5");
+            m.update(token.getBytes(), 0, token.length());
+            return new BigInteger(1, m.digest()).toString(MAXIMO_TAMANIO_TOKEN);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public static Usuario buscarCuenta(String token) {
+        List users = Usuario.where("token = ?", token);
+        if(users.isEmpty()){
+            return null;
+        }
+        return (Usuario)users.get(0);
+    }
+
 }

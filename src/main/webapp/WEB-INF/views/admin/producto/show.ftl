@@ -55,7 +55,33 @@
             
         </div>
     </div>
-
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Comentarios</h3>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table  class="table">
+                    <#list comentarios as comentario>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li><i class="fa fa-user"></i>${comentario.usuario.perfiles.nombre}</li>
+                                <li><i class="fa fa-calendar-o"></i>${comentario.fecha_alta}</li>
+                            </ul>
+                            <p>${comentario.comentario}</p> 
+                        </td>
+                        <td>
+                            <@form  id=comentario.id controller="comentario" action="delete" method="delete">
+                            <button class="btn btn-default" type="submit"data-toggle="tooltip" data-placement="left" title="Eliminar"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
+                            </@form>
+                        </td>
+                    </tr>
+                </#list>
+                </table>
+            </div>
+        </div>
+    </div>
 <script>
 $("#input-repl-1a").fileinput({
     autoReplace: false,

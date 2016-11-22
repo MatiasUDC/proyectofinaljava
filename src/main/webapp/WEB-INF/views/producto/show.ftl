@@ -125,8 +125,8 @@
                                     <tr>
                                         <td>
                                             <ul>
-                                                <li><a href=""><i class="fa fa-user"></i>${comentario.usuario.perfiles.nombre}</a></li>
-                                                <li><a href=""><i class="fa fa-calendar-o"></i>${comentario.fecha_alta}</a></li>
+                                                <li><i class="fa fa-user"></i>${comentario.usuario.perfiles.nombre}</li>
+                                                <li><i class="fa fa-calendar-o"></i>${comentario.fecha_alta}</li>
                                             </ul>
                                             <p>${comentario.comentario}</p> 
                                         </td>

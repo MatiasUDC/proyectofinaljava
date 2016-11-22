@@ -17,16 +17,20 @@ import org.javalite.activejdbc.annotations.Table;
 @Table("productos")
 @BelongsTo(parent = Categoria.class, foreignKeyName = "categoria_id")
 public class Producto extends Model{
+    private static final int LIMITE_RECOMENDADO = 3;
+    private static final int MINIMO_STOCK = 1;
+    private static final int MAXIMO_STOCK = 1001;
+    private static final int CATEGORIA_DEFAULT = 0;
     static{
         validatePresenceOf("nombre").message("Porfavor, ingrese el nombre del producto");
         validatePresenceOf("descripcion").message("Porfavor, ingrese una descripcion del producto");
         validateNumericalityOf("categoria_id")
                 .allowNull(true)
-                .greaterThan(0).message("Porfavor, seleccione una categoria para el producto");
+                .greaterThan(CATEGORIA_DEFAULT).message("Porfavor, seleccione una categoria para el producto");
         validateNumericalityOf("stock")
-                .allowNull(true).greaterThan(1)
-                .lessThan(1001).onlyInteger()
-                .message("Profavor, ingrese un numero de stock entre 1 y 10001.");
+                .allowNull(true).greaterThan(MINIMO_STOCK)
+                .lessThan(MAXIMO_STOCK).onlyInteger()
+                .message("Profavor, ingrese un numero de stock entre "+MINIMO_STOCK+" y "+MAXIMO_STOCK+".");
         //validateRegexpOf("precio", "^(\\d|-)?(\\d|,)*\\.?\\d*$").message("Ingrese un precio para el producto");
         validatePresenceOf("imagen").message("Porfavor, seleccione una imagen para el producto");
         
@@ -57,7 +61,7 @@ public class Producto extends Model{
     }
     
     public static List getProductosRecomendados(){
-        return findAll().orderBy("rand()").limit(3);
+        return findAll().orderBy("rand()").limit(LIMITE_RECOMENDADO);
     }
     
     public static List getProductoAjax(String criterio){

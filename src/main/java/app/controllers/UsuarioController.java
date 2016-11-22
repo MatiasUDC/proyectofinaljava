@@ -71,4 +71,15 @@ public class UsuarioController extends AppController{
         }
         redirect(LoginController.class);
     }
+    
+    public void restaurar(){
+        String token = param("key");
+        Usuario user = Usuario.buscarCuenta(token);
+        if (user == null){
+            flash("restaurar", "No se ha encontrado el Usuario.");
+            redirect(LoginController.class);
+        } else {
+            //redireccionar a restaurar
+        }
+    }
 }

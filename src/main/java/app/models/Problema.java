@@ -22,6 +22,8 @@ import org.javalite.activejdbc.annotations.Table;
     @BelongsTo(foreignKeyName = "id_problema", parent = Tproblema.class)
 })
 public class Problema extends Model{
+    private static final int RESUELTO = 0;
+    private static final int NO_RESUELTO = 1;
     static {
         /*
         validateNumericalityOf("Cantidad")
@@ -53,4 +55,7 @@ public class Problema extends Model{
         return problema.saveIt();
     }
 
+    public static void resolverProblema(Problema problema) {
+        problema.set("estado", RESUELTO);
+    }
 }

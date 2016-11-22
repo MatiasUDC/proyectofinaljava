@@ -49,13 +49,18 @@ public class ComentarioController extends AppController {
         usuario = (Usuario) session().get("user");
         if(usuario != null){
             Comentario comentario = (Comentario) Comentario.findById(getId());
-            if(!usuario.get("id").equals(comentario.parent(Usuario.class).get("id"))){
+            if(!(usuario.get("id").equals(comentario.parent(Usuario.class).get("id")) 
+                    || Usuario.getRol(usuario).getString("nombre").equals("admin"))){
                 redirect(ProductoController.class,"show",comentario.get("productos_id"));
             } else {
                 comentario.set("estado", 0);
                 Comentario.comentar(comentario);
                 flash("comentario", "Comentario Eliminado!..");
-                redirect(ProductoController.class,"show",comentario.get("productos_id"));
+                if(!Usuario.getRol(usuario).getString("nombre").equals("admin")){
+                    redirect(ProductoController.class,"show",comentario.get("productos_id"));
+                } else {
+                    redirect(app.controllers.admin.ProductoController.class,"show",comentario.get("productos_id"));
+                }   
             }
         } else {
             redirect(HomeController.class);

@@ -5,11 +5,11 @@
  */
 package app.controllers;
 import app.controllers.admin.ProductoController;
-import app.models.Perfil;
 import app.models.Rol;
 import app.models.Tienda;
 import app.models.Usuario;
 import app.utils.PropertiesFile;
+import java.util.Date;
 import java.util.List;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.POST;
@@ -103,6 +103,54 @@ public class LoginController extends AppController {
             flash("signup", "No se ha podido registar, revise los siguientes items");
             flash("errors", newUser.errors());
             flash("params", params1st());
+        }
+        redirect(LoginController.class);
+    }
+    @POST
+    public void restaurar() {
+
+        Usuario usuario = (Usuario) Usuario.getUsurioEmail(param("email"));
+        if(usuario != null){
+            final Properties propsEmail = PropertiesFile.getPropertiesMail();
+            final Properties propsAuthen = PropertiesFile.getPropertiesAuthentication();
+            /* genero otro token */
+            String token = usuario.getString("email");
+            Date fecha = new Date();
+            token = token.concat("" + fecha.getTime());
+            
+            usuario.set("token", Usuario.generarToken(token));
+            
+            List tienda = Tienda.getTienda();
+            final Tienda t = (Tienda) tienda.get(0);
+            Session session = Session.getDefaultInstance(propsAuthen,
+                    new javax.mail.Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(propsEmail.getProperty("email"), propsEmail.getProperty("password"));
+                }
+            });
+
+            try {
+
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(t.getString("email")));
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(usuario.getString("email")));
+                message.setSubject("Restaurar contraseña de " + t.getString("nombre"));
+                message.setText( "Ingrese en el siguiente enlace para restaurar su contraseña y poder ingresar\n\n" +
+                        "en: http://localhost:8084/tienda_online/usuario/restaurar?key="+usuario.getString("token")+"\n\n"+
+                        "Si usted no se ha registrado, porfavor ingrese\n"
+                                + "en: http://localhost:8084/tienda_online/usuario/baja?key="+usuario.getString("token"));
+
+                Transport.send(message);
+
+                flash("restaurar", "Ingrese a su correo para resturar su contraseña");
+                
+            } catch (MessagingException e) {
+                flash("restaurar", "No se ha podido enviar el correo de restauracion de contraseña!.");
+            }
+        } else { 
+            flash("restaurar", "No se encuentra registrado el email!!");
         }
         redirect(LoginController.class);
     }

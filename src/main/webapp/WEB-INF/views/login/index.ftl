@@ -65,6 +65,17 @@
                         <@flash name="signup"/>
                     </div><!--/sign up form-->
                 </div>
+
+                <div class="col-sm-3">
+                    <div class="signup-form"><!--sign up form-->
+                        <h2>Restaurar Contraseña</h2>
+                        <@form action="restaurar" method="post">
+                            <input type="email" name="email" placeholder="Direción Email"/>
+                            <button type="submit" class="btn btn-default">Restaurar</button>
+                        </@form>
+                        <@flash name="restaurar"/>
+                    </div><!--/sign up form-->
+                </div>
             </div>
         </div>
     </section><!--/form-->
