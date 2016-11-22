@@ -1,86 +1,53 @@
     <@content for="title">Home</@content>
-
-<header id="header"><!--header-->
-    <div class="header_top"><!--header_top-->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="contactinfo">
-                        <ul class="nav nav-pills">
-                            <li><a href="#"><i class="fa fa-phone"></i> 2945 589324</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i> info@tienda_online.com</a></li>
+    <header id="header"><!--header-->
+        <div class="header_top"><!--header_top-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="contactinfo">
+                            <ul class="nav nav-pills">
+                                <li><a href="#"><i class="fa fa-phone"></i> 2945 589324</a></li>
+				<li><a href="#"><i class="fa fa-envelope"></i> info@tienda_online.com</a></li>
                             </ul>
-                        </div>
+			</div>
                     </div>
-                <div class="col-sm-6">
-                    <div class="social-icons pull-right">
-                        <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <div class="col-sm-6">
+                        <div class="social-icons pull-right">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div><!--/header_top-->
-
-    <div class="header-middle"><!--header-middle-->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="logo pull-left">
-                        <@link_to controller="home"><img src="${context_path}/bower_components/images/home/logo.png" alt="" /></@link_to>
-                        </div>
-                    </div>
-                <div class="col-sm-8">
-                    <div class="shop-menu pull-right">
-                        <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-shopping"></i> Lista de Compras</a></li>
-                            <li><@link_to controller="login"><i class="fa fa-lock"></i> Iniciar sesión</@link_to></li>
+    
+	
+        <div class="header-bottom"><!--header-bottom-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav">
+                                <#if usuario??>
+                                <li><@link_to controller="usuario" action="index" ><i class="glyphicon glyphicon-user"></i> Perfil</@link_to></li>
+                                <li><@link_to controller="login" action="logout" ><i class="fa fa-lock"></i> Cerrar sesión</@link_to></li>
+                                <#else>
+                                <li><@link_to controller="login"><i class="fa fa-lock"></i> Iniciar sesión</@link_to></li>
+                                </#if>
                             </ul>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div><!--/header-middle-->
-
-<div class="header-bottom"><!--header-bottom-->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-9">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                    <div class="mainmenu pull-left">
-                        <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="#">Productos</a></li>
-                                    <li><a href="#">Categorias</a></li> 
-                                    </ul>
-                            <li><a href="#">Contacto</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                <div class="col-sm-3">
-                    <form>
-                        <input id="busqueda" type="text" placeholder="Busqueda"/>
-                        <button id="buscar" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                        </form>
-                    </div>
+ 
                 </div>
             </div>
         </div><!--/header-bottom-->
     </header><!--/header-->
-
+    
 <section>
     <div class="container">
         <div class="row">
@@ -93,43 +60,31 @@
                             <li role="presentation"><@link_to controller="usuario"  action="comentario">Comentarios</@link_to></li>
                             <li role="presentation"><@link_to controller="usuario"  action="problema">Problemas</@link_to></li>
                             <li role="presentation"><@link_to controller="usuario"  action="perfil">Perfil</@link_to></li>
-
-
                             </ul>
-
                         </div><!--/category-products-->				
                     </div>
                 </div>
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center">Productos</h2>
+                    <h2 class="title text-center">Compras</h2>
                         <#list compras as compra>
                     <div class="col-sm-3">
-                        <div  id="prod" class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <h2>$ ${ compra.producto.precio }</h2>
-                                    <p>${ compra.producto.nombre }</p>
-                                            <@link_to controller="producto"  action="show" class="btn btn-default add-to-cart" id=compra.producto.id>Ver Producto</@link_to>
-                                            <@link_to controller="compra"  action="deleteuser" class="btn btn-default " id=compra.id>Ver Producto</@link_to>
+                                    <img src="${context_path}/${ path_imagen }${ compra.producto.imagen}" alt="${ compra.producto.imagen}" height="190" width="130" />
+                                    <h4>${ compra.monto }</h4>
+                                    <h4>${ compra.cantidad }</h4>
+                                    <h2>${ compra.producto.nombre }</h2>
+                                            <@link_to controller="producto"  action="show" class="btn btn-default " id=compra.producto.id>Ver Producto</@link_to><br/><p></p>
+                                            <@link_to controller="compra"  action="edit" class="btn btn-default " id=compra.id>Editar Compra</@link_to><br/><p></p>
+                                            <@link_to controller="compra"  action="delete" class="btn btn-default " id=compra.id>Borrar Compra</@link_to><br/><p></p>
+                                            <@link_to controller="problema"  action="new_form" class="btn btn-default " id=compra.id>Reportar Problema Compra</@link_to><br/><p></p>
                                 </div>
                             </div>
                         </div>
                         </#list>
-                </div><!--features_items-->
-
-
+                    </div><!--features_items-->
                 </div>
             </div>
         </div>
     </section>
-
-
-<script>
-    $(function() {
-        $('#buscar').click(function(event) {
-            var busqueda = $('#busqueda').val();
-            $("#prod").load('home/busqueda', { busqueda : busqueda },function(responseTxt, statusTxt, xhr){});
-        });
-    });
-    </script>

@@ -128,10 +128,12 @@ public class Usuario extends Model {
         return false;
     }
 
-    public static Perfil getPerfil(int id) {
-        Perfil perfil = Perfil.findById(id);
+    public static Perfil getPerfil(Usuario u) {
+        
+        Perfil perfil = u.parent(Perfil.class);
         return perfil;
     }
+
 
     public static String generarToken(String token) {
         try {
@@ -152,6 +154,12 @@ public class Usuario extends Model {
             return null;
         }
         return (Usuario)users.get(0);
+    }
+
+
+    public static List<Problema> lista_problemas_usuario(Usuario u) {
+        List<Problema> problemas = u.getAll(Problema.class);
+        return problemas;
     }
 
 }

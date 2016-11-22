@@ -35,7 +35,9 @@ public class ProblemaController extends AppController {
 
     @GET
     public void newForm() {
-        //declaro producto
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        view("usuario",usuario);
         Compra compra = Compra.findById(getId());
         view("compra", compra);
         java.util.List<SelectOption> list = Tproblema.selectedProblemas();
@@ -47,6 +49,8 @@ public class ProblemaController extends AppController {
     public void create() {
         Problema problema = new Problema();
         problema.fromMap(params1st());
+       
+        
         if (!Problema.registrar(problema)) {
             flash("message", "No se ha podido registrar el problema, revise los siguientes items");
             flash("errors", problema.errors());
@@ -54,7 +58,7 @@ public class ProblemaController extends AppController {
             redirect(ProblemaController.class, "new_form");
         } else {
             flash("message", "El problema fue registrado correctamente" );
-            redirect(ProblemaController.class);
+            redirect(UsuarioController.class, "problema");
         }
     }
 

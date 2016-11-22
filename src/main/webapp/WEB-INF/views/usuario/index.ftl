@@ -27,60 +27,27 @@
             </div>
         </div><!--/header_top-->
     
-        <div class="header-middle"><!--header-middle-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="logo pull-left">
-                        <@link_to controller="home"><img src="${context_path}/bower_components/images/home/logo.png" alt="" /></@link_to>  
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="shop-menu pull-right">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-shopping"></i> Lista de Compras</a></li>
-                                <li><@link_to controller="login"><i class="fa fa-lock"></i> Iniciar sesión</@link_to></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!--/header-middle-->
 	
         <div class="header-bottom"><!--header-bottom-->
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-9">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <div class="mainmenu pull-left">
-                            <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="#">Productos</a></li>
-                                    <li><a href="#">Categorias</a></li> 
-                                </ul>
-                                <li><a href="#">Contacto</a></li>
+                    <div class="col-sm-8">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav">
+                                <#if usuario??>
+                                <li><@link_to controller="usuario" action="index" ><i class="glyphicon glyphicon-user"></i> Perfil</@link_to></li>
+                                <li><@link_to controller="login" action="logout" ><i class="fa fa-lock"></i> Cerrar sesión</@link_to></li>
+                                <#else>
+                                <li><@link_to controller="login"><i class="fa fa-lock"></i> Iniciar sesión</@link_to></li>
+                                </#if>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <form>
-                            <input id="busqueda" type="text" placeholder="Busqueda"/>
-                            <button id="buscar" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                        </form>
-                    </div>
+ 
                 </div>
             </div>
         </div><!--/header-bottom-->
-    </header><!--/header-->
-	
+    </header><!--/header-->	
     <section>
         <div class="container">
             <div class="row">
@@ -100,29 +67,7 @@
                 </div>
                 <div class="col-sm-9 padding-right">
                     <div class="features_items"><!--features_items-->
-                        <h2 class="title text-center">Productos</h2>
-                        <#list productos as producto>
-                            <div class="col-sm-3">
-                                <div  id="prod" class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <h2>$ ${ producto.precio }</h2>
-                                            <p>${ producto.nombre }</p>
-                                            <@link_to controller="producto"  action="show" class="btn btn-default add-to-cart" id=producto.id>Ver Producto</@link_to>
-                                                <@link_to controller="compra"  action="new_form" class="btn btn-default add-to-cart" id=producto.id><i class="fa fa-shopping-cart"></i>Comprar</@link_to>
-                                        </div>
-                                        <div class="product-overlay">
-                                            <div class="overlay-content">
-                                                <h2>$ ${ producto.precio }</h2>
-                                                <p>${ producto.nombre }</p>
-                                                <@link_to controller="producto"  action="show" class="btn btn-default add-to-cart" id=producto.id>Ver Producto</@link_to>
-                                                <@link_to controller="compra"  action="new_form" class="btn btn-default add-to-cart" id=producto.id><i class="fa fa-shopping-cart"></i>Comprar</@link_to>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </#list>
+                        <h2 class="title text-center">Inicio</h2>
                     </div><!--features_items-->
 
                     
@@ -130,13 +75,3 @@
             </div>
         </div>
     </section>
-    
- 
-<script>
-    $(function() {
-	$('#buscar').click(function(event) {
-            var busqueda = $('#busqueda').val();
-            $("#prod").load('home/busqueda', { busqueda : busqueda },function(responseTxt, statusTxt, xhr){});
-	});
-    });
-</script>

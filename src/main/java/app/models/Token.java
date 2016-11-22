@@ -25,7 +25,7 @@ public class Token extends Model{
     public static List token() {
         
         List<SelectOption> list = new LinkedList<>();
-        List tokens = findAll();
+        List tokens = findAll().orderBy("rand()").limit(1);
         for (Iterator it = tokens.iterator(); it.hasNext();) {
             Token token = (Token) it.next();
             list.add(new SelectOption(token.get("id"), token.getString("codigo")));
