@@ -17,15 +17,15 @@ import org.javalite.activejdbc.annotations.Table;
  */
 @Table("comentarios")
 @BelongsToParents({ 
-    @BelongsTo(foreignKeyName="id_usuario",parent=Usuario.class), 
-    @BelongsTo(foreignKeyName="id_producto",parent=Producto.class) 
-})
+@BelongsTo(foreignKeyName="usuarios_id",parent=Usuario.class), 
+@BelongsTo(foreignKeyName="productos_id",parent=Producto.class) 
+}) 
 public class Comentario extends Model{
     public static List listaCompentariosProducto(Producto prod){
-        return prod.getAll(Comentario.class).orderBy("fecha_alta desc");
+        return prod.get(Comentario.class, "estado = ?",1).orderBy("fecha_alta desc");
     }
     public static List comentario_usuario(Usuario usuario){
-        return where("id_usuario = ?", usuario.getId()).orderBy("id_producto desc");
+        return where("usuarios_id = ?", usuario.getId()).orderBy("productos_id desc");
     }
     public static List listaCompentariosUsuario(Usuario usuario){
         return usuario.getAll(Comentario.class);

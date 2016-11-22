@@ -143,7 +143,7 @@
     $(function() {
 	$('#buscar').click(function(event) {
             var busqueda = $('#busqueda').val();
-            $("#prod").load('home/busqueda', { busqueda : busqueda },function(responseTxt, statusTxt, xhr){});
+            $("#prod").load('/tienda_online/home/busqueda', { busqueda : busqueda },function(responseTxt, statusTxt, xhr){});
 	});
     });
 </script>

@@ -119,15 +119,33 @@
                         <div class="tab-content">
                             <div class="tab-pane fade active in" id="reviews" >
                                 <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                    <table  class="table">
                                     <#list comentarios as comentario>
-                                    <ul>
-                                        <li><a href=""><i class="fa fa-user"></i>${comentario.usuario.perfiles.nombre}</a></li>
-                                        <li><a href=""><i class="fa fa-calendar-o"></i>${comentario.fecha_alta}</a></li>
-                                    </ul>
-                                    <p>${comentario.comentario}</p>
+                                    <tr>
+                                        <td>
+                                            <ul>
+                                                <li><a href=""><i class="fa fa-user"></i>${comentario.usuario.perfiles.nombre}</a></li>
+                                                <li><a href=""><i class="fa fa-calendar-o"></i>${comentario.fecha_alta}</a></li>
+                                            </ul>
+                                            <p>${comentario.comentario}</p> 
+                                        </td>
+                                        <td>
+                                            <#if usuario??>
+                                            <#if usuario.id == comentario.usuarios_id>
+                                            <@form  id=comentario.id controller="comentario" action="delete" method="delete">
+                                                <button class="btn btn-default" type="submit"data-toggle="tooltip" data-placement="left" title="Eliminar"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>
+                                            </@form>
+                                            </#if>
+                                            </#if>
+                                        </td>
+                                    </tr>
                                     </#list>
+                                    </table>
+                                
                                     <p><b>Escribe un comentario</b></p>
-                                    <@form  id=producto.id controller="comentario" action="create" method="post">
+                                    <@form controller="comentario" action="create" method="post">
+                                        <input type="hidden" name="productos_id" value="${ producto.id}">
                                         <textarea id="comentario" name="comentario" >${(flasher.params.comentario)!}</textarea>
                                         <span class="error">${(flasher.errors.comentario)!}</span>
                                         <button type="submit" class="btn btn-default pull-right">
@@ -167,3 +185,8 @@
             </div>
         </div>
     </section>
+<script>    
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>

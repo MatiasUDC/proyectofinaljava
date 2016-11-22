@@ -18,6 +18,11 @@
             <span class="error">${(flasher.errors.telefono)!}</span>
         </div>
         <div class="form-group">
+            <label class="col-sm-2 control-label" for="direccion">Direccion * : </label>
+            <input class="form-control"type="text" name="direccion" value="${ tienda.direccion }"required>
+            <span class="error">${(flasher.errors.direccion)!}</span>
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label" for="facebook">Facebook * : </label>
             <input class="form-control"type="text" name="facebook" value="${ tienda.facebook }"required>
             <span class="error">${(flasher.errors.facebook)!}</span>

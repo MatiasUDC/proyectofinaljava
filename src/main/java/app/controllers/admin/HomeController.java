@@ -46,7 +46,9 @@ public class HomeController extends AppController{
         if(control()){
             redirect(app.controllers.HomeController.class);
         } else {
-            Tienda t = (Tienda) Tienda.findById(getId());
+            List tienda = Tienda.getTienda();
+            Tienda t = (Tienda) tienda.get(0);
+            t.fromMap(params1st());
             if(!Tienda.actualizarInfoTienda(t)){
                 flash("message", "No se ha podido guardar la informacion, revise los siguientes items");
                 flash("errors", t.errors());

@@ -1,8 +1,8 @@
 <@content for="title">Usuarios Registrados</@content>
 
-<@link_to class="btn btn-default" action="new_form">Nuevo</@link_to>
+<@link_to class="btn btn-default" action="new_form">Nuevo Administrador</@link_to>
 <@flash name="message"/>
-<h3>Administradores</h3>
+<h3>Usuarios</h3>
 <div class="table-responsive">
     <table class="table">
         <thead>

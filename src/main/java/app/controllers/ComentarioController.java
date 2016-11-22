@@ -7,10 +7,9 @@ package app.controllers;
 
 import app.controllers.authorization.Protected;
 import app.models.Comentario;
-import app.models.Producto;
 import app.models.Usuario;
-import java.sql.Date;
 import org.javalite.activeweb.AppController;
+import org.javalite.activeweb.annotations.DELETE;
 import org.javalite.activeweb.annotations.POST;
 
 /**
@@ -29,23 +28,37 @@ public class ComentarioController extends AppController {
                 redirect(app.controllers.admin.HomeController.class);
             } else {
                 Comentario com  = new Comentario();
-                Producto prod = Producto.getProducto(getId());
-                com.set("comentario", param("comentario"));
-                com.set(prod);
-                com.set(usuario);
+                com.fromMap(params1st());
+                com.set("estado", 0);
+                usuario.add(com);
                 java.util.Date utilDate = new java.util.Date();
                 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                 com.set("fecha_alta", sqlDate);
-                if(Comentario.comentar(com)){
-                    flash("comentario", "No se ha podido comentar");
-                    flash("errors", com.errors());
-                    flash("params", params1st());
-                } else {
-                    flash("comentario", "Comentario Enviado!..");
-                }
-                redirect(ProductoController.class,"show",prod.get("id_producto"));
+                Comentario.comentar(com);
+                flash("comentario", "Comentario Enviado!..");
+                redirect(ProductoController.class,"show",com.get("productos_id"));
             }
+        } else {
+            redirect(HomeController.class);
         }
-        redirect(HomeController.class);
+    }
+    
+    @DELETE
+    public void delete(){
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        if(usuario != null){
+            Comentario comentario = (Comentario) Comentario.findById(getId());
+            if(!usuario.get("id").equals(comentario.parent(Usuario.class).get("id"))){
+                redirect(ProductoController.class,"show",comentario.get("productos_id"));
+            } else {
+                comentario.set("estado", 0);
+                Comentario.comentar(comentario);
+                flash("comentario", "Comentario Eliminado!..");
+                redirect(ProductoController.class,"show",comentario.get("productos_id"));
+            }
+        } else {
+            redirect(HomeController.class);
+        }
     }
 }
