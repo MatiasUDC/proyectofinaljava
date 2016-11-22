@@ -110,7 +110,7 @@ public class UsuarioController extends AppController{
         Usuario usuario;
         usuario = (Usuario) session().get("user");
         if(usuario != null){
-            return !Usuario.getRol(usuario).getString("nombre").equals("user");
+            return Usuario.getRol(usuario).getString("nombre").equals("user");
         }
         return false;
 
