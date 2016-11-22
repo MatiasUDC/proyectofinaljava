@@ -52,11 +52,8 @@ public class CompraController extends AppController {
 
     @POST
     public void create() {
-        Usuario usuario;
-        usuario = (Usuario) session().get("user");
         Compra compra = new Compra();
         compra.fromMap(params1st());
-        compra.set(usuario);
         Producto producto = Compra.TraerProducto(compra.getInteger("id_producto"));
         int stock = producto.getInteger("stock");
         int cantidad = compra.getInteger("cantidad");
@@ -65,13 +62,15 @@ public class CompraController extends AppController {
             if (stock > cantidad) {
                 int resta = stock - cantidad;
                 producto.set("stock", resta);
+
                 if (!Compra.registrar(compra)) {
+                    
                     flash("message", "No se ha podido registar la compra, revise los siguientes items");
                     flash("errors", compra.errors());
                     flash("params", params1st());
                     redirect(CompraController.class, "new_form");
                 } else {
-
+                    Producto.actualizar(producto);
                     flash("message", "La Compra fue realizada correctamente");
                     redirect(HomeController.class);
                 }
@@ -103,9 +102,15 @@ public class CompraController extends AppController {
     @DELETE
     public void delete() {
         Compra c = (Compra) Compra.findById(getId());
-        String producto = c.getString("producto");
+        Producto p = Compra.TraerProducto(c.getInteger("id_producto"));
+        String nombre = p.getString("nombre");
+        int stock = p.getInteger("stock");
+        int cantidad = c.getInteger("cantidad");
+        int suma = stock + cantidad;
+        p.set("stock", suma);
+        Producto.actualizar(p); 
         Compra.baja(c);
-        flash("message", "La compra de : '" + producto + "'fue dada de baja correctamente");
+        flash("message", "La compra de : '" + nombre + "'fue dada de baja correctamente");
         redirect(CompraController.class);
     }
 

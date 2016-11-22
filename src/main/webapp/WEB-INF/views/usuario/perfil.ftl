@@ -116,7 +116,7 @@
                             </blockquote>
                            </a></p>   
                     </div><!--features_items-->
-
+                    <@link_to controller="perfil"  action="edit" class="btn btn-default" >Editar Perfil</@link_to>
                     
                 </div>
             </div>

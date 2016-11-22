@@ -23,5 +23,8 @@ import org.javalite.activejdbc.annotations.Table;
 
 
 public class Perfil extends Model{
-    
+    public static boolean actualizar(Perfil perfil){
+ 
+        return perfil.saveIt();
+    }
 }

@@ -52,7 +52,6 @@ public class Producto extends Model{
  
         return producto.saveIt();
     }
-    
     public static Producto getProducto(String id){
         return findById(id);
     }

@@ -31,6 +31,10 @@
                 <option value="5">24</option>
                 </select>
             </div>
+        <div class="form-group" id="token">
+            <label class="col-sm-2 control-label" for="token" style="display:none">Token * : </label><br/><br/>
+             <@select id="id_token" class="selectpicker show-menu-arrow" name="id_token" list=token> <option value="0">Codigo de Pago </option> </@>
+            </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="monto">Monto Final * : </label>
             <input class="col-sm-2 control-label" name="monto" id="monto" value="${ compra.monto }"> 
@@ -72,10 +76,11 @@
     </script>
     <script type="text/javascript">
         $().ready(function () {
+/*
             jQuery.validator.addMethod('selectcheck', function (value) {
                 return (value != '0');
             }, "Campo obligatorio");
-
+*/                
             $("#formulario_compra").validate({
                 rules: {
                     monto: {
