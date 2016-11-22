@@ -6,6 +6,8 @@
 package app.models;
 
 import org.javalite.activejdbc.Model;
+import org.javalite.activejdbc.annotations.BelongsTo;
+import org.javalite.activejdbc.annotations.BelongsToParents;
 import org.javalite.activejdbc.annotations.Table;
 
 /**
@@ -13,6 +15,13 @@ import org.javalite.activejdbc.annotations.Table;
  * @author universidad
  */
 @Table("perfiles")
+/*
+@BelongsToParents({
+    @BelongsTo(foreignKeyName = "cuidad_id", parent = Producto.class)
+})
+*/
+
+
 public class Perfil extends Model{
     
 }

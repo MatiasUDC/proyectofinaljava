@@ -10,6 +10,7 @@ import app.models.Problema;
 import app.models.Producto;
 import app.models.Usuario;
 import app.models.Comentario;
+import app.models.Perfil;
 
 import java.util.List;
 import org.javalite.activeweb.AppController;
@@ -53,8 +54,10 @@ public class UsuarioController extends AppController{
         view("usuario", usuario);*/    
     }
     public void perfil(){
-        //List problemas = Problema.lista_problemas();
-        //view("problemas",problemas);
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        Perfil perfil = Usuario.getPerfil(usuario.getInteger("perfil_id"));
+        view("perfil", perfil);
         render().layout("layouts/public_layout");
         /*
         List usuario = Usuario.lista_usuario();

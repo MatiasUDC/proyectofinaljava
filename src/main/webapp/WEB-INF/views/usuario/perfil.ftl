@@ -101,7 +101,20 @@
                 <div class="col-sm-9 padding-right">
                     <div class="features_items"><!--features_items-->
                         <h2 class="title text-center">Perfil de Usuario</h2>
-                        
+                             <blockquote>
+                                <p>Nombre: ${perfil.nombre}</p>
+                            </blockquote>
+                            <blockquote>
+                                <p>Telefono: ${perfil.apellido}</p>
+                            </blockquote>
+                            
+                            <blockquote>
+                                <p>Direccion: ${perfil.direccion}</p>
+                            </blockquote>
+                            <blockquote>
+                                <p>Facebook: ${perfil.telefono}</p>
+                            </blockquote>
+                           </a></p>   
                     </div><!--features_items-->
 
                     
