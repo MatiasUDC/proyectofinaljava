@@ -27,11 +27,6 @@
                 <span class="error">${(flasher.errors.nombre)!}</span>
                 </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="nombre">Nombre * : </label>
-                <input class="form-control"type="text" name="nombre" value="${ producto.nombre }"required>
-                <span class="error">${(flasher.errors.nombre)!}</span>
-                </div>
-            <div class="form-group">
                 <button class="btn btn-default" type="submit">Guardar</button>
                 <@link_to class="btn btn-default" controller="perfil">Cancelar</@link_to>
             </div>

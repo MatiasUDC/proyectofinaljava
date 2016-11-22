@@ -19,7 +19,7 @@ import org.javalite.activejdbc.annotations.Table;
 @Table("problemas")
 @BelongsToParents({
     @BelongsTo(foreignKeyName = "id_compra", parent = Compra.class),
-    @BelongsTo(foreignKeyName = "id_problema", parent = Tproblema.class)
+    @BelongsTo(foreignKeyName = "problema", parent = Tproblema.class)
 })
 public class Problema extends Model{
     static {

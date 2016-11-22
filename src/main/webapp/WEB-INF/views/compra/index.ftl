@@ -21,7 +21,7 @@
         <tbody>
             <#list compras as item>
             <tr>
-                <th>${item.id_usuario}</th>
+                <th></th>
                 <th>${item.producto.nombre}</th>
                 <th>${item.cantidad}</th>
                 <th>${item.metodo.nombre}</th>

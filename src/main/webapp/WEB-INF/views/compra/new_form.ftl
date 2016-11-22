@@ -22,9 +22,9 @@
              <@select id="metodos" class="selectpicker show-menu-arrow" name="id_metodo" list=metodos> <option value="0">Seleccione un Metodo de Pago </option> </@> 
             <span class="error">${(flasher.errors.metodos)!}</span>
             </div>
-        <div class="form-group" id="coutas" style="display:none">
+        <div class="form-group" id="cuota" style="display:none" >
             <label class="col-sm-2 control-label" for="cuotas" >Cuotas * : </label><br/><br/>
-            <select id="cuota" placeholder="seleccione la cantidad de cuotas deseada" name="cuotas" class="contact_form">
+            <select id="cuotas" placeholder="seleccione la cantidad de cuotas deseada" name="cuotas" class="contact_form">
                 <option value="0">1</option>
                 <option value="1">3</option>
                 <option value="2">6</option>
@@ -33,6 +33,7 @@
                 <option value="5">24</option>
                 </select>
             </div>
+    
         <div class="form-group" id="token" style="display:none">
             <label class="col-sm-2 control-label" for="token">Token * : </label><br/><br/>
              <@select id="id_token" class="selectpicker show-menu-arrow" name="id_token" list=token> <option value="0">Codigo de Pago </option> </@>
@@ -67,18 +68,18 @@
 <script>
     $(document).ready(function () {
     $("#metodos").change(function (evento) {
-       if (($("#metodos").val() == 3)||($("#metodos").val() == 4)){
-            $("#cuotas").show();
-       }else{
-            $("#cuotas").hide();
-            $("#cuota").val() == 0;
-       }
-        if (($("#metodos").val() == 1)||($("#metodos").val() == 2)){
-            $("#token").show();
-       }else{
-            $("#token").hide();
-            $("#id_token").val() == 0;
-       }
+            if (($("#metodos").val() == 3)||($("#metodos").val() == 4)){
+                 $("#cuota").show();
+            }else{
+                 $("#cuota").hide();
+                 $("#cuotas").val() == 0;
+            }
+            if (($("#metodos").val() == 1)||($("#metodos").val() == 2)){
+                 $("#token").show();
+            }else{
+                 $("#token").hide();
+                 $("#id_token").val() == 1;
+            }
     });
     });  
     </script>

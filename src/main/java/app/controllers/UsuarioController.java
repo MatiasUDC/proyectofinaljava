@@ -21,47 +21,69 @@ import org.javalite.activeweb.AppController;
  */
 public class UsuarioController extends AppController{
     public void index(){
-        List productos = Producto.lista_productos();
-        view("productos",productos);
-        render().layout("layouts/public_layout");
-        /*
-        List usuario = Usuario.lista_usuario();
-        view("usuario", usuario);*/    
+        if(control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            render().layout("layouts/public_layout");
+            /*
+            List usuario = Usuario.lista_usuario();
+            view("usuario", usuario);*/    
+        }
     }
     public void compra(){
-        List compras = Compra.lista_compras();
-        view("compras",compras);
-        render().layout("layouts/public_layout");
-        /*
-        List usuario = Usuario.lista_usuario();
-        view("usuario", usuario);*/    
+        if(control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            view("path_imagen",appContext().get("path_imagen"));
+            List compras = Compra.lista_compras();
+            view("compras",compras);
+            render().layout("layouts/public_layout");
+            /*
+            List usuario = Usuario.lista_usuario();
+            view("usuario", usuario);*/    
+        }
     }
     public void problema(){
-        List problemas = Problema.lista_problemas();
-        view("problemas",problemas);
-        render().layout("layouts/public_layout");
-        /*
-        List usuario = Usuario.lista_usuario();
-        view("usuario", usuario);*/    
+        if(control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            Usuario usuario;
+            usuario = (Usuario) session().get("user");
+            List problemas = Usuario.lista_problemas_usuario(usuario);
+            view("problemas",problemas);
+            render().layout("layouts/public_layout");
+            /*
+            List usuario = Usuario.lista_usuario();
+            view("usuario", usuario);*/    
+        }
     }
     public void comentario(){
-        Usuario usuario = Usuario.findById(getId());
-        List comentario = Comentario.comentario_usuario(usuario);
-        view("comentario",comentario);
-        render().layout("layouts/public_layout");
-        /*
-        List usuario = Usuario.lista_usuario();
-        view("usuario", usuario);*/    
+    
+        if(control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            Usuario usuario = Usuario.findById(getId());
+            List comentario = Comentario.comentario_usuario(usuario);
+            view("comentario",comentario);
+            render().layout("layouts/public_layout");
+            /*
+            List usuario = Usuario.lista_usuario();
+            view("usuario", usuario);*/    
+        }
     }
     public void perfil(){
-        Usuario usuario;
-        usuario = (Usuario) session().get("user");
-        Perfil perfil = Usuario.getPerfil(usuario.getInteger("perfil_id"));
-        view("perfil", perfil);
-        render().layout("layouts/public_layout");
-        /*
-        List usuario = Usuario.lista_usuario();
-        view("usuario", usuario);*/    
+        if(control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            Usuario usuario;
+            usuario = (Usuario) session().get("user");
+            Perfil perfil = Usuario.getPerfil(usuario);
+            view("perfil", perfil);
+            render().layout("layouts/public_layout");
+            /*
+            List usuario = Usuario.lista_usuario();
+            view("usuario", usuario);*/    
+        }
     }
     public void verificar(){
         String token = param("key");
@@ -70,5 +92,13 @@ public class UsuarioController extends AppController{
             flash("login", "Cuenta verificada, puede iniciar sesión");
         }
         redirect(LoginController.class);
+    }
+    public boolean control(){
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        if(usuario != null){
+            return !Usuario.getRol(usuario).getString("nombre").equals("user");
+        }
+        return false;
     }
 }

@@ -21,7 +21,7 @@ public class PerfilController extends AppController {
     public void edit() {
             Usuario usuario;
             usuario = (Usuario) session().get("user");
-            Perfil p = Usuario.getPerfil(usuario.getInteger(getId()));
+            Perfil p = Usuario.getPerfil(usuario);
             view("perfil", p);
             render().layout("layouts/form_layout");
             
@@ -31,7 +31,7 @@ public class PerfilController extends AppController {
     public void update() {
             Usuario usuario;
             usuario = (Usuario) session().get("user");
-            Perfil p = Usuario.getPerfil(usuario.getInteger(getId()));
+            Perfil p = Usuario.getPerfil(usuario);
             
             p.fromMap(params1st());
             if(!Perfil.actualizar(p)){

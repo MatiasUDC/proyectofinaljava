@@ -54,9 +54,21 @@ public class CompraController extends AppController {
     public void create() {
         Compra compra = new Compra();
         compra.fromMap(params1st());
+        
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        
+        int id_usu = usuario.getInteger("id");
+        compra.set("usuario_id",id_usu);
+        
         Producto producto = Compra.TraerProducto(compra.getInteger("id_producto"));
+        
         int stock = producto.getInteger("stock");
         int cantidad = compra.getInteger("cantidad");
+        
+        if (compra.getInteger("id_token") == 0){
+            compra.set("id_token", null);
+        }
         
         if (stock != 0) {
             if (stock > cantidad) {
@@ -111,7 +123,7 @@ public class CompraController extends AppController {
         Producto.actualizar(p); 
         Compra.baja(c);
         flash("message", "La compra de : '" + nombre + "'fue dada de baja correctamente");
-        redirect(CompraController.class);
+        redirect(UsuarioController.class);
     }
 
     @PUT
@@ -128,5 +140,6 @@ public class CompraController extends AppController {
             redirect(CompraController.class);
         }
     }
+
 
 }
