@@ -52,8 +52,11 @@ public class CompraController extends AppController {
 
     @POST
     public void create() {
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
         Compra compra = new Compra();
         compra.fromMap(params1st());
+        compra.set(usuario);
         Producto producto = Compra.TraerProducto(compra.getInteger("id_producto"));
         int stock = producto.getInteger("stock");
         int cantidad = compra.getInteger("cantidad");

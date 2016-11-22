@@ -5,8 +5,6 @@
  */
 package app.controllers.admin;
 
-import app.models.Producto;
-
 import java.util.List;
 import org.javalite.activeweb.AppController;
 import app.controllers.authorization.Protected;

@@ -26,7 +26,7 @@ public class ProblemaController extends AppController {
         usuario = (Usuario) session().get("user");
         if(usuario != null){
             if(Usuario.getRol(usuario).getString("nombre").equals("admin")){
-                redirect(app.controllers.admin.HomeController.class);
+                redirect(app.controllers.HomeController.class);
             } else {
                 view("problemas", Problema.lista_problemas());
             }

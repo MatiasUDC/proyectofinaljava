@@ -1,7 +1,5 @@
 <@content for="title">Compras</@content>
 
-<@link_to class="btn btn-default" action="new_form">Nuevo</@link_to>
-    
 <@flash name="message"/>
    
 <div class="table-responsive">
@@ -9,6 +7,7 @@
         <thead>
             <tr>
                 <th>Usuario</th>
+                <th>Email</th>
                 <th>Producto</th>
                 <th>Tipo</th>
                 <th>Descripcion</th>
@@ -20,11 +19,12 @@
         <tbody>
             <#list problemas as item>
             <tr>
-                <th>${item.compra.id_usuario}</th>
+                <th>${item.compra.usuarios.perfiles.nombre}</th>
+                <th>${item.compra.usuarios.email}</th>
                 <th>${item.compra.producto.nombre}</th>
-                <th>${item.tipoproblema.nombre}</th>
+                <th>${item.tipo_problema.nombre}</th>
                 <th>${item.descripcion}</th>
-                <th><@form  id=item.id action="delete" method="delete" html_id=item.id><button class="btn btn-default" type="submit">Problema Resuelto</button></@form></th>
+                <th><@form  id=item.id action="responder" method="get" html_id=item.id><button class="btn btn-default" type="submit">Problema Resuelto</button></@form></th>
             </tr>
             </#list>
         </tbody>

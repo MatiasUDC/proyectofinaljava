@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="#"><img src="${context_path}/bower_components/images/home/logo.png" alt="" /></a>
+                            <@link_to controller="home"><img src="${context_path}/bower_components/images/home/logo.png" alt="" /></@link_to>
                         </div>
                     </div>
                     <div class="col-sm-8">
@@ -85,6 +85,7 @@
                 <div class="col-sm-9 padding-right">
                     <div id="prod" class="features_items"><!--features_items-->
                         <h2 class="title text-center">Productos</h2>
+                        <p><@flash name="message"/></p>
                         <#list productos as producto>
                             <div class="col-sm-3">
                                 <div  class="product-image-wrapper">

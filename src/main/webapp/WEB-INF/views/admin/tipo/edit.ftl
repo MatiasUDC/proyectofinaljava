@@ -29,7 +29,7 @@
                             </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <a href="index" class="btn btn-danger">Continuar</a>
+                            <@link_to class="btn btn-danger" controller="/admin/tipo">Continuar</@link_to>
                             </div>
                         </div>
                     </div>
