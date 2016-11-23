@@ -28,8 +28,8 @@ public class Compra extends Model {
     static {
 
         validateNumericalityOf("cantidad")
-                .allowNull(true).greaterThan(1)
-                .message("Por favor, Ingrese un monto de productos validos.");
+                .allowNull(true).greaterThan(0)
+                .message("Por favor, Ingrese una cantidad validas.");
         /*
         validateNumericalityOf("id_metodo")
                 .allowNull(true)

@@ -43,7 +43,7 @@ public class CompraController extends AppController {
 
     @GET
     public void newForm() {
-        if(!control()){
+        if(control()){
             redirect(app.controllers.HomeController.class);
         } else {
             //declaro producto
@@ -60,7 +60,7 @@ public class CompraController extends AppController {
     @POST
     public void create() {
         
-        
+
         Compra compra = new Compra();
         compra.fromMap(params1st());
         
@@ -71,10 +71,12 @@ public class CompraController extends AppController {
         compra.set("usuario_id",id_usu);
         
         Producto producto = Compra.TraerProducto(compra.getInteger("id_producto"));
-        
+        Integer cantidad = compra.getInteger("cantidad");
+        Double precio = producto.getDouble("precio");
+        Double totalPagar = (Double)(cantidad*precio);
+        compra.set("monto", totalPagar);
         int stock = producto.getInteger("stock");
-        int cantidad = compra.getInteger("cantidad");
-        
+       
         if (compra.getInteger("id_token") == 0){
             compra.set("id_token", null);
         }
@@ -89,7 +91,7 @@ public class CompraController extends AppController {
                     flash("message", "No se ha podido registar la compra, revise los siguientes items");
                     flash("errors", compra.errors());
                     flash("params", params1st());
-                    redirect(CompraController.class, "new_form");
+                    redirect(CompraController.class, "new_form",producto.get("id"));
                 } else {
                     Producto.actualizar(producto);
                     flash("message", "La Compra fue realizada correctamente");
@@ -99,7 +101,7 @@ public class CompraController extends AppController {
                 flash("message", "Stock insuficiente disponible para la compra, por favor prueba con otra cantidad");
                 flash("errors", compra.errors());
                 flash("params", params1st());
-                redirect(CompraController.class, "new_form");
+                redirect(CompraController.class, "new_form", producto.get("id"));
             }
         } else {
             flash("message", "Producto no Disponible para compra por falta de Stock");

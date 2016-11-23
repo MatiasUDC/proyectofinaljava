@@ -8,22 +8,22 @@
         <div class="panel-footer">
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="nombre">Nombre * : </label>
-                <input class="form-control"type="text" name="nombre" value="${ perfil.nombre }"required>
+                <input class="form-control"type="text" name="nombre" value="${ (perfil.nombre)! }"required>
                 <span class="error">${(flasher.errors.nombre)!}</span>
                 </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="apellido">Apellido * : </label>
-                <input class="form-control"type="text" name="apellido" value="${ perfil.nombre }"required>
+                <input class="form-control"type="text" name="apellido" value="${ (perfil.apellido)! }"required>
                 <span class="error">${(flasher.errors.apellido)!}</span>
                 </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="telefono">Direccion * : </label>
-                <input class="form-control"type="text" name="direccion" value="${ perfil.direccion }"required>
+                <input class="form-control"type="text" name="direccion" value="${ (perfil.direccion)! }"required>
                 <span class="error">${(flasher.errors.direccion)!}</span>
                 </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="telefono">Telefono * : </label>
-                <input class="form-control"type="text" name="telefono" value="${ perfil.telefono }"required>
+                <input class="form-control"type="text" name="telefono" value="${ (perfil.telefono)! }"required>
                 <span class="error">${(flasher.errors.nombre)!}</span>
                 </div>
             <div class="form-group">

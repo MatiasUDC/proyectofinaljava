@@ -23,7 +23,9 @@ public class Categoria extends Model{
     }
     
     public static List lista_categorias() {
+        
         return findAll().orderBy("nombre desc");
+        
     }
     
     public static List<SelectOption> selectedCategoria(){

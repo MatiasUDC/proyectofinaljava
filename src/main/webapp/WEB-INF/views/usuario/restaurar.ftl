@@ -41,9 +41,10 @@
             <div class="row">
                 <div class="col-sm-4 ">
                     <div class="login-form"><!--login form-->
-                        <h2>Nueva Contraseña </h2>
+                        <h2>Nueva Contraseña para ${usuario.email }</h2>
 			<@form action="contrasenia" method="post">
                             <form role="form">
+                            <input type="hidden" name="usuario_id" value="${ usuario.id }">
                             <input type="password" name="password" placeholder="Contraseña" />
                             <button type="submit" class="btn btn-default">Login</button>
 			</@form>

@@ -5,7 +5,8 @@
 <div class="panel panel-success">
     <div class="panel-body">Registrar Compra</div>
     <div class="panel-footer">
-        <input type="hidden" name="id_producto" value="${ producto.id}">
+        <input type="hidden" name="id_producto" value="${ producto.id }">
+        <input type="hidden" id="montoreal" value="${ producto.precio}">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="nombre">Producto * : </label>
             <input class="form-control"type="text" name="nombre" disabled="true" value="${ producto.nombre }">
@@ -13,7 +14,7 @@
             </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="cantidad">Cantidad * : </label>
-            <input class="form-control" min="1" id="cantidad" type="number" name="cantidad" value="${(flasher.params.cantidad)!}" onClick="" required>
+            <input class="form-control" min="1" id="cantidad" type="number" name="cantidad" value="1" onClick="" required>
             <input type="button" id="Costo" value="Costo">
             <span class="error">${(flasher.errors.cantidad)!}</span>
             </div>
@@ -40,7 +41,7 @@
             </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="monto">Monto Final * : </label>
-            <input class="col-sm-2 control-label" name="monto" id="monto" value="${ producto.precio }"> 
+            <input class="col-sm-2 control-label" name="monto" id="monto" value="${ producto.precio }" disabled> 
             <span class="error">${(flasher.errors.monto)!}</span>
             </div>
 
@@ -58,9 +59,9 @@
         $(document).ready(function () {
         $("#Costo").click(function (e) {
             var num1 = $("#cantidad").val();
-            var num2 = $("#monto").val();
+            var num2 = $("#montoreal").val();
             var resultado = parseInt(num1) * parseFloat(num2);
-            $("#monto").val(resultado);
+            $("#monto").val(parseFloat(resultado));
         });
         });
             

@@ -25,6 +25,8 @@ import javax.mail.internet.MimeMessage;
  */
 public class LoginController extends AppController {
 
+    public static final  int ACTIVA = 1;
+    
     public void index() {
         render().layout("layouts/public_layout");
     }
@@ -64,16 +66,40 @@ public class LoginController extends AppController {
 
     @POST
     public void signup() {
+        boolean encontrado = false;
+        boolean actualizado;
+
         if(blank("email", "password")){
             flash("login", "Ingrese email y contraseña");
             redirect();
         }else{
-            Usuario newUser = new Usuario();
+            Usuario newUser;
+            newUser = Usuario.getUsurioEmailDesactivado(param("email"));
+            if(newUser==null){
+                newUser = new Usuario();
+            }else{
+                encontrado = true;
+            }
+            
             newUser.fromMap(params1st());
             Usuario emailDuplicado = Usuario.getUsurioEmail(newUser.getString("email"));
+            
             if(emailDuplicado == null){
-                if (Usuario.crear(newUser, true)) {
-                    final Properties propsEmail = PropertiesFile.getPropertiesMail();
+                /* genero  token */
+                String token = newUser.getString("email");
+                Date fecha = new Date();
+                token = token.concat("" + fecha.getTime());
+                token = Usuario.generarToken(token);
+                newUser.set("token", token);
+                
+                if(encontrado){   
+                    actualizado = Usuario.activar(newUser);
+                }else{
+                    actualizado = Usuario.crear(newUser, true);
+                }
+                
+                if (actualizado) {
+                    final Properties propsEmail = PropertiesFile.getConfigProperties();
                     final Properties propsAuthen = PropertiesFile.getPropertiesAuthentication();
 
                     List tienda = Tienda.getTienda();
@@ -123,17 +149,20 @@ public class LoginController extends AppController {
 
         Usuario usuario = Usuario.getUsurioEmail(param("email"));
         if (usuario != null) {
-            final Properties propsEmail = PropertiesFile.getPropertiesMail();
+            final Properties propsEmail = PropertiesFile.getConfigProperties();
             final Properties propsAuthen = PropertiesFile.getPropertiesAuthentication();
+            
             /* genero otro token */
             String token = usuario.getString("email");
             Date fecha = new Date();
             token = token.concat("" + fecha.getTime());
-
-            usuario.set("token", Usuario.generarToken(token));
-
+            token = Usuario.generarToken(token);
+            usuario.set("token", token);
+            Usuario.actualizar(usuario);
+            
             List tienda = Tienda.getTienda();
             final Tienda t = (Tienda) tienda.get(0);
+                    
             Session session = Session.getDefaultInstance(propsAuthen,
                     new javax.mail.Authenticator() {
                 @Override

@@ -75,17 +75,17 @@
                         <h2 class="title text-center">Perfil de Usuario</h2>
                             <#if perfil??>
                              <blockquote>
-                                <p>Nombre: ${perfil.nombre}</p>
+                                <p>Nombre: ${(perfil.nombre)!}</p>
                             </blockquote>
                             <blockquote>
-                                <p>Apellido: ${perfil.apellido}</p>
+                                <p>Apellido: ${(perfil.apellido)!}</p>
                             </blockquote>
                             
                             <blockquote>
-                                <p>Direccion: ${perfil.direccion}</p>
+                                <p>Direccion: ${(perfil.direccion)!}</p>
                             </blockquote>
                             <blockquote>
-                                <p>Telefono: ${perfil.telefono}</p>
+                                <p>Telefono: ${(perfil.telefono)!}</p>
                             </blockquote>
                             </#if>
                            </a></p>   

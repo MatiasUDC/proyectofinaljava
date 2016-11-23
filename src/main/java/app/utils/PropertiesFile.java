@@ -14,9 +14,9 @@ import java.util.Properties;
  * @author cesar
  */
 public class PropertiesFile {
-    public static Properties getPropertiesMail() {
+    public static Properties getConfigProperties() {
         Properties properties = new Properties();
-        InputStream input = PropertiesFile.class.getClassLoader().getResourceAsStream("email.properties");
+        InputStream input = PropertiesFile.class.getClassLoader().getResourceAsStream("config.properties");
         try {
             properties.load(input);
         } catch (IOException ex) {

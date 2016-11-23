@@ -5,6 +5,8 @@
  */
 package app.config;
 
+import app.utils.PropertiesFile;
+import java.util.Properties;
 import org.javalite.activeweb.AppContext;
 import org.javalite.activeweb.Bootstrap;
 import org.javalite.activeweb.Configuration;
@@ -17,9 +19,9 @@ public class AppBootstrap extends Bootstrap {
 
     @Override
     public void init(AppContext ac) {
+        Properties propsConfig = PropertiesFile.getConfigProperties();
         Configuration.setUseDefaultLayoutForErrors(false);
-        //ac.set("path_imagen_disc", "/home/universidad/NetBeansProjects/proyectofinaljava/src/main/webapp/imagenes/");
-        ac.set("path_imagen_disc", "C:\\Users\\Soraya\\Documents\\NetBeansProjects\\proyectofinaljava\\src\\main\\webapp\\imagenes");
+        ac.set("path_imagen_disc", propsConfig.get("path_imagen_disc"));
         ac.set("path_imagen", "imagenes/");
         
     }

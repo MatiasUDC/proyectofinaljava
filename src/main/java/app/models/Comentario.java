@@ -18,8 +18,8 @@ import org.javalite.activejdbc.annotations.Table;
  */
 @Table("comentarios")
 @BelongsToParents({ 
-@BelongsTo(foreignKeyName="id_usuario",parent=Usuario.class), 
-@BelongsTo(foreignKeyName="id_producto",parent=Producto.class) 
+@BelongsTo(foreignKeyName="usuarios_id",parent=Usuario.class), 
+@BelongsTo(foreignKeyName="productos_id",parent=Producto.class) 
 }) 
 public class Comentario extends Model{
     static{

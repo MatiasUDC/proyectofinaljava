@@ -22,13 +22,15 @@ import java.util.logging.Logger;
  */
 @Table("usuarios")
 @BelongsToParents({
-    @BelongsTo(foreignKeyName = "perfil_id", parent = Perfil.class)
-    ,
+    @BelongsTo(foreignKeyName = "perfil_id", parent = Perfil.class),
     @BelongsTo(foreignKeyName = "rol_id", parent = Rol.class)
 })
 public class Usuario extends Model {
 
+    private static final int ACTIVA = 1;
+    private static final int DESACTIVADO = 0;
     private static final int NO_VERIFICADO = 0;
+    private static final int ELIMINAR = 0;
     private static final int VERIFICADO = 1;
     private static final int MAXIMO_TAMANIO_TOKEN = 16;
     
@@ -76,6 +78,7 @@ public class Usuario extends Model {
                 Perfil perfil = new Perfil();
                 perfil.set("nombre", name);
                 perfil.set("apellido", name);
+                perfil.set("estado", ACTIVA);
                 perfil.saveIt();
                 List rolUsuer = Rol.getRol("usuario");
                 if (rolUsuer.isEmpty()) {
@@ -90,29 +93,46 @@ public class Usuario extends Model {
         }
         return save;
     }
-
+    
+    public static boolean activar(Usuario user){
+        user.set("estado", ACTIVA);
+        return user.save();
+    }
+    
     public static boolean eliminar(Usuario u) {
-        return u.delete();
+        u.set("estado", ELIMINAR);
+        u.set("verificado",NO_VERIFICADO);
+        return u.save();
     }
 
     public static boolean actualizar(Usuario u) {
-        return u.saveIt();
+        return u.save();
     }
 
     public static List getUsurio(String email, String password) {
-        return where("email = ? and password = ?", email, password);
+        return where("email = ? and password = ? and estado = ?", email, password, ACTIVA);
 
     }
 
     public static Usuario getUsurioEmail(String email) {
         
-        List usuario  = where("email = ?", email);
+        List usuario  = where("email = ? and estado = ? ", email, ACTIVA);
         if(usuario.isEmpty()){
             return null;
         }
         return (Usuario)usuario.get(0);
     }
-
+    
+    public static Usuario getUsurioEmailDesactivado(String email) {
+        
+        List usuario  = where("email = ? and estado = ?", email, DESACTIVADO);
+        if(usuario.isEmpty()){
+            return null;
+        }
+        return (Usuario)usuario.get(0);
+    }
+    
+    
     public static Rol getRol(Usuario user) {
         return user.parent(Rol.class);
     }
@@ -152,7 +172,7 @@ public class Usuario extends Model {
             m.update(token.getBytes(), 0, token.length());
             return new BigInteger(1, m.digest()).toString(MAXIMO_TAMANIO_TOKEN);
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Usuario.class.getName()).log(Level.INFO, null, ex);
         }
         return null;
     }
