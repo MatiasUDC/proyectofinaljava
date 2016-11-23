@@ -1,5 +1,7 @@
             <h2 class="title text-center">Productos</h2>
-            <@flash name="message"/>
+                        <#if (productos?size < 1) >
+                        <h3>No se ha encontrado el producto</h3>
+                        </#if>
                         <#list productos as producto>
                             <div class="col-sm-3">
                                 <div  class="product-image-wrapper">

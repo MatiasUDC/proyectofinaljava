@@ -85,7 +85,9 @@
                 <div class="col-sm-9 padding-right">
                     <div id="prod" class="features_items"><!--features_items-->
                         <h2 class="title text-center">Productos</h2>
-                        <p><@flash name="message"/></p>
+                        <#if (productos?size < 1) >
+                        <h3>No Hay Productos Cargados</h3>
+                        </#if>
                         <#list productos as producto>
                             <div class="col-sm-3">
                                 <div  class="product-image-wrapper">

@@ -40,7 +40,7 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                                 <#if usuario??>
-                            <li><@link_to controller="usuario" action="index" ><i class="glyphicon glyphicon-user"></i> Perfil</@link_to></li>
+                          
                             <li><@link_to controller="login" action="logout" ><i class="fa fa-lock"></i> Cerrar sesión</@link_to></li>
                                 <#else>
                             <li><@link_to controller="login"><i class="fa fa-lock"></i> Iniciar sesión</@link_to></li>

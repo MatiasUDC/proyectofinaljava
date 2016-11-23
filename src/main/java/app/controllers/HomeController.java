@@ -47,10 +47,6 @@ public class HomeController extends AppController {
         String criterio =params1st().get("busqueda");
 
             List productos = Producto.getProductoAjax(criterio);
-            if(productos.isEmpty()){
-                String message = "No se han econtrado resultados.";
-                flash("message", message);
-            }
             view("productos", productos);
             view("path_imagen",appContext().get("path_imagen"));
             render().noLayout();
