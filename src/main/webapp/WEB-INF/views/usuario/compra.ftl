@@ -82,7 +82,6 @@
                                     <h2>${ compra.producto.nombre }</h2>
                                             <@link_to controller="producto"  action="show" class="btn btn-default " id=compra.producto.id>Ver Producto</@link_to><br/><p></p>
                                             <@link_to controller="compra"  action="edit" class="btn btn-default " id=compra.id>Editar Compra</@link_to><br/><p></p>
-                                            <@link_to controller="compra"  action="delete" class="btn btn-default " id=compra.id>Borrar Compra</@link_to><br/><p></p>
                                             <@link_to controller="problema"  action="new_form" class="btn btn-default " id=compra.id>Reportar Problema Compra</@link_to><br/><p></p>
                                 </div>
                             </div>

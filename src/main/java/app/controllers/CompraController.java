@@ -25,33 +25,42 @@ public class CompraController extends AppController {
 
     @GET
     public void index() {
-        Usuario usuario;
-        usuario = (Usuario) session().get("user");
-        if(usuario != null){
-            if(Usuario.getRol(usuario).getString("nombre").equals("admin")){
-                redirect(app.controllers.admin.HomeController.class);
-            } else {
-                //view("producto", Compra.TraerProducto()
-                view("compras", Compra.lista_compras());
+        if(!control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            Usuario usuario;
+            usuario = (Usuario) session().get("user");
+            if(usuario != null){
+                if(Usuario.getRol(usuario).getString("nombre").equals("admin")){
+                    redirect(app.controllers.admin.HomeController.class);
+                } else {
+                    //view("producto", Compra.TraerProducto()
+                    view("compras", Compra.lista_compras());
+                }
             }
         }
-
     }
 
     @GET
     public void newForm() {
-        //declaro producto
-        Producto producto = Producto.findById(getId());
-        view("producto", producto);
-        java.util.List<SelectOption> token = Token.token();
-        view("token", token);
-        java.util.List<SelectOption> list = Metodo.selectedMetodos();
-        view("metodos", list);
-        render().layout("layouts/form_layout");
+        if(!control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            //declaro producto
+            Producto producto = Producto.findById(getId());
+            view("producto", producto);
+            java.util.List<SelectOption> token = Token.token();
+            view("token", token);
+            java.util.List<SelectOption> list = Metodo.selectedMetodos();
+            view("metodos", list);
+            render().layout("layouts/form_layout");
+        }
     }
 
     @POST
     public void create() {
+        
+        
         Compra compra = new Compra();
         compra.fromMap(params1st());
         
@@ -103,29 +112,34 @@ public class CompraController extends AppController {
 
     @GET
     public void edit() {
-
-        Compra c = (Compra) Compra.findById(getId());
-        java.util.List<SelectOption> list = Metodo.selectedMetodos();
-        view("metodos", list);
-        view("compra", c);
-
+        if(!control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            Compra c = (Compra) Compra.findById(getId());
+            java.util.List<SelectOption> list = Metodo.selectedMetodos();
+            view("metodos", list);
+            view("compra", c);
+        }
     }
 
     @DELETE
     public void delete() {
-        Compra c = (Compra) Compra.findById(getId());
-        Producto p = Compra.TraerProducto(c.getInteger("id_producto"));
-        String nombre = p.getString("nombre");
-        int stock = p.getInteger("stock");
-        int cantidad = c.getInteger("cantidad");
-        int suma = stock + cantidad;
-        p.set("stock", suma);
-        Producto.actualizar(p); 
-        Compra.baja(c);
-        flash("message", "La compra de : '" + nombre + "'fue dada de baja correctamente");
-        redirect(UsuarioController.class);
+        if(!control()){
+            redirect(app.controllers.HomeController.class);
+        } else {
+            Compra c = (Compra) Compra.findById(getId());
+            Producto p = Compra.TraerProducto(c.getInteger("id_producto"));
+            String nombre = p.getString("nombre");
+            int stock = p.getInteger("stock");
+            int cantidad = c.getInteger("cantidad");
+            int suma = stock + cantidad;
+            p.set("stock", suma);
+            Producto.actualizar(p); 
+            Compra.baja(c);
+            flash("message", "La compra de : '" + nombre + "'fue dada de baja correctamente");
+            redirect(UsuarioController.class);
+        }
     }
-
     @PUT
     public void update() {
         Compra c = (Compra) Compra.findById(getId());
@@ -140,6 +154,14 @@ public class CompraController extends AppController {
             redirect(CompraController.class);
         }
     }
+    public boolean control(){
+        Usuario usuario;
+        usuario = (Usuario) session().get("user");
+        if(usuario != null){
+            return Usuario.getRol(usuario).getString("nombre").equals("user");
+        }
+        return false;
 
+    }
 
 }

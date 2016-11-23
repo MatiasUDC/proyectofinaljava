@@ -18,8 +18,8 @@ public class AppBootstrap extends Bootstrap {
     @Override
     public void init(AppContext ac) {
         Configuration.setUseDefaultLayoutForErrors(false);
-        ac.set("path_imagen_disc", "/home/universidad/NetBeansProjects/proyectofinaljava/src/main/webapp/imagenes/");
-        //ac.set("path_imagen_disc", "C:\\Users\\Soraya\\Documents\\NetBeansProjects\\proyectofinaljava\\src\\main\\webapp\\imagenes");
+        //ac.set("path_imagen_disc", "/home/universidad/NetBeansProjects/proyectofinaljava/src/main/webapp/imagenes/");
+        ac.set("path_imagen_disc", "C:\\Users\\Soraya\\Documents\\NetBeansProjects\\proyectofinaljava\\src\\main\\webapp\\imagenes");
         ac.set("path_imagen", "imagenes/");
         
     }
