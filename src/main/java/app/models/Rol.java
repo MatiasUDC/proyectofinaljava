@@ -18,6 +18,10 @@ import org.javalite.activeweb.freemarker.SelectOption;
  */
 @Table("rol")
 public class Rol extends Model{
+    static{
+        validatePresenceOf("nombre").message("El nombre es requerido");
+    }    
+    
     public static List getRol(String nombre){
     	return where("nombre = ?", nombre).limit(1);
     }

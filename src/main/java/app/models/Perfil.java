@@ -15,13 +15,10 @@ import org.javalite.activejdbc.annotations.Table;
  * @author universidad
  */
 @Table("perfiles")
-/*
+
 @BelongsToParents({
     @BelongsTo(foreignKeyName = "cuidad_id", parent = Producto.class)
 })
-*/
-
-
 public class Perfil extends Model{
     public static boolean actualizar(Perfil perfil){
  

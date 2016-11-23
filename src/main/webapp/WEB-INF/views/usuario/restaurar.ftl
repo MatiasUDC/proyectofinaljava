@@ -41,41 +41,15 @@
             <div class="row">
                 <div class="col-sm-4 ">
                     <div class="login-form"><!--login form-->
-                        <h2>Login </h2>
-			<@form action="login" method="post">
+                        <h2>Nueva Contraseña </h2>
+			<@form action="contrasenia" method="post">
                             <form role="form">
-                            <input type="email" name="email" placeholder="Email" />
                             <input type="password" name="password" placeholder="Contraseña" />
                             <button type="submit" class="btn btn-default">Login</button>
 			</@form>
-                        <@flash name="login"/>
+                        <@flash name="password"/>
                     </div><!--/login form-->
 		</div>
-                <div class="col-sm-1">
-                    <h2 class="or">OR</h2>
-                </div>
-                <div class="col-sm-4">
-                    <div class="signup-form"><!--sign up form-->
-                        <h2>Signup!</h2>
-                        <@form action="signup" method="post">
-                            <input type="email" name="email" placeholder="Direción Email"/>
-                            <input type="password" name="password" placeholder="Password"/>
-                            <button type="submit" class="btn btn-default">Signup</button>
-                        </@form>
-                        <@flash name="signup"/>
-                    </div><!--/sign up form-->
-                </div>
-
-                <div class="col-sm-3">
-                    <div class="signup-form"><!--sign up form-->
-                        <h2>Restaurar Contraseña</h2>
-                        <@form action="restaurar" method="post">
-                            <input type="email" name="email" placeholder="Direción Email"/>
-                            <button type="submit" class="btn btn-default">Restaurar</button>
-                        </@form>
-                        <@flash name="restaurar"/>
-                    </div><!--/sign up form-->
-                </div>
             </div>
         </div>
     </section><!--/form-->

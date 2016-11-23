@@ -26,10 +26,11 @@ import org.javalite.activejdbc.annotations.Table;
 public class Compra extends Model {
 
     static {
-        /*
-        validateNumericalityOf("Cantidad")
+
+        validateNumericalityOf("cantidad")
                 .allowNull(true).greaterThan(1)
-                .message("Por favor, Ingrese un monto de productos validos.");   
+                .message("Por favor, Ingrese un monto de productos validos.");
+        /*
         validateNumericalityOf("id_metodo")
                 .allowNull(true)
                 .greaterThan(1).message("Porfavor, Seleccione una metodo para la compra");

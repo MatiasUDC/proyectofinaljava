@@ -25,9 +25,6 @@ public class UsuarioController extends AppController{
             redirect(app.controllers.HomeController.class);
         } else {
             render().layout("layouts/public_layout");
-            /*
-            List usuario = Usuario.lista_usuario();
-            view("usuario", usuario);*/    
         }
     }
     public void compra(){
@@ -37,10 +34,7 @@ public class UsuarioController extends AppController{
             view("path_imagen",appContext().get("path_imagen"));
             List compras = Compra.lista_compras();
             view("compras",compras);
-            render().layout("layouts/public_layout");
-            /*
-            List usuario = Usuario.lista_usuario();
-            view("usuario", usuario);*/    
+            render().layout("layouts/public_layout");  
         }
     }
     public void problema(){
@@ -52,9 +46,6 @@ public class UsuarioController extends AppController{
             List problemas = Usuario.lista_problemas_usuario(usuario);
             view("problemas",problemas);
             render().layout("layouts/public_layout");
-            /*
-            List usuario = Usuario.lista_usuario();
-            view("usuario", usuario);*/    
         }
     }
     public void comentario(){
@@ -66,10 +57,7 @@ public class UsuarioController extends AppController{
             usuario = (Usuario) session().get("user");
             List comentario = Comentario.listaComentariosUsuario(usuario);
             view("comentarios",comentario);
-            render().layout("layouts/public_layout");
-            /*
-            List usuario = Usuario.lista_usuario();
-            view("usuario", usuario);*/    
+            render().layout("layouts/public_layout");   
         }
     }
     public void perfil(){
@@ -80,10 +68,7 @@ public class UsuarioController extends AppController{
             usuario = (Usuario) session().get("user");
             Perfil perfil = Usuario.getPerfil(usuario);
             view("perfil", perfil);
-            render().layout("layouts/public_layout");
-            /*
-            List usuario = Usuario.lista_usuario();
-            view("usuario", usuario);*/    
+            render().layout("layouts/public_layout"); 
         }
     }
     public void verificar(){
@@ -103,7 +88,21 @@ public class UsuarioController extends AppController{
             flash("restaurar", "No se ha encontrado el Usuario.");
             redirect(LoginController.class);
         } else {
-            //redireccionar a restaurar
+            view("usuario", user);
+            render().layout("layouts/public_layout");
+        }
+    }
+    
+    public void contrasenia(){
+        Usuario user = (Usuario)Usuario.getUsurio(param("usuario_id"));
+        user.set("password", param("password"));
+        if(!Usuario.actualizar(user)){
+            flash("password", "No se ha podido cambiar las contraseña.");
+            flash("errors", user.errors());
+            flash("params", params1st());
+            redirect(UsuarioController.class,"restaurar?key"+user.get("token"));
+        } else {
+            redirect(HomeController.class);
         }
     }
 

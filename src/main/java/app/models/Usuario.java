@@ -31,7 +31,12 @@ public class Usuario extends Model {
     private static final int NO_VERIFICADO = 0;
     private static final int VERIFICADO = 1;
     private static final int MAXIMO_TAMANIO_TOKEN = 16;
-
+    
+    static{
+        validateEmailOf("email").message("EL email es requerido");
+        validatePresenceOf("password").message("La contraseña es requerida");
+    }
+    
     public static List lista_usuario(Object id) {
         return where("id != ?", id);
     }
@@ -99,9 +104,13 @@ public class Usuario extends Model {
 
     }
 
-    public static List getUsurioEmail(String email) {
-        return where("email = ?", email);
-
+    public static Usuario getUsurioEmail(String email) {
+        
+        List usuario  = where("email = ?", email);
+        if(usuario.isEmpty()){
+            return null;
+        }
+        return (Usuario)usuario.get(0);
     }
 
     public static Rol getRol(Usuario user) {

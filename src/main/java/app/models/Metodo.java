@@ -20,9 +20,9 @@ import org.javalite.activeweb.freemarker.SelectOption;
 @Table("metodos")
 public class Metodo extends Model{
     
-     static{
-        validatePresenceOf("nombre").message("Porfavor, ingrese el nombre del metodo de pago");
-     }
+    static{
+       validatePresenceOf("nombre").message("Porfavor, ingrese el nombre del metodo de pago");
+    }
     
     public static List lista_metodos() {
         return findAll();

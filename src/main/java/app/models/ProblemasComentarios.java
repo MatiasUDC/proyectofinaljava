@@ -21,6 +21,9 @@ import org.javalite.activejdbc.annotations.Table;
     @BelongsTo(foreignKeyName="problema_id",parent=Problema.class) 
 }) 
 public class ProblemasComentarios extends Model{
+    static{
+        validatePresenceOf("comentario").message("El comentario es requerido");
+    }   
     public static List getProblemasComentarios(Problema problema){
         return problema.getAll(ProblemasComentarios.class).orderBy("fecha_alta");
     }
