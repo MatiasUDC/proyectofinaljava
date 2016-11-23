@@ -14,7 +14,7 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="metodo">Tipo de Problema * : </label><br/><br/>
-             <@select id="tipo_id" class="selectpicker show-menu-arrow" name="tipo_id" list=tipos> <option value="0">Seleccione el Problema </option> </@> 
+             <@select id="id_problema" class="selectpicker show-menu-arrow" name="id_problema" list=tipos> <option value="0">Seleccione el Problema </option> </@> 
                 <span class="error">${(flasher.errors.problemas)!}</span>
                 </div>
             <div class="form-group">
