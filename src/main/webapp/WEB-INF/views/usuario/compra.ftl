@@ -30,6 +30,11 @@
         <div class="header-bottom"><!--header-bottom-->
             <div class="container">
                 <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <@link_to controller="home"><img src="${context_path}/bower_components/images/home/logo.png" alt="" /></@link_to>
+                        </div>
+                    </div>
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
@@ -67,8 +72,8 @@
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Compras</h2>
-                        <#list compras as compra>
-                    <div class="col-sm-3">
+                    <#list compras as compra>
+                        <div class="col-sm-3">
                             <div class="single-products">
                                 <div class="productinfo text-center">
                                     <img src="${context_path}/${ path_imagen }${ compra.producto.imagen}" alt="${ compra.producto.imagen}" height="190" width="130" />
@@ -82,9 +87,9 @@
                                 </div>
                             </div>
                         </div>
-                        </#list>
-                    </div><!--features_items-->
-                </div>
+                    </#list>
+                </div><!--features_items-->
             </div>
         </div>
-    </section>
+    </div>
+</section>

@@ -21,7 +21,7 @@ import org.javalite.activeweb.AppController;
  */
 public class UsuarioController extends AppController{
     public void index(){
-        if(control()){
+        if(!control()){
             redirect(app.controllers.HomeController.class);
         } else {
             render().layout("layouts/public_layout");
@@ -31,7 +31,7 @@ public class UsuarioController extends AppController{
         }
     }
     public void compra(){
-        if(control()){
+        if(!control()){
             redirect(app.controllers.HomeController.class);
         } else {
             view("path_imagen",appContext().get("path_imagen"));
@@ -44,7 +44,7 @@ public class UsuarioController extends AppController{
         }
     }
     public void problema(){
-        if(control()){
+        if(!control()){
             redirect(app.controllers.HomeController.class);
         } else {
             Usuario usuario;
@@ -59,12 +59,13 @@ public class UsuarioController extends AppController{
     }
     public void comentario(){
     
-        if(control()){
+        if(!control()){
             redirect(app.controllers.HomeController.class);
         } else {
-            Usuario usuario = Usuario.findById(getId());
-            List comentario = Comentario.comentario_usuario(usuario);
-            view("comentario",comentario);
+            Usuario usuario;
+            usuario = (Usuario) session().get("user");
+            List comentario = Comentario.listaComentariosUsuario(usuario);
+            view("comentarios",comentario);
             render().layout("layouts/public_layout");
             /*
             List usuario = Usuario.lista_usuario();
@@ -72,7 +73,7 @@ public class UsuarioController extends AppController{
         }
     }
     public void perfil(){
-        if(control()){
+        if(!control()){
             redirect(app.controllers.HomeController.class);
         } else {
             Usuario usuario;

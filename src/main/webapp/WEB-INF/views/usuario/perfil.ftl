@@ -31,6 +31,11 @@
         <div class="header-bottom"><!--header-bottom-->
             <div class="container">
                 <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <@link_to controller="home"><img src="${context_path}/bower_components/images/home/logo.png" alt="" /></@link_to>
+                        </div>
+                    </div>
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
@@ -68,19 +73,21 @@
                 <div class="col-sm-9 padding-right">
                     <div class="features_items"><!--features_items-->
                         <h2 class="title text-center">Perfil de Usuario</h2>
+                            <#if perfil??>
                              <blockquote>
                                 <p>Nombre: ${perfil.nombre}</p>
                             </blockquote>
                             <blockquote>
-                                <p>Telefono: ${perfil.apellido}</p>
+                                <p>Apellido: ${perfil.apellido}</p>
                             </blockquote>
                             
                             <blockquote>
                                 <p>Direccion: ${perfil.direccion}</p>
                             </blockquote>
                             <blockquote>
-                                <p>Facebook: ${perfil.telefono}</p>
+                                <p>Telefono: ${perfil.telefono}</p>
                             </blockquote>
+                            </#if>
                            </a></p>   
                     </div><!--features_items-->
                     <@link_to controller="perfil"  action="edit" class="btn btn-default" id=perfil.id>Editar Perfil</@link_to>

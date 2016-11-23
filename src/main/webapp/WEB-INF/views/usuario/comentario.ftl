@@ -31,6 +31,11 @@
         <div class="header-bottom"><!--header-bottom-->
             <div class="container">
                 <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <@link_to controller="home"><img src="${context_path}/bower_components/images/home/logo.png" alt="" /></@link_to>
+                        </div>
+                    </div>
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
@@ -68,23 +73,21 @@
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Comentarios Creados</h2>
+                </div><!--features_items-->
+                    <#list comentarios as comentario>
+                        <div class="col-sm-3">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <h3>${ comentario.producto.nombre }</h3>
+                                    <h3>${ comentario.fecha_alta }</h3>
+                                    <h3>${ comentario.comentario}</h3>
+                                    </div>
 
-</div><!--features_items-->
-
-                        <#list comentarios as comentario>
-                <div class="col-sm-3">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <h2>${comentario.producto.nombre }</h2>
-                            <p>${ comentario.comentario}</p>
+                                </div>
                             </div>
-
                         </div>
-                    </div>
+                    </#list>
                 </div>
-                        </#list>
-
             </div>
         </div>
-    </div>
 </section>
