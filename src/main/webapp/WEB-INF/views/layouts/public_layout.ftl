@@ -8,6 +8,8 @@
         <link href="${context_path}/bower_components/css/animate.css" rel="stylesheet">
 	<link href="${context_path}/bower_components/css/main.css" rel="stylesheet">
 	<link href="${context_path}/bower_components/css/responsive.css" rel="stylesheet">
+       
+        <script src="${context_path}/bower_components/jquery-validation/dist/jquery.validate.js" type="text/javascript"></script>
     </head>
     <body>
         ${page_content}

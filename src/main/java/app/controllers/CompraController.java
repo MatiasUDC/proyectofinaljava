@@ -9,9 +9,13 @@ import app.controllers.authorization.Protected;
 import app.models.Compra;
 import app.models.Metodo;
 import app.models.Producto;
-import app.models.Token;
 import app.models.Usuario;
-import java.util.List;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.javalite.activeweb.AppController;
 import org.javalite.activeweb.annotations.*;
 import org.javalite.activeweb.freemarker.SelectOption;
@@ -22,7 +26,7 @@ import org.javalite.activeweb.freemarker.SelectOption;
  */
 @Protected
 public class CompraController extends AppController {
-
+    private static final int MAXIMO_TAMANIO_TOKEN = 12;
     @GET
     public void index() {
         if(!control()){
@@ -49,11 +53,9 @@ public class CompraController extends AppController {
             //declaro producto
             Producto producto = Producto.findById(getId());
             view("producto", producto);
-            java.util.List<SelectOption> token = Token.token();
-            view("token", token);
             java.util.List<SelectOption> list = Metodo.selectedMetodos();
             view("metodos", list);
-            render().layout("layouts/form_layout");
+            render().layout("layouts/public_layout");
         }
     }
 
@@ -76,10 +78,9 @@ public class CompraController extends AppController {
         Double totalPagar = (Double)(cantidad*precio);
         compra.set("monto", totalPagar);
         int stock = producto.getInteger("stock");
-       
-        if (compra.getInteger("id_token") == 0){
-            compra.set("id_token", null);
-        }
+
+        compra.set("token", generarToken());
+
         
         if (stock != 0) {
             if (stock > cantidad) {
@@ -165,5 +166,17 @@ public class CompraController extends AppController {
         return false;
 
     }
-
+    public String generarToken() {
+        String token = new Date().getTime()+""+new Date().getSeconds();
+        try {
+            MessageDigest m;
+            /* Genero MD5 */
+            m = MessageDigest.getInstance("MD5");
+            m.update(token.getBytes(), 0, token.length());
+            return new BigInteger(1, m.digest()).toString(MAXIMO_TAMANIO_TOKEN);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.INFO, null, ex);
+        }
+        return null;
+    }
 }

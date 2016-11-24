@@ -21,7 +21,6 @@ import org.javalite.activejdbc.annotations.Table;
     @BelongsTo(foreignKeyName = "id_producto", parent = Producto.class),
     @BelongsTo(foreignKeyName = "id_usuario", parent = Usuario.class),
     @BelongsTo(foreignKeyName = "id_metodo", parent = Metodo.class),
-    @BelongsTo(foreignKeyName = "id_token", parent = Token.class)
 })
 public class Compra extends Model {
 
@@ -30,6 +29,10 @@ public class Compra extends Model {
         validateNumericalityOf("cantidad")
                 .allowNull(true).greaterThan(0)
                 .message("Por favor, Ingrese una cantidad validas.");
+        validateNumericalityOf("id_metodo")
+                .allowNull(true).greaterThan(0)
+                .message("Por favor, Seleccione un metodo de pago.");
+        validatePresenceOf("cuotas").message("el numero de cuotas es requerido");
         /*
         validateNumericalityOf("id_metodo")
                 .allowNull(true)

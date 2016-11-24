@@ -81,7 +81,7 @@
                                     <h4>${ compra.cantidad }</h4>
                                     <h2>${ compra.producto.nombre }</h2>
                                             <@link_to controller="producto"  action="show" class="btn btn-default " id=compra.producto.id>Ver Producto</@link_to><br/><p></p>
-                                            <@link_to controller="problema"  action="new_form" class="btn btn-default " id=compra.id>Reportar Problema Compra</@link_to><br/><p></p>
+                                            <@link_to controller="usuario"  action="problema" class="btn btn-default " id=compra.id>Reportar problema Compra</@link_to><br/><p></p>
                                 </div>
                             </div>
                         </div>
