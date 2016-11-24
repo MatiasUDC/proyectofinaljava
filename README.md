@@ -13,3 +13,5 @@ Venta de indumentaria y accesorios para caza y pesca.
 * Vendedor cambia el estado de la reserva/compra.
 * Usuario recibe producto y comenta.
 * Circuito de arbitraje (en caso de problemas).
+
+##Para pruebas rellenar config.properties de resources y usar pruebas_tienda.sql
